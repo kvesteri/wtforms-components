@@ -7,9 +7,6 @@ for WTForms.
 Fields
 ======
 
-While the main purpose of WTForms-Alchemy is to provide a bridge between SQLAlchemy
-models and WTForms forms. It also provides some additional fields and validators missing
-from WTForms.
 
 SelectField
 -----------
