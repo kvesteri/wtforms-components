@@ -1,4 +1,5 @@
 import time
+import phonenumbers
 from datetime import datetime
 from cgi import escape
 from wtforms import widgets, Form
@@ -9,6 +10,7 @@ from wtforms.fields import (
     FieldList,
     FormField,
     SelectField as _SelectField,
+    StringField
 )
 from wtforms.fields.core import _unset_value
 from wtforms.validators import ValidationError, DataRequired
@@ -233,3 +235,54 @@ class SplitDateTimeField(FormField):
 class DateTimeForm(Form):
     date = DateField(u'Date', validators=[DataRequired()])
     time = TimeField(u'Time', validators=[DataRequired()])
+
+
+class PhoneNumberInput(widgets.TextInput):
+    input_type = 'tel'
+
+
+class PhoneNumberField(StringField):
+    """
+    A string field representing a PhoneNumber object from
+    `Python phonenumbers library`_.
+
+    .. _Python phonenumbers library:
+       https://github.com/daviddrysdale/python-phonenumbers
+
+    :param country_code:
+        Country code of the phone number.
+    :param display_format:
+        The PhoneNumberFormat in which the phone number is displayed.
+    """
+    widget = PhoneNumberInput()
+    error_msg = u'Not a valid phone number value'
+
+    def __init__(self, label=None, validators=None, country_code='US',
+                 display_format=phonenumbers.PhoneNumberFormat.NATIONAL,
+                 **kwargs):
+        super(PhoneNumberField, self).__init__(label, validators, **kwargs)
+        self.country_code = country_code
+        self.display_format = display_format
+
+    def _value(self):
+        if self.data:
+            return phonenumbers.format_number(
+                self.data,
+                self.display_format
+            )
+        else:
+            return u''
+
+    def process_formdata(self, valuelist):
+        if valuelist:
+            try:
+                self.data = phonenumbers.parse(
+                    valuelist[0],
+                    self.country_code
+                )
+                if not phonenumbers.is_valid_number(self.data):
+                    self.data = None
+                    raise ValueError(self.gettext(self.error_msg))
+            except phonenumbers.phonenumberutil.NumberParseException:
+                self.data = None
+                raise ValueError(self.gettext(self.error_msg))
