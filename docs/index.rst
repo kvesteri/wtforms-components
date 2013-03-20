@@ -13,6 +13,28 @@ SelectField
 
 This SelectField provides support for optgroups.
 
+PhoneNumberField
+----------------
+
+PhoneNumberField is a string field representing a PhoneNumber object from
+`Python phonenumbers library`_.
+
+.. _Python phonenumbers library:
+   https://github.com/daviddrysdale/python-phonenumbers
+
+The following example shows that the field takes the phone number's country
+code and display format as parameters. ::
+
+    import phonenumbers
+    from wtforms import Form
+    from wtforms_components import PhoneNumberField
+
+    class UserForm(Form):
+        phone_number = PhoneNumberField(
+            country_code='FI'
+            display_format=phonenumbers.PhoneNumberFormat.NATIONAL
+        )
+
 Validators
 ==========
 
@@ -27,7 +49,7 @@ In the following example we define a start_time field, which does not accept dat
     from datetime import datetime
     from wtforms import Form
     from wtforms.fields import DateField
-    from wtforms_alchemy import DateRange
+    from wtforms_components import DateRange
 
     class EventForm(Form):
         start_time = DateField(
@@ -43,7 +65,7 @@ validate field email if field user_id is provided. ::
 
     from wtforms import Form
     from wtforms.fields import IntegerField, TextField
-    from wtforms_alchemy import If
+    from wtforms_components import If
 
     class SomeForm(Form):
         user_id = IntegerField()
@@ -62,7 +84,7 @@ to provide nested conditional validations. ::
 
     from wtforms import Form
     from wtforms.fields import IntegerField, TextField
-    from wtforms_alchemy import If
+    from wtforms_components import If
 
     class SomeForm(Form):
         user_id = IntegerField()

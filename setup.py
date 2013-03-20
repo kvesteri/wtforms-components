@@ -24,7 +24,7 @@ class PyTest(Command):
 
 setup(
     name='WTForms-Components',
-    version='0.1',
+    version='0.2',
     url='https://github.com/kvesteri/wtforms-components',
     license='BSD',
     author='Konsta Vesterinen',
