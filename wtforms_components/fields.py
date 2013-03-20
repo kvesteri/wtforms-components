@@ -3,11 +3,9 @@ import phonenumbers
 from datetime import datetime
 from cgi import escape
 from wtforms import widgets, Form
-from wtforms.compat import text_type
 from wtforms.fields import (
     DateField,
     Field,
-    FieldList,
     FormField,
     SelectField as _SelectField,
     StringField
