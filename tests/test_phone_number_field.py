@@ -43,6 +43,14 @@ class TestPhoneNumberField(FormTestCase):
             form.validate()
             assert len(form.errors['phone_number']) == 1
 
+    def test_phone_number_is_empty(self):
+        form_class = self.init_form(country_code='FI')
+        form = form_class(MultiDict(phone_number=''))
+        assert form.phone_number._value() is u''
+        form.validate()
+        assert len(form.errors) == 0
+        assert form.data['phone_number'] is None
+
     def test_default_display_format(self):
         form_class = self.init_form(country_code='FI')
         form = form_class(MultiDict(phone_number='+358401234567'))

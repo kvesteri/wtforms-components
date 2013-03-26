@@ -271,12 +271,18 @@ class PhoneNumberField(StringField):
 
     def process_formdata(self, valuelist):
         if valuelist:
-            try:
-                self.data = PhoneNumber(
-                    valuelist[0],
-                    self.country_code
-                )
-                if not self.data.is_valid_number():
+            if valuelist[0] == u'':
+                self.data = None
+            else:
+                try:
+                    self.data = PhoneNumber(
+                        valuelist[0],
+                        self.country_code
+                    )
+                    if not self.data.is_valid_number():
+                        self.data = None
+                        raise ValueError(self.gettext(self.error_msg))
+                except phonenumbers.phonenumberutil.NumberParseException:
                     self.data = None
                     raise ValueError(self.gettext(self.error_msg))
             except phonenumbers.phonenumberutil.NumberParseException:
