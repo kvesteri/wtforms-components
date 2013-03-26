@@ -295,7 +295,6 @@ class NumberRangeField(StringField):
     .. _SQLAlchemy-Utils:
        https://github.com/kvesteri/sqlalchemy-utils
     """
-    widget = widgets.TextInput
     error_msg = u'Not a valid number range value'
 
     def _value(self):

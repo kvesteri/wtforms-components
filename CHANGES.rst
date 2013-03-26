@@ -4,6 +4,13 @@ Changelog
 Here you can see the full list of changes between each WTForms-Components
 release.
 
+
+0.4.3 (2013-03-26)
+^^^^^^^^^^^^^^^^^^
+
+- Fixed NumberRangeField widget rendering
+
+
 0.4.2 (2013-03-26)
 ^^^^^^^^^^^^^^^^^^
 
