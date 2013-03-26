@@ -4,6 +4,12 @@ Changelog
 Here you can see the full list of changes between each WTForms-Components
 release.
 
+0.4.2 (2013-03-26)
+^^^^^^^^^^^^^^^^^^
+
+- Removed NumberRangeInput
+
+
 0.4.1 (2013-03-26)
 ^^^^^^^^^^^^^^^^^^
 
