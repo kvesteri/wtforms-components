@@ -24,16 +24,22 @@ class TestNumberRangeField(FormTestCase):
         self.form_class = TestForm
         return self.form_class
 
-    def test_valid_phone_numbers(self):
+    def test_valid_number_ranges(self):
         form_class = self.init_form()
         for number_range in self.valid_ranges:
             form = form_class(MultiDict(number_range=number_range))
             form.validate()
             assert len(form.errors) == 0
 
-    def test_invalid_phone_numbers(self):
+    def test_invalid_number_ranges(self):
         form_class = self.init_form()
         for number_range in self.invalid_ranges:
             form = form_class(MultiDict(number_range=number_range))
             form.validate()
             assert len(form.errors['number_range']) == 1
+
+    def test_field_rendering_when_validation_fails(self):
+        form_class = self.init_form()
+        form = form_class(MultiDict(number_range='invalid'))
+        form.validate()
+        assert 'value="invalid"' in str(form.number_range)

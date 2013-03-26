@@ -298,6 +298,8 @@ class NumberRangeField(StringField):
     error_msg = u'Not a valid number range value'
 
     def _value(self):
+        if self.raw_data:
+            return self.raw_data[0]
         if self.data:
             return str(self.data)
         else:
