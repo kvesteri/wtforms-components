@@ -15,7 +15,7 @@ from wtforms.validators import ValidationError, DataRequired
 from wtforms.widgets import (
     HTMLString, html_params, Select as BaseSelectWidget
 )
-from sqlalchemy_utils import PhoneNumber
+from sqlalchemy_utils import PhoneNumber, NumberRange, NumberRangeException
 
 
 class SelectWidget(BaseSelectWidget):
@@ -280,5 +280,40 @@ class PhoneNumberField(StringField):
                     self.data = None
                     raise ValueError(self.gettext(self.error_msg))
             except phonenumbers.phonenumberutil.NumberParseException:
+                self.data = None
+                raise ValueError(self.gettext(self.error_msg))
+
+
+class NumberRangeInput(widgets.TextInput):
+    input_type = 'number-range'
+
+
+class NumberRangeField(StringField):
+    """
+    A string field representing a NumberRange object from
+    `SQLAlchemy-Utils`_.
+
+    .. _SQLAlchemy-Utils:
+       https://github.com/kvesteri/sqlalchemy-utils
+
+    :param country_code:
+        Country code of the phone number.
+    :param display_format:
+        The format in which the phone number is displayed.
+    """
+    widget = NumberRangeInput()
+    error_msg = u'Not a valid number range value'
+
+    def _value(self):
+        if self.data:
+            return str(self.data)
+        else:
+            return u''
+
+    def process_formdata(self, valuelist):
+        if valuelist:
+            try:
+                self.data = NumberRange.from_str(valuelist[0])
+            except NumberRangeException:
                 self.data = None
                 raise ValueError(self.gettext(self.error_msg))
