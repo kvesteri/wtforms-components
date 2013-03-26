@@ -1,5 +1,4 @@
 from .fields import (
-    NumberRangeInput,
     NumberRangeField,
     SelectField,
     SelectMultipleField,
@@ -12,7 +11,6 @@ __all__ = (
     Chain,
     DateRange,
     If,
-    NumberRangeInput,
     NumberRangeField,
     PhoneNumberField,
     SelectField,
