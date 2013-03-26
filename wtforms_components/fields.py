@@ -15,6 +15,7 @@ from wtforms.validators import ValidationError, DataRequired
 from wtforms.widgets import (
     HTMLString, html_params, Select as BaseSelectWidget
 )
+from sqlalchemy_utils import PhoneNumber
 
 
 class SelectWidget(BaseSelectWidget):
@@ -242,21 +243,21 @@ class PhoneNumberInput(widgets.TextInput):
 class PhoneNumberField(StringField):
     """
     A string field representing a PhoneNumber object from
-    `Python phonenumbers library`_.
+    `SQLAlchemy-Utils`_.
 
-    .. _Python phonenumbers library:
-       https://github.com/daviddrysdale/python-phonenumbers
+    .. _SQLAlchemy-Utils:
+       https://github.com/kvesteri/sqlalchemy-utils
 
     :param country_code:
         Country code of the phone number.
     :param display_format:
-        The PhoneNumberFormat in which the phone number is displayed.
+        The format in which the phone number is displayed.
     """
     widget = PhoneNumberInput()
     error_msg = u'Not a valid phone number value'
 
     def __init__(self, label=None, validators=None, country_code='US',
-                 display_format=phonenumbers.PhoneNumberFormat.NATIONAL,
+                 display_format='national',
                  **kwargs):
         super(PhoneNumberField, self).__init__(label, validators, **kwargs)
         self.country_code = country_code
@@ -264,21 +265,18 @@ class PhoneNumberField(StringField):
 
     def _value(self):
         if self.data:
-            return phonenumbers.format_number(
-                self.data,
-                self.display_format
-            )
+            return getattr(self.data, self.display_format)
         else:
             return u''
 
     def process_formdata(self, valuelist):
         if valuelist:
             try:
-                self.data = phonenumbers.parse(
+                self.data = PhoneNumber(
                     valuelist[0],
                     self.country_code
                 )
-                if not phonenumbers.is_valid_number(self.data):
+                if not self.data.is_valid_number():
                     self.data = None
                     raise ValueError(self.gettext(self.error_msg))
             except phonenumbers.phonenumberutil.NumberParseException:

@@ -1,4 +1,3 @@
-import phonenumbers
 from wtforms_components import PhoneNumberField
 from wtforms_test import FormTestCase
 from wtforms import Form
@@ -52,7 +51,7 @@ class TestPhoneNumberField(FormTestCase):
     def test_international_display_format(self):
         form_class = self.init_form(
             country_code='FI',
-            display_format=phonenumbers.PhoneNumberFormat.INTERNATIONAL
+            display_format='international'
         )
         form = form_class(MultiDict(phone_number='0401234567'))
         assert form.phone_number._value() == u'+358 40 1234567'
@@ -60,7 +59,7 @@ class TestPhoneNumberField(FormTestCase):
     def test_e164_display_format(self):
         form_class = self.init_form(
             country_code='FI',
-            display_format=phonenumbers.PhoneNumberFormat.E164
+            display_format='e164'
         )
         form = form_class(MultiDict(phone_number='0401234567'))
         assert form.phone_number._value() == u'+358401234567'

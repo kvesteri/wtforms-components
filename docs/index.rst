@@ -17,22 +17,21 @@ PhoneNumberField
 ----------------
 
 PhoneNumberField is a string field representing a PhoneNumber object from
-`Python phonenumbers library`_.
+`SQLAlchemy-Utils`_.
 
-.. _Python phonenumbers library:
-   https://github.com/daviddrysdale/python-phonenumbers
+.. _SQLAlchemy-Utils:
+   https://github.com/kvesteri/sqlalchemy-utils
 
 The following example shows that the field takes the phone number's country
 code and display format as parameters. ::
 
-    import phonenumbers
     from wtforms import Form
     from wtforms_components import PhoneNumberField
 
     class UserForm(Form):
         phone_number = PhoneNumberField(
             country_code='FI'
-            display_format=phonenumbers.PhoneNumberFormat.NATIONAL
+            display_format='national'
         )
 
 Validators
