@@ -4,6 +4,11 @@ Changelog
 Here you can see the full list of changes between each WTForms-Components
 release.
 
+0.4.1 (2013-03-26)
+^^^^^^^^^^^^^^^^^^
+
+- Changed empty phone number to be passed as None
+
 
 0.4.0 (2013-03-26)
 ^^^^^^^^^^^^^^^^^^

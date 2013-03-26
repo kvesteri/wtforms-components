@@ -285,9 +285,6 @@ class PhoneNumberField(StringField):
                 except phonenumbers.phonenumberutil.NumberParseException:
                     self.data = None
                     raise ValueError(self.gettext(self.error_msg))
-            except phonenumbers.phonenumberutil.NumberParseException:
-                self.data = None
-                raise ValueError(self.gettext(self.error_msg))
 
 
 class NumberRangeInput(widgets.TextInput):
