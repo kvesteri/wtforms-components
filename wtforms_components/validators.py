@@ -155,7 +155,7 @@ class Unique(object):
         try:
             obj = (
                 self.query
-                .filter(self.column == field.data).one()
+                .filter(self.column == field.data).first()
             )
 
             if not hasattr(form, '_obj') or not form._obj == obj:
