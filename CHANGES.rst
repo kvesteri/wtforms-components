@@ -5,6 +5,12 @@ Here you can see the full list of changes between each WTForms-Components
 release.
 
 
+0.4.0 (2013-03-26)
+^^^^^^^^^^^^^^^^^^
+
+- Added NumberRangeField
+
+
 0.3.0 (2013-03-26)
 ^^^^^^^^^^^^^^^^^^
 
