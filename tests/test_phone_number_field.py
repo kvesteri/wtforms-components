@@ -43,10 +43,14 @@ class TestPhoneNumberField(FormTestCase):
             form.validate()
             assert len(form.errors['phone_number']) == 1
 
-    def test_phone_number_is_empty(self):
+    def test_render_empty_phone_number_value(self):
         form_class = self.init_form(country_code='FI')
         form = form_class(MultiDict(phone_number=''))
-        assert form.phone_number._value() is u''
+        assert 'value=""' in form.phone_number()
+
+    def test_empty_phone_number_value_passed_as_none(self):
+        form_class = self.init_form(country_code='FI')
+        form = form_class(MultiDict(phone_number=''))
         form.validate()
         assert len(form.errors) == 0
         assert form.data['phone_number'] is None
@@ -54,7 +58,7 @@ class TestPhoneNumberField(FormTestCase):
     def test_default_display_format(self):
         form_class = self.init_form(country_code='FI')
         form = form_class(MultiDict(phone_number='+358401234567'))
-        assert form.phone_number._value() == u'040 1234567'
+        assert 'value="040 1234567"' in form.phone_number()
 
     def test_international_display_format(self):
         form_class = self.init_form(
@@ -62,7 +66,7 @@ class TestPhoneNumberField(FormTestCase):
             display_format='international'
         )
         form = form_class(MultiDict(phone_number='0401234567'))
-        assert form.phone_number._value() == u'+358 40 1234567'
+        assert 'value="+358 40 1234567"' in form.phone_number()
 
     def test_e164_display_format(self):
         form_class = self.init_form(
@@ -70,4 +74,10 @@ class TestPhoneNumberField(FormTestCase):
             display_format='e164'
         )
         form = form_class(MultiDict(phone_number='0401234567'))
-        assert form.phone_number._value() == u'+358401234567'
+        assert 'value="+358401234567"' in form.phone_number()
+
+    def test_field_rendering_when_invalid_phone_number(self):
+        form_class = self.init_form()
+        form = form_class(MultiDict(phone_number='invalid'))
+        form.validate()
+        assert 'value="invalid"' in form.phone_number()

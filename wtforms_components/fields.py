@@ -264,8 +264,12 @@ class PhoneNumberField(StringField):
         self.display_format = display_format
 
     def _value(self):
+        # self.data holds a PhoneNumber object, use it before falling back
+        # to self.rawdata which holds a string
         if self.data:
             return getattr(self.data, self.display_format)
+        elif self.raw_data:
+            return self.raw_data[0]
         else:
             return u''
 
