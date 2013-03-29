@@ -5,6 +5,13 @@ Here you can see the full list of changes between each WTForms-Components
 release.
 
 
+0.4.6 (2013-03-29)
+^^^^^^^^^^^^^^^^^^
+
+- Fixed Unique validator when using Form constructor obj parameter
+- Updated docs
+
+
 0.4.5 (2013-03-27)
 ^^^^^^^^^^^^^^^^^^
 

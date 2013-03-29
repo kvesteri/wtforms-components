@@ -1,6 +1,5 @@
 from wtforms import ValidationError
 from wtforms.validators import StopValidation
-from sqlalchemy.orm.exc import NoResultFound
 
 
 class ControlStructure(object):
@@ -152,15 +151,12 @@ class Unique(object):
         return self.get_session().query(self.model)
 
     def __call__(self, form, field):
-        try:
-            obj = (
-                self.query
-                .filter(self.column == field.data).first()
-            )
+        obj = (
+            self.query
+            .filter(self.column == field.data).first()
+        )
 
-            if not hasattr(form, '_obj') or not form._obj == obj:
-                if self.message is None:
-                    self.message = field.gettext(u'Already exists.')
-                raise ValidationError(self.message)
-        except NoResultFound:
-            pass
+        if not hasattr(form, '_obj') or (obj and not form._obj == obj):
+            if self.message is None:
+                self.message = field.gettext(u'Already exists.')
+            raise ValidationError(self.message)
