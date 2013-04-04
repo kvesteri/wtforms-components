@@ -5,12 +5,13 @@ from .fields import (
     SelectMultipleField,
     PhoneNumberField
 )
-from .validators import DateRange, Unique, If, Chain
+from .validators import DateRange, Unique, If, Chain, Email
 
 
 __all__ = (
     Chain,
     DateRange,
+    Email,
     If,
     NumberRangeField,
     PhoneNumberField,
