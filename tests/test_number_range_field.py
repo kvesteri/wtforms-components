@@ -43,3 +43,8 @@ class TestNumberRangeField(FormTestCase):
         form = form_class(MultiDict(number_range='invalid'))
         form.validate()
         assert 'value="invalid"' in str(form.number_range)
+
+    def test_converts_empty_strings_to_none(self):
+        form_class = self.init_form()
+        form = form_class(MultiDict(number_range=''))
+        assert form.data == {'number_range': None}

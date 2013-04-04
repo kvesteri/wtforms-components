@@ -311,8 +311,11 @@ class NumberRangeField(StringField):
 
     def process_formdata(self, valuelist):
         if valuelist:
-            try:
-                self.data = NumberRange.from_str(valuelist[0])
-            except NumberRangeException:
+            if valuelist[0] == u'' or valuelist[0] == '':
                 self.data = None
-                raise ValueError(self.gettext(self.error_msg))
+            else:
+                try:
+                    self.data = NumberRange.from_str(valuelist[0])
+                except NumberRangeException:
+                    self.data = None
+                    raise ValueError(self.gettext(self.error_msg))

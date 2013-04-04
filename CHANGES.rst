@@ -5,6 +5,13 @@ Here you can see the full list of changes between each WTForms-Components
 release.
 
 
+0.5.0 (2013-04-04)
+^^^^^^^^^^^^^^^^^^
+
+- Added Email validator
+- Fixed empty string handling with NumberRange fields
+
+
 0.4.6 (2013-03-29)
 ^^^^^^^^^^^^^^^^^^
 
