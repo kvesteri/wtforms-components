@@ -1,6 +1,7 @@
 from wtforms import Form
 from .fields import (
     NumberRangeField,
+    PassiveHiddenField,
     SelectField,
     SelectMultipleField,
     PhoneNumberField
@@ -14,6 +15,7 @@ __all__ = (
     Email,
     If,
     NumberRangeField,
+    PassiveHiddenField,
     PhoneNumberField,
     SelectField,
     SelectMultipleField,

@@ -5,6 +5,12 @@ Here you can see the full list of changes between each WTForms-Components
 release.
 
 
+0.5.0 (2013-04-12)
+^^^^^^^^^^^^^^^^^^
+
+- Added PassiveHiddenField
+
+
 0.5.0 (2013-04-04)
 ^^^^^^^^^^^^^^^^^^
 

@@ -7,6 +7,7 @@ from wtforms.fields import (
     DateField,
     Field,
     FormField,
+    HiddenField,
     SelectField as _SelectField,
     StringField
 )
@@ -319,3 +320,11 @@ class NumberRangeField(StringField):
                 except NumberRangeException:
                     self.data = None
                     raise ValueError(self.gettext(self.error_msg))
+
+
+class PassiveHiddenField(HiddenField):
+    """
+    HiddenField that does not populate obj values.
+    """
+    def populate_obj(self, obj, name):
+        pass
