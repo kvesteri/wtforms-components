@@ -5,7 +5,14 @@ Here you can see the full list of changes between each WTForms-Components
 release.
 
 
-0.5.0 (2013-04-12)
+0.5.2 (2013-04-12)
+^^^^^^^^^^^^^^^^^^
+
+- Added tests for TimeField
+- Added TimeField to main module import
+
+
+0.5.1 (2013-04-12)
 ^^^^^^^^^^^^^^^^^^
 
 - Added PassiveHiddenField

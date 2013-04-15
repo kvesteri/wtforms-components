@@ -2,9 +2,10 @@ from wtforms import Form
 from .fields import (
     NumberRangeField,
     PassiveHiddenField,
+    PhoneNumberField,
     SelectField,
     SelectMultipleField,
-    PhoneNumberField
+    TimeField,
 )
 from .validators import DateRange, Unique, If, Chain, Email
 
@@ -19,6 +20,7 @@ __all__ = (
     PhoneNumberField,
     SelectField,
     SelectMultipleField,
+    TimeField,
     Unique,
 )
 

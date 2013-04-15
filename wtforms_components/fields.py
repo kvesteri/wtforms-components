@@ -190,7 +190,7 @@ class TimeField(Field):
                 self.data = time.strptime(time_str, self.format)
             except ValueError:
                 self.data = None
-                raise ValueError(self.gettext('Not a valid datetime value'))
+                raise ValueError(self.gettext('Not a valid time.'))
 
 
 class Date():
