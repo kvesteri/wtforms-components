@@ -8,6 +8,7 @@ from .fields import (
     TimeField,
 )
 from .validators import DateRange, Unique, If, Chain, Email
+from .widgets import ReadOnlyWidgetProxy
 
 
 __all__ = (
@@ -34,3 +35,8 @@ class ModelForm(Form):
             self, formdata=formdata, obj=obj, prefix=prefix, **kwargs
         )
         self._obj = obj
+
+
+def read_only(field):
+    field.widget = ReadOnlyWidgetProxy(field.widget)
+    return field

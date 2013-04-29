@@ -35,6 +35,73 @@ code and display format as parameters. ::
             display_format='national'
         )
 
+
+NumberRangeField
+----------------
+
+NumberRangeField is a string field representing a NumberRange object from
+`SQLAlchemy-Utils`_.
+
+.. _SQLAlchemy-Utils:
+   https://github.com/kvesteri/sqlalchemy-utils
+
+Example: ::
+
+    from wtforms import Form
+    from wtforms_components import NumberRangeField
+
+    class EventForm(Form):
+        estimated_participants = NumberRangeField('Estimated participants')
+
+
+
+PassiveHiddenField
+------------------
+
+PassiveHiddenField acts just like normal wtforms.fields.HiddenField except it
+doesn't populate object values with populate_obj function.
+
+Example: ::
+
+    from wtforms import Form, TextField
+    from wtforms_components import PassiveHiddenField
+
+    class EventForm(Form):
+        id = PassiveHiddenField()
+        name = TextField('Name')
+
+
+TimeField
+---------
+
+TimeField is a string field which stores a `datetime.time` matching a format.
+
+
+    from wtforms import Form, DateField
+    from wtforms_components import TimeField
+
+    class EventForm(Form):
+        start_date = DateField('Start date')
+        start_time = TimeField('Start time')
+
+
+Read-only fields
+----------------
+
+WTForms-Components provides a convenient function for making fields read-only.
+
+In the following example we define a form where name field is defined as read-only.
+
+
+    from wtforms import Form, DateField, TextField
+    from wtforms_components import TimeField, read_only
+
+    class EventForm(Form):
+        name = read_only(TextField('Name'))
+        start_date = DateField('Start date')
+        start_time = TimeField('Start time')
+
+
 Validators
 ==========
 
@@ -55,6 +122,24 @@ In the following example we define a start_time field, which does not accept dat
         start_time = DateField(
             validators=[DateRange(min=datetime.now())]
         )
+
+
+Email validator
+---------------
+
+Validates an email address. This validator is based on `Django's email validator`_ and is stricter than the standard email validator included in WTForms.
+
+Example: ::
+
+    from wtforms import Form
+    from wtforms.fields import TextField
+    from wtforms_components import Email
+
+    class UserForm(Form):
+        email = TextField(
+            validators=[Email()]
+        )
+
 
 If validator
 ------------

@@ -1,7 +1,6 @@
 import time
 import phonenumbers
 from datetime import datetime
-from cgi import escape
 from wtforms import widgets, Form
 from wtforms.fields import (
     DateField,
@@ -13,47 +12,8 @@ from wtforms.fields import (
 )
 from wtforms.fields.core import _unset_value
 from wtforms.validators import ValidationError, DataRequired
-from wtforms.widgets import (
-    HTMLString, html_params, Select as BaseSelectWidget
-)
 from sqlalchemy_utils import PhoneNumber, NumberRange, NumberRangeException
-
-
-class SelectWidget(BaseSelectWidget):
-    """
-    Add support of choices with ``optgroup`` to the ``Select`` widget.
-    """
-    @classmethod
-    def render_option(cls, value, label, mixed):
-        """
-        Render option as HTML tag, but not forget to wrap options into
-        ``optgroup`` tag if ``label`` var is ``list`` or ``tuple``.
-        """
-        if isinstance(label, (list, tuple)):
-            children = []
-
-            for item_value, item_label in label:
-                item_html = cls.render_option(item_value, item_label, mixed)
-                children.append(item_html)
-
-            html = u'<optgroup label="%s">%s</optgroup>'
-            data = (escape(unicode(value)), u'\n'.join(children))
-        else:
-            coerce_func, data = mixed
-            if isinstance(data, list) or isinstance(data, tuple):
-                selected = coerce_func(value) in data
-            else:
-                selected = coerce_func(value) == data
-
-            options = {'value': value}
-
-            if selected:
-                options['selected'] = u'selected'
-
-            html = u'<option %s>%s</option>'
-            data = (html_params(**options), escape(unicode(label)))
-
-        return HTMLString(html % data)
+from .widgets import SelectWidget, PhoneNumberInput
 
 
 class SelectField(_SelectField):
@@ -172,6 +132,7 @@ class TimeField(Field):
     A text field which stores a `datetime.time` matching a format.
     """
     widget = widgets.TextInput()
+    error_msg = 'Not a valid time.'
 
     def __init__(self, label=None, validators=None, format='%H:%M', **kwargs):
         super(TimeField, self).__init__(label, validators, **kwargs)
@@ -190,7 +151,7 @@ class TimeField(Field):
                 self.data = time.strptime(time_str, self.format)
             except ValueError:
                 self.data = None
-                raise ValueError(self.gettext('Not a valid time.'))
+                raise ValueError(self.gettext(self.error_msg))
 
 
 class Date():
@@ -235,10 +196,6 @@ class SplitDateTimeField(FormField):
 class DateTimeForm(Form):
     date = DateField(u'Date', validators=[DataRequired()])
     time = TimeField(u'Time', validators=[DataRequired()])
-
-
-class PhoneNumberInput(widgets.TextInput):
-    input_type = 'tel'
 
 
 class PhoneNumberField(StringField):

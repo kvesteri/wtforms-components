@@ -5,6 +5,12 @@ Here you can see the full list of changes between each WTForms-Components
 release.
 
 
+0.5.3 (2013-04-26)
+^^^^^^^^^^^^^^^^^^
+
+- Added read_only field marker function
+
+
 0.5.2 (2013-04-12)
 ^^^^^^^^^^^^^^^^^^
 
