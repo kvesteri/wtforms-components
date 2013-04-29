@@ -36,6 +36,24 @@ code and display format as parameters. ::
         )
 
 
+ColorField
+----------
+
+ColorField is a string field representing a Color object from `colour`_  package.
+
+.. _colour:
+   https://github.com/vaab/colour
+
+Example ::
+
+    from wtforms import Form
+    from wtforms_components import ColorField
+
+    class DocumentForm(Form):
+        background_color = ColorField()
+
+
+
 NumberRangeField
 ----------------
 

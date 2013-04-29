@@ -1,5 +1,6 @@
 import time
 import phonenumbers
+from colour import Color
 from datetime import datetime
 from wtforms import widgets, Form
 from wtforms.fields import (
@@ -13,7 +14,7 @@ from wtforms.fields import (
 from wtforms.fields.core import _unset_value
 from wtforms.validators import ValidationError, DataRequired
 from sqlalchemy_utils import PhoneNumber, NumberRange, NumberRangeException
-from .widgets import SelectWidget, PhoneNumberInput
+from .widgets import ColorInput, SelectWidget, PhoneNumberInput
 
 
 class SelectField(_SelectField):
@@ -275,6 +276,39 @@ class NumberRangeField(StringField):
                 try:
                     self.data = NumberRange.from_str(valuelist[0])
                 except NumberRangeException:
+                    self.data = None
+                    raise ValueError(self.gettext(self.error_msg))
+
+
+class ColorField(StringField):
+    """
+    A string field representing a Color object from python colour package.
+
+    .. _colours:
+       https://github.com/vaab/colour
+
+    Represents an ``<input type="color">``.
+    """
+    widget = ColorInput()
+
+    error_msg = u'Not a valid color.'
+
+    def _value(self):
+        if self.raw_data:
+            return self.raw_data[0]
+        if self.data:
+            return str(self.data)
+        else:
+            return u''
+
+    def process_formdata(self, valuelist):
+        if valuelist:
+            if valuelist[0] == u'' or valuelist[0] == '':
+                self.data = None
+            else:
+                try:
+                    self.data = Color(valuelist[0])
+                except AttributeError:
                     self.data = None
                     raise ValueError(self.gettext(self.error_msg))
 

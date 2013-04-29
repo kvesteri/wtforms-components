@@ -5,6 +5,12 @@ Here you can see the full list of changes between each WTForms-Components
 release.
 
 
+0.5.4 (2013-04-29)
+^^^^^^^^^^^^^^^^^^
+
+- Added ColorField
+
+
 0.5.3 (2013-04-26)
 ^^^^^^^^^^^^^^^^^^
 

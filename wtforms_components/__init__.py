@@ -1,5 +1,6 @@
 from wtforms import Form
 from .fields import (
+    ColorField,
     NumberRangeField,
     PassiveHiddenField,
     PhoneNumberField,
@@ -13,6 +14,7 @@ from .widgets import ReadOnlyWidgetProxy
 
 __all__ = (
     Chain,
+    ColorField,
     DateRange,
     Email,
     If,
