@@ -5,6 +5,15 @@ Here you can see the full list of changes between each WTForms-Components
 release.
 
 
+0.5.5 (2013-05-07)
+^^^^^^^^^^^^^^^^^^
+
+- Made TimeField use HTML5 TimeInput
+- Made PhoneNumberField use HTML5 TelInput
+- Made ColorField use HTML5 ColorInput
+- Updated WTForms dependency to 1.0.4
+
+
 0.5.4 (2013-04-29)
 ^^^^^^^^^^^^^^^^^^
 

@@ -1,18 +1,11 @@
 from cgi import escape
 from wtforms.widgets import (
-    HTMLString, html_params, TextInput, Input, Select as BaseSelectWidget
+    HTMLString, html_params, Select as BaseSelectWidget, TextInput
 )
 
 
-class PhoneNumberInput(TextInput):
-    input_type = 'tel'
-
-
-class ColorInput(Input):
-    """
-    Renders an input with type "color".
-    """
-    input_type = 'color'
+class TimeInput(TextInput):
+    input_type = 'time'
 
 
 class ReadOnlyWidgetProxy(object):

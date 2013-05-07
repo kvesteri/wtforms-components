@@ -2,7 +2,7 @@ import time
 import phonenumbers
 from colour import Color
 from datetime import datetime
-from wtforms import widgets, Form
+from wtforms import Form
 from wtforms.fields import (
     DateField,
     Field,
@@ -12,9 +12,10 @@ from wtforms.fields import (
     StringField
 )
 from wtforms.fields.core import _unset_value
-from wtforms.validators import ValidationError, DataRequired
+from wtforms.validators import ValidationError
+from wtforms.widgets.html5 import TelInput, ColorInput
 from sqlalchemy_utils import PhoneNumber, NumberRange, NumberRangeException
-from .widgets import ColorInput, SelectWidget, PhoneNumberInput
+from .widgets import SelectWidget, TimeInput
 
 
 class SelectField(_SelectField):
@@ -39,17 +40,6 @@ class SelectField(_SelectField):
     Also supports lazy choices (callables that return an iterable)
     """
     widget = SelectWidget()
-
-    # def __init__(
-    #         self, label=None, validators=None, coerce=text_type,
-    #         choices=None, sort=False, **kwargs):
-    #     _SelectField.__init__(
-    #         self,
-    #         label=label,
-    #         validators=validators,
-    #         coerce=coerce,
-    #         **kwargs
-    #     )
 
     def iter_choices(self):
         """
@@ -132,7 +122,7 @@ class TimeField(Field):
     """
     A text field which stores a `datetime.time` matching a format.
     """
-    widget = widgets.TextInput()
+    widget = TimeInput()
     error_msg = 'Not a valid time.'
 
     def __init__(self, label=None, validators=None, format='%H:%M', **kwargs):
@@ -164,7 +154,7 @@ class SplitDateTimeField(FormField):
     def __init__(self, label=None, validators=None, separator='-', **kwargs):
         FormField.__init__(
             self,
-            DateTimeForm,
+            datetime_form(kwargs.get('datetime_form', {})),
             label=label,
             validators=validators,
             separator=separator,
@@ -194,9 +184,16 @@ class SplitDateTimeField(FormField):
             ))
 
 
-class DateTimeForm(Form):
-    date = DateField(u'Date', validators=[DataRequired()])
-    time = TimeField(u'Time', validators=[DataRequired()])
+def datetime_form(options):
+    options.setdefault('date', {})
+    options.setdefault('time', {})
+    options['date'].setdefault('label', u'Date')
+    options['time'].setdefault('label', u'Time')
+
+    class DateTimeForm(Form):
+        date = DateField(options['date'].label, **options['date'])
+        time = TimeField(options['time'].label, **options['time'])
+    return DateTimeForm
 
 
 class PhoneNumberField(StringField):
@@ -212,7 +209,7 @@ class PhoneNumberField(StringField):
     :param display_format:
         The format in which the phone number is displayed.
     """
-    widget = PhoneNumberInput()
+    widget = TelInput()
     error_msg = u'Not a valid phone number value'
 
     def __init__(self, label=None, validators=None, country_code='US',
