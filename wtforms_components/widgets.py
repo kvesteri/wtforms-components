@@ -4,7 +4,7 @@ from wtforms.widgets import (
     html_params,
     Select as _Select
 )
-from wtforms.validators import NumberRange
+from wtforms.validators import NumberRange, DataRequired
 from wtforms.widgets import html5
 from .validators import DateRange
 
@@ -27,6 +27,13 @@ def min_max(field, validator_class):
     return data
 
 
+def has_validator(field, validator_class):
+    for validator in field.validators:
+        if isinstance(validator, validator_class):
+            return True
+    return False
+
+
 class DateTimeLocalInput(html5.DateTimeLocalInput):
     """
     Renders an input with type "datetime-local".
@@ -35,6 +42,8 @@ class DateTimeLocalInput(html5.DateTimeLocalInput):
     validator.
     """
     def __call__(self, field, **kwargs):
+        if has_validator(field, DataRequired):
+            kwargs.setdefault('required', True)
         for key, value in min_max(field, DateRange).items():
             kwargs.setdefault(key, value.strftime(field.format))
 
@@ -49,6 +58,8 @@ class DateTimeInput(html5.DateTimeInput):
     validator.
     """
     def __call__(self, field, **kwargs):
+        if has_validator(field, DataRequired):
+            kwargs.setdefault('required', True)
         for key, value in min_max(field, DateRange).items():
             kwargs.setdefault(key, value.strftime(field.format))
 
@@ -63,6 +74,8 @@ class DateInput(html5.DateInput):
     validator.
     """
     def __call__(self, field, **kwargs):
+        if has_validator(field, DataRequired):
+            kwargs.setdefault('required', True)
         for key, value in min_max(field, DateRange).items():
             kwargs.setdefault(key, value.strftime(field.format))
 
@@ -77,6 +90,8 @@ class NumberInput(html5.NumberInput):
     validator.
     """
     def __call__(self, field, **kwargs):
+        if has_validator(field, DataRequired):
+            kwargs.setdefault('required', True)
         for key, value in min_max(field, NumberRange).items():
             kwargs.setdefault(key, value)
 

@@ -5,6 +5,13 @@ Here you can see the full list of changes between each WTForms-Components
 release.
 
 
+0.6.1 (2013-05-23)
+^^^^^^^^^^^^^^^^^^
+
+- Added required flag for NumberInput, DateInput, DateTimeInput
+and DateTimeLocalInput whenever associated field has a DataRequired validator.
+
+
 0.6.0 (2013-05-23)
 ^^^^^^^^^^^^^^^^^^
 

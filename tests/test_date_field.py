@@ -1,18 +1,11 @@
 from datetime import datetime
 from wtforms_components import DateField, DateRange
-from wtforms_test import FormTestCase
-from wtforms import Form
 
-from tests import MultiDict
+from tests import MultiDict, FieldTestCase
 
 
-class TestDateField(FormTestCase):
-    def init_form(self, **kwargs):
-        class TestForm(Form):
-            test_field = DateField(**kwargs)
-
-        self.form_class = TestForm
-        return self.form_class
+class TestDateField(FieldTestCase):
+    field_class = DateField
 
     def test_assigns_min_and_max(self):
         form_class = self.init_form(
