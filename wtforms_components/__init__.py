@@ -1,6 +1,11 @@
 from wtforms import Form
 from .fields import (
     ColorField,
+    DateField,
+    DateTimeField,
+    DateTimeLocalField,
+    DecimalField,
+    IntegerField,
     NumberRangeField,
     PassiveHiddenField,
     PhoneNumberField,
@@ -9,20 +14,27 @@ from .fields import (
     TimeField,
 )
 from .validators import DateRange, Unique, If, Chain, Email
-from .widgets import ReadOnlyWidgetProxy
+from .widgets import ReadOnlyWidgetProxy, NumberInput, SelectWidget
 
 
 __all__ = (
     Chain,
     ColorField,
     DateRange,
+    DateField,
+    DateTimeField,
+    DateTimeLocalField,
+    DecimalField,
     Email,
     If,
+    IntegerField,
+    NumberInput,
     NumberRangeField,
     PassiveHiddenField,
     PhoneNumberField,
     SelectField,
     SelectMultipleField,
+    SelectWidget,
     TimeField,
     Unique,
 )

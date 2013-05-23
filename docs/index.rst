@@ -8,6 +8,65 @@ Fields
 ======
 
 
+WTForms derived HTML5 Fields
+-----------------------------
+
+WTForms-Components provides enhanced versions of WTForms HTML5 fields. These fields support
+HTML5 compatible min and max validators. WTForms-Components is smart enough to automatically
+attach HTML5 min and max validators based on field's NumberRange and DateRange validators.
+
+Example:
+
+::
+
+    from wtforms import Form
+    from wtforms_components import DateTimeField
+    from werkzeug.datastructures import MultiDict
+
+
+    class TestForm(Form):
+        test_field = DateTimeField(
+            'Date',
+            validators=[DateRange(
+                min=datetime(2000, 1, 1),
+                max=datetime(2000, 10, 10)
+            )]
+        )
+
+
+    form = TestForm(MultiDict(test_field='2000-2-2'))
+    form.test_field
+
+    # <input id="test_field" max="2000-10-10 00:00:00" min="2000-01-01 00:00:00" name="test_field" type="datetime" value="2000-2-2">'
+
+
+Same applies to IntegerField:
+
+
+::
+
+    from wtforms import Form
+    from wtforms_components import IntegerField
+    from werkzeug.datastructures import MultiDict
+
+
+    class TestForm(Form):
+        test_field = IntegerField(
+            'Date',
+            validators=[NumberRange(
+                min=1,
+                max=4
+            )]
+        )
+
+
+    form = TestForm(MultiDict(test_field='3'))
+    form.test_field
+
+    # <input id="test_field" max="4" min="1" name="test_field" type="number" value="3">'
+
+
+
 SelectField
 -----------
 

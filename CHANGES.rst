@@ -5,6 +5,15 @@ Here you can see the full list of changes between each WTForms-Components
 release.
 
 
+0.6.0 (2013-05-23)
+^^^^^^^^^^^^^^^^^^
+
+- IntegerField which creates HTML5 compatible min and max attributes based on
+attached NumberRange validators
+- DateField, DateTimeField and DateTimeLocalField classes which create HTML5
+compatible min and max attributes based on attached NumberRange validators
+
+
 0.5.5 (2013-05-07)
 ^^^^^^^^^^^^^^^^^^
 

@@ -24,7 +24,7 @@ class PyTest(Command):
 
 setup(
     name='WTForms-Components',
-    version='0.5.5',
+    version='0.6.0',
     url='https://github.com/kvesteri/wtforms-components',
     license='BSD',
     author='Konsta Vesterinen',
@@ -38,7 +38,7 @@ setup(
     install_requires=[
         'WTForms>=1.0.4',
         'SQLAlchemy>=0.8.0',
-        'SQLAlchemy-Utils>=0.10.0',
+        'SQLAlchemy-Utils>=0.12.1',
         'colour==0.0.2'
     ],
     cmdclass={'test': PyTest},

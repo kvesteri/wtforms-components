@@ -4,18 +4,44 @@ from colour import Color
 from datetime import datetime
 from wtforms import Form
 from wtforms.fields import (
-    DateField,
     Field,
     FormField,
     HiddenField,
     SelectField as _SelectField,
     StringField
 )
+from wtforms.fields import html5
 from wtforms.fields.core import _unset_value
 from wtforms.validators import ValidationError
-from wtforms.widgets.html5 import TelInput, ColorInput
+from wtforms.widgets.html5 import TelInput, ColorInput, TimeInput
 from sqlalchemy_utils import PhoneNumber, NumberRange, NumberRangeException
-from .widgets import SelectWidget, TimeInput
+from .widgets import (
+    SelectWidget,
+    NumberInput,
+    DateTimeInput,
+    DateInput,
+    DateTimeLocalInput
+)
+
+
+class IntegerField(html5.IntegerField):
+    widget = NumberInput()
+
+
+class DecimalField(html5.DecimalField):
+    widget = NumberInput()
+
+
+class DateTimeLocalField(html5.DateTimeField):
+    widget = DateTimeLocalInput()
+
+
+class DateTimeField(html5.DateTimeField):
+    widget = DateTimeInput()
+
+
+class DateField(html5.DateField):
+    widget = DateInput()
 
 
 class SelectField(_SelectField):
