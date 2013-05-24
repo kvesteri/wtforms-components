@@ -5,6 +5,13 @@ Here you can see the full list of changes between each WTForms-Components
 release.
 
 
+0.6.2 (2013-05-23)
+^^^^^^^^^^^^^^^^^^
+
+- Added TimeInput
+- Added TimeRange validator
+
+
 0.6.1 (2013-05-23)
 ^^^^^^^^^^^^^^^^^^
 

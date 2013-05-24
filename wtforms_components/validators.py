@@ -71,7 +71,65 @@ class If(ControlStructure):
                 self.reraise(exc)
 
 
-class DateRange(object):
+class BaseDateTimeRange(object):
+    def __init__(self, min=None, max=None, format='%H:%M', message=None):
+        self.min = min
+        self.max = max
+        self.format = format
+        self.message = message
+
+    def __call__(self, form, field):
+        data = field.data
+        min_ = self.min() if callable(self.min) else self.min
+        max_ = self.max() if callable(self.max) else self.max
+        if (data is None or (min_ is not None and data < min_) or
+                (max_ is not None and data > max_)):
+            if self.message is None:
+                if max_ is None:
+                    self.message = field.gettext(self.greater_than_msg)
+                elif min_ is None:
+                    self.message = field.gettext(self.less_than_msg)
+                else:
+                    self.message = field.gettext(self.between_msg)
+
+            raise ValidationError(
+                self.message % dict(
+                    field_label=field.label,
+                    min=min_.strftime(self.format) if min_ else '',
+                    max=max_.strftime(self.format) if max_ else ''
+                )
+            )
+
+
+class TimeRange(BaseDateTimeRange):
+    """
+    Same as wtforms.validators.NumberRange but validates date.
+
+    :param min:
+        The minimum required value of the time. If not provided, minimum
+        value will not be checked.
+    :param max:
+        The maximum value of the time. If not provided, maximum value
+        will not be checked.
+    :param message:
+        Error message to raise in case of a validation error. Can be
+        interpolated using `%(min)s` and `%(max)s` if desired. Useful defaults
+        are provided depending on the existence of min and max.
+    """
+
+    greater_than_msg = u'Time must be greater than %(min)s.'
+
+    less_than_msg = u'Time must be less than %(max)s.'
+
+    between_msg = u'Time must be between %(min)s and %(max)s.'
+
+    def __init__(self, min=None, max=None, format='%H:%M', message=None):
+        super(TimeRange, self).__init__(
+            min=min, max=max, format=format, message=message
+        )
+
+
+class DateRange(BaseDateTimeRange):
     """
     Same as wtforms.validators.NumberRange but validates date.
 
@@ -87,39 +145,16 @@ class DateRange(object):
         are provided depending on the existence of min and max.
     """
 
-    date_greater_than = u'Date must be greater than %(min)s.'
+    greater_than_msg = u'Date must be greater than %(min)s.'
 
-    date_less_than = u'Date must be less than %(max)s.'
+    less_than_msg = u'Date must be less than %(max)s.'
 
-    date_between = u'Date must be between %(min)s and %(max)s.'
+    between_msg = u'Date must be between %(min)s and %(max)s.'
 
     def __init__(self, min=None, max=None, format='%Y-%m-%d', message=None):
-        self.min = min
-        self.max = max
-        self.format = format
-        self.message = message
-
-    def __call__(self, form, field):
-        data = field.data
-        min_ = self.min() if callable(self.min) else self.min
-        max_ = self.max() if callable(self.max) else self.max
-        if (data is None or (min_ is not None and data < min_) or
-                (max_ is not None and data > max_)):
-            if self.message is None:
-                if max_ is None:
-                    self.message = field.gettext(self.date_greater_than)
-                elif min_ is None:
-                    self.message = field.gettext(self.date_less_than)
-                else:
-                    self.message = field.gettext(self.date_between)
-
-            raise ValidationError(
-                self.message % dict(
-                    field_label=field.label,
-                    min=min_.strftime(self.format) if min_ else '',
-                    max=max_.strftime(self.format) if max_ else ''
-                )
-            )
+        super(DateRange, self).__init__(
+            min=min, max=max, format=format, message=message
+        )
 
 
 class Unique(object):

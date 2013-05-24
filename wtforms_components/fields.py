@@ -1,7 +1,7 @@
+import datetime
 import time
 import phonenumbers
 from colour import Color
-from datetime import datetime
 from wtforms import Form
 from wtforms.fields import (
     Field,
@@ -13,14 +13,15 @@ from wtforms.fields import (
 from wtforms.fields import html5
 from wtforms.fields.core import _unset_value
 from wtforms.validators import ValidationError
-from wtforms.widgets.html5 import TelInput, ColorInput, TimeInput
+from wtforms.widgets.html5 import TelInput, ColorInput
 from sqlalchemy_utils import PhoneNumber, NumberRange, NumberRangeException
 from .widgets import (
     SelectWidget,
     NumberInput,
     DateTimeInput,
     DateInput,
-    DateTimeLocalInput
+    DateTimeLocalInput,
+    TimeInput
 )
 
 
@@ -165,7 +166,9 @@ class TimeField(Field):
         if valuelist:
             time_str = ' '.join(valuelist)
             try:
-                self.data = time.strptime(time_str, self.format)
+                self.data = datetime.time(
+                    *time.strptime(time_str, self.format)[3:5]
+                )
             except ValueError:
                 self.data = None
                 raise ValueError(self.gettext(self.error_msg))

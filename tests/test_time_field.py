@@ -1,10 +1,11 @@
-from wtforms_components import TimeField
-from wtforms_test import FormTestCase
-from wtforms import Form
-from tests import MultiDict
+from datetime import time
+from wtforms_components import TimeField, TimeRange
+from tests import MultiDict, FieldTestCase
 
 
-class TestPhoneNumberField(FormTestCase):
+class TestTimeField(FieldTestCase):
+    field_class = TimeField
+
     def setup_method(self, method):
         self.valid_times = [
             '00:00',
@@ -17,23 +18,29 @@ class TestPhoneNumberField(FormTestCase):
             'unknown',
         ]
 
-    def init_form(self, **kwargs):
-        class TestForm(Form):
-            time = TimeField(**kwargs)
-
-        self.form_class = TestForm
-        return self.form_class
-
-    def test_valid_phone_numbers(self):
+    def test_valid_times(self):
         form_class = self.init_form()
-        for time in self.valid_times:
-            form = form_class(MultiDict(time=time))
+        for time_ in self.valid_times:
+            form = form_class(MultiDict(test_field=time_))
             form.validate()
             assert len(form.errors) == 0
 
-    def test_invalid_phone_numbers(self):
+    def test_invalid_times(self):
         form_class = self.init_form()
-        for time in self.invalid_times:
-            form = form_class(MultiDict(time=time))
+        for time_ in self.invalid_times:
+            form = form_class(MultiDict(test_field=time_))
             form.validate()
-            assert len(form.errors['time']) == 1
+            assert len(form.errors['test_field']) == 1
+
+    def test_assigns_min_and_max(self):
+        form_class = self.init_form(
+            validators=[TimeRange(
+                min=time(12, 12),
+                max=time(13, 30)
+            )]
+        )
+        form = form_class(MultiDict(test_field='13:20'))
+        assert str(form.test_field) == (
+            '<input id="test_field" max="13:30:00" min="12:12:00"'
+            ' name="test_field" type="time" value="13:20">'
+        )

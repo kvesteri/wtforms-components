@@ -5,8 +5,8 @@ from wtforms.widgets import (
     Select as _Select
 )
 from wtforms.validators import NumberRange, DataRequired
-from wtforms.widgets import html5
-from .validators import DateRange
+from wtforms.widgets import html5, Input
+from .validators import DateRange, TimeRange
 
 
 def min_max(field, validator_class):
@@ -34,52 +34,65 @@ def has_validator(field, validator_class):
     return False
 
 
-class DateTimeLocalInput(html5.DateTimeLocalInput):
+class BaseDateTimeInput(Input):
+    """
+    Base class for TimeInput, DateTimeLocalInput, DateTimeInput and
+    DateInput widgets
+    """
+    range_validator_class = DateRange
+
+    def __call__(self, field, **kwargs):
+        if has_validator(field, DataRequired):
+            kwargs.setdefault('required', True)
+        for key, value in min_max(field, self.range_validator_class).items():
+            kwargs.setdefault(key, value.strftime(self.format))
+
+        return super(BaseDateTimeInput, self).__call__(field, **kwargs)
+
+
+class TimeInput(BaseDateTimeInput):
+    """
+    Renders an input with type "time".
+
+    Adds min and max html5 field parameters based on field's TimeRange
+    validator.
+    """
+    input_type = 'time'
+    range_validator_class = TimeRange
+    format = '%H:%M:%S'
+
+
+class DateTimeLocalInput(BaseDateTimeInput):
     """
     Renders an input with type "datetime-local".
 
     Adds min and max html5 field parameters based on field's DateRange
     validator.
     """
-    def __call__(self, field, **kwargs):
-        if has_validator(field, DataRequired):
-            kwargs.setdefault('required', True)
-        for key, value in min_max(field, DateRange).items():
-            kwargs.setdefault(key, value.strftime(field.format))
-
-        return super(DateTimeLocalInput, self).__call__(field, **kwargs)
+    input_type = 'datetime-local'
+    format = '%Y-%m-%dT%H:%M:%S'
 
 
-class DateTimeInput(html5.DateTimeInput):
+class DateTimeInput(BaseDateTimeInput):
     """
     Renders an input with type "datetime".
 
     Adds min and max html5 field parameters based on field's DateRange
     validator.
     """
-    def __call__(self, field, **kwargs):
-        if has_validator(field, DataRequired):
-            kwargs.setdefault('required', True)
-        for key, value in min_max(field, DateRange).items():
-            kwargs.setdefault(key, value.strftime(field.format))
-
-        return super(DateTimeInput, self).__call__(field, **kwargs)
+    input_type = 'datetime'
+    format = '%Y-%m-%dT%H:%M:%SZ'
 
 
-class DateInput(html5.DateInput):
+class DateInput(BaseDateTimeInput):
     """
     Renders an input with type "date".
 
     Adds min and max html5 field parameters based on field's DateRange
     validator.
     """
-    def __call__(self, field, **kwargs):
-        if has_validator(field, DataRequired):
-            kwargs.setdefault('required', True)
-        for key, value in min_max(field, DateRange).items():
-            kwargs.setdefault(key, value.strftime(field.format))
-
-        return super(DateInput, self).__call__(field, **kwargs)
+    input_type = 'date'
+    format = '%Y-%m-%d'
 
 
 class NumberInput(html5.NumberInput):

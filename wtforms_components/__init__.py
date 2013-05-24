@@ -13,7 +13,7 @@ from .fields import (
     SelectMultipleField,
     TimeField,
 )
-from .validators import DateRange, Unique, If, Chain, Email
+from .validators import DateRange, Unique, If, Chain, Email, TimeRange
 from .widgets import ReadOnlyWidgetProxy, NumberInput, SelectWidget
 
 
@@ -36,6 +36,7 @@ __all__ = (
     SelectMultipleField,
     SelectWidget,
     TimeField,
+    TimeRange,
     Unique,
 )
 
