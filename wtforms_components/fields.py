@@ -24,6 +24,8 @@ from .widgets import (
     SelectWidget,
     TelInput,
     TimeInput,
+    RangeInput,
+    SearchInput,
 )
 
 
@@ -49,6 +51,18 @@ class DateTimeField(html5.DateTimeField):
 
 class DateField(html5.DateField):
     widget = DateInput()
+
+
+class IntegerSliderField(html5.IntegerRangeField):
+    widget = RangeInput()
+
+
+class DecimalSliderField(html5.DecimalRangeField):
+    widget = RangeInput()
+
+
+class SearchField(html5.SearchField):
+    widget = SearchInput()
 
 
 class SelectField(_SelectField):

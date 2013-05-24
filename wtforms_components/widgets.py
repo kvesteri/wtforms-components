@@ -55,6 +55,34 @@ class BaseDateTimeInput(HTML5Input):
         return super(BaseDateTimeInput, self).__call__(field, **kwargs)
 
 
+class SearchInput(HTML5Input):
+    """
+    Renders an input with type "search".
+    """
+    input_type = 'search'
+
+
+class MonthInput(HTML5Input):
+    """
+    Renders an input with type "month".
+    """
+    input_type = 'month'
+
+
+class WeekInput(HTML5Input):
+    """
+    Renders an input with type "week".
+    """
+    input_type = 'week'
+
+
+class RangeInput(HTML5Input):
+    """
+    Renders an input with type "range".
+    """
+    input_type = 'range'
+
+
 class URLInput(HTML5Input):
     """
     Renders an input with type "url".

@@ -5,7 +5,14 @@ Here you can see the full list of changes between each WTForms-Components
 release.
 
 
-0.6.2 (2013-05-23)
+0.6.3 (2013-05-24)
+^^^^^^^^^^^^^^^^^^
+
+- Added EmailField to main import
+- Added SearchField, IntegerSliderField, DecimalSliderField
+
+
+0.6.2 (2013-05-24)
 ^^^^^^^^^^^^^^^^^^
 
 - Added TimeInput, URLInput, ColorInput and TelInput
