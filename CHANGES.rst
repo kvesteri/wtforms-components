@@ -8,7 +8,7 @@ release.
 0.6.2 (2013-05-23)
 ^^^^^^^^^^^^^^^^^^
 
-- Added TimeInput
+- Added TimeInput, URLInput, ColorInput and TelInput
 - Added TimeRange validator
 
 

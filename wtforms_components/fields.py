@@ -13,16 +13,22 @@ from wtforms.fields import (
 from wtforms.fields import html5
 from wtforms.fields.core import _unset_value
 from wtforms.validators import ValidationError
-from wtforms.widgets.html5 import TelInput, ColorInput
 from sqlalchemy_utils import PhoneNumber, NumberRange, NumberRangeException
 from .widgets import (
-    SelectWidget,
-    NumberInput,
-    DateTimeInput,
+    ColorInput,
     DateInput,
+    DateTimeInput,
     DateTimeLocalInput,
-    TimeInput
+    EmailInput,
+    NumberInput,
+    SelectWidget,
+    TelInput,
+    TimeInput,
 )
+
+
+class EmailField(StringField):
+    widget = EmailInput()
 
 
 class IntegerField(html5.IntegerField):

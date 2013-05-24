@@ -5,7 +5,7 @@ from wtforms.widgets import (
     Select as _Select
 )
 from wtforms.validators import NumberRange, DataRequired
-from wtforms.widgets import html5, Input
+from wtforms.widgets import Input
 from .validators import DateRange, TimeRange
 
 
@@ -34,7 +34,14 @@ def has_validator(field, validator_class):
     return False
 
 
-class BaseDateTimeInput(Input):
+class HTML5Input(Input):
+    def __call__(self, field, **kwargs):
+        if has_validator(field, DataRequired):
+            kwargs.setdefault('required', True)
+        return super(HTML5Input, self).__call__(field, **kwargs)
+
+
+class BaseDateTimeInput(HTML5Input):
     """
     Base class for TimeInput, DateTimeLocalInput, DateTimeInput and
     DateInput widgets
@@ -42,12 +49,38 @@ class BaseDateTimeInput(Input):
     range_validator_class = DateRange
 
     def __call__(self, field, **kwargs):
-        if has_validator(field, DataRequired):
-            kwargs.setdefault('required', True)
         for key, value in min_max(field, self.range_validator_class).items():
             kwargs.setdefault(key, value.strftime(self.format))
 
         return super(BaseDateTimeInput, self).__call__(field, **kwargs)
+
+
+class URLInput(HTML5Input):
+    """
+    Renders an input with type "url".
+    """
+    input_type = 'url'
+
+
+class ColorInput(HTML5Input):
+    """
+    Renders an input with type "tel".
+    """
+    input_type = 'color'
+
+
+class TelInput(HTML5Input):
+    """
+    Renders an input with type "tel".
+    """
+    input_type = 'tel'
+
+
+class EmailInput(HTML5Input):
+    """
+    Renders an input with type "email".
+    """
+    input_type = 'email'
 
 
 class TimeInput(BaseDateTimeInput):
@@ -95,16 +128,16 @@ class DateInput(BaseDateTimeInput):
     format = '%Y-%m-%d'
 
 
-class NumberInput(html5.NumberInput):
+class NumberInput(HTML5Input):
     """
     Renders an input with type "number".
 
     Adds min and max html5 field parameters based on field's NumberRange
     validator.
     """
+    input_type = 'number'
+
     def __call__(self, field, **kwargs):
-        if has_validator(field, DataRequired):
-            kwargs.setdefault('required', True)
         for key, value in min_max(field, NumberRange).items():
             kwargs.setdefault(key, value)
 
