@@ -203,7 +203,7 @@ class SplitDateTimeField(FormField):
     def __init__(self, label=None, validators=None, separator='-', **kwargs):
         FormField.__init__(
             self,
-            datetime_form(kwargs.get('datetime_form', {})),
+            datetime_form(kwargs.pop('datetime_form', {})),
             label=label,
             validators=validators,
             separator=separator,
@@ -227,8 +227,8 @@ class SplitDateTimeField(FormField):
     def populate_obj(self, obj, name):
         if hasattr(obj, name):
             date = self.date.data
-            hours, minutes = self.time.data.tm_hour, self.time.data.tm_min
-            setattr(obj, name, datetime(
+            hours, minutes = self.time.data.hour, self.time.data.minute
+            setattr(obj, name, datetime.datetime(
                 date.year, date.month, date.day, hours, minutes
             ))
 
@@ -240,8 +240,8 @@ def datetime_form(options):
     options['time'].setdefault('label', u'Time')
 
     class DateTimeForm(Form):
-        date = DateField(options['date'].label, **options['date'])
-        time = TimeField(options['time'].label, **options['time'])
+        date = DateField(**options['date'])
+        time = TimeField(**options['time'])
     return DateTimeForm
 
 
