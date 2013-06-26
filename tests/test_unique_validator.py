@@ -2,7 +2,6 @@ from pytest import raises
 import sqlalchemy as sa
 
 from wtforms_components import ModelForm, Unique
-from wtforms import Form
 from wtforms.fields import TextField
 from tests import MultiDict, DatabaseTestCase
 
@@ -25,7 +24,7 @@ class TestUniqueValidator(DatabaseTestCase):
                     )]
                 )
 
-    def test_validates_model_field_unicity(self):
+    def test_existing_name_collision(self):
         class MyForm(ModelForm):
             name = TextField(
                 validators=[Unique(
@@ -35,12 +34,28 @@ class TestUniqueValidator(DatabaseTestCase):
             )
 
         self.session.add(self.User(name=u'someone'))
+        self.session.commit()
 
         form = MyForm(MultiDict({'name': u'someone'}))
         form.validate()
         assert form.errors == {'name': [u'Already exists.']}
 
-    def test_allows_updating_of_an_entity(self):
+    def test_without_obj_without_collision(self):
+        class MyForm(ModelForm):
+            name = TextField(
+                validators=[Unique(
+                    self.User.name,
+                    get_session=lambda: self.session
+                )]
+            )
+
+        self.session.add(self.User(name=u'someone else'))
+        self.session.commit()
+
+        form = MyForm(MultiDict({'name': u'someone'}))
+        assert form.validate()
+
+    def test_existing_name_no_collision(self):
         class MyForm(ModelForm):
             name = TextField(
                 validators=[Unique(
@@ -66,4 +81,4 @@ class TestUniqueValidator(DatabaseTestCase):
             )
 
         form = MyForm(MultiDict({'name': u'someone'}))
-        form.validate()
+        assert form.validate()
