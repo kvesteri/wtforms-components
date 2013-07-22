@@ -1,7 +1,5 @@
 import datetime
 import time
-import phonenumbers
-from colour import Color
 from wtforms import Form
 from wtforms.fields import (
     Field,
@@ -279,6 +277,8 @@ class PhoneNumberField(StringField):
             return u''
 
     def process_formdata(self, valuelist):
+        import phonenumbers
+
         if valuelist:
             if valuelist[0] == u'':
                 self.data = None
@@ -348,6 +348,8 @@ class ColorField(StringField):
             return u''
 
     def process_formdata(self, valuelist):
+        from colour import Color
+
         if valuelist:
             if valuelist[0] == u'' or valuelist[0] == '':
                 self.data = None

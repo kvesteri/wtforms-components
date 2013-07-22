@@ -21,6 +21,9 @@ from .validators import DateRange, Unique, If, Chain, Email, TimeRange
 from .widgets import ReadOnlyWidgetProxy, NumberInput, SelectWidget
 
 
+__version__ = '0.6.4'
+
+
 __all__ = (
     Chain,
     ColorField,

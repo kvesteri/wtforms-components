@@ -5,6 +5,12 @@ Here you can see the full list of changes between each WTForms-Components
 release.
 
 
+0.6.4 (2013-07-22)
+^^^^^^^^^^^^^^^^^^
+
+- Packages colour and phonenumbers are now lazy imported
+
+
 0.6.3 (2013-05-24)
 ^^^^^^^^^^^^^^^^^^
 
