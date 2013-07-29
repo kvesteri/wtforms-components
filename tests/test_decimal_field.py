@@ -15,3 +15,13 @@ class TestDecimalField(FieldTestCase):
             '<input id="test_field" max="10" min="2" '
             'name="test_field" type="number" value="3">'
         )
+
+    def test_assigns_step(self):
+        form_class = self.init_form(
+            step=0.1
+        )
+        form = form_class(MultiDict(test_field=3))
+        assert str(form.test_field) == (
+            '<input id="test_field" '
+            'name="test_field" step="0.1" type="number" value="3">'
+        )

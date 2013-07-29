@@ -36,7 +36,45 @@ class IntegerField(html5.IntegerField):
 
 
 class DecimalField(html5.DecimalField):
+    """
+    A text field which displays and coerces data of the `decimal.Decimal` type.
+
+    :param places:
+        How many decimal places to quantize the value to for display on form.
+        If None, does not quantize value.
+    :param rounding:
+        How to round the value during quantize, for example
+        `decimal.ROUND_UP`. If unset, uses the rounding value from the
+        current thread's context.
+    :param step:
+        The step attribute specifies the legal number intervals for an <input>
+        element.
+
+        Example: if step="3", legal numbers could be -3, 0, 3, 6, etc.
+    """
+
     widget = NumberInput()
+
+    def __init__(
+        self,
+        label=None,
+        validators=None,
+        places=2,
+        rounding=None,
+        step=None,
+        **kwargs
+    ):
+        if step is not None:
+            self.widget.step = step
+
+        html5.DecimalField.__init__(
+            self,
+            label=label,
+            validators=validators,
+            places=places,
+            rounding=rounding,
+            **kwargs
+        )
 
 
 class DateTimeLocalField(html5.DateTimeField):

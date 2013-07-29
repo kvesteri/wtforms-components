@@ -5,6 +5,12 @@ Here you can see the full list of changes between each WTForms-Components
 release.
 
 
+0.6.5 (2013-07-29)
+^^^^^^^^^^^^^^^^^^
+
+- Added step rendering for NumberInput and RangeInput widgets
+
+
 0.6.4 (2013-07-22)
 ^^^^^^^^^^^^^^^^^^
 

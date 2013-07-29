@@ -28,10 +28,10 @@ def min_max(field, validator_class):
 
 
 def has_validator(field, validator_class):
-    for validator in field.validators:
-        if isinstance(validator, validator_class):
-            return True
-    return False
+    return any([
+        isinstance(validator, validator_class)
+        for validator in field.validators
+    ])
 
 
 class HTML5Input(Input):
@@ -81,6 +81,12 @@ class RangeInput(HTML5Input):
     Renders an input with type "range".
     """
     input_type = 'range'
+    step = None
+
+    def __call__(self, field, **kwargs):
+        if self.step is not None:
+            kwargs.setdefault('step', self.step)
+        return super(RangeInput, self).__call__(field, **kwargs)
 
 
 class URLInput(HTML5Input):
@@ -164,11 +170,14 @@ class NumberInput(HTML5Input):
     validator.
     """
     input_type = 'number'
+    step = None
 
     def __call__(self, field, **kwargs):
         for key, value in min_max(field, NumberRange).items():
             kwargs.setdefault(key, value)
 
+        if self.step is not None:
+            kwargs.setdefault('step', self.step)
         return super(NumberInput, self).__call__(field, **kwargs)
 
 
