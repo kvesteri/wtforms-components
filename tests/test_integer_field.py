@@ -11,5 +11,5 @@ class TestIntegerField(FieldTestCase):
         form = form_class(MultiDict(test_field=3))
         assert str(form.test_field) == (
             '<input id="test_field" max="10" min="2" '
-            'name="test_field" type="number" value="3">'
+            'name="test_field" step="1" type="number" value="3">'
         )

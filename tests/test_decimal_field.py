@@ -1,4 +1,5 @@
 from wtforms_components import DecimalField
+from wtforms_components.widgets import NumberInput
 from wtforms.validators import NumberRange
 from tests import MultiDict, FieldTestCase
 
@@ -13,12 +14,12 @@ class TestDecimalField(FieldTestCase):
         form = form_class(MultiDict(test_field=3))
         assert str(form.test_field) == (
             '<input id="test_field" max="10" min="2" '
-            'name="test_field" type="number" value="3">'
+            'name="test_field" step="any" type="number" value="3">'
         )
 
     def test_assigns_step(self):
         form_class = self.init_form(
-            step=0.1
+            widget=NumberInput(step='0.1')
         )
         form = form_class(MultiDict(test_field=3))
         assert str(form.test_field) == (

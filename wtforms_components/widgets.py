@@ -81,7 +81,9 @@ class RangeInput(HTML5Input):
     Renders an input with type "range".
     """
     input_type = 'range'
-    step = None
+
+    def __init__(self, step=None):
+        self.step = step
 
     def __call__(self, field, **kwargs):
         if self.step is not None:
@@ -170,7 +172,9 @@ class NumberInput(HTML5Input):
     validator.
     """
     input_type = 'number'
-    step = None
+
+    def __init__(self, step=None):
+        self.step = step
 
     def __call__(self, field, **kwargs):
         for key, value in min_max(field, NumberRange).items():
