@@ -19,12 +19,12 @@ from .widgets import (
     DateTimeLocalInput,
     EmailInput,
     NumberInput,
+    RangeInput,
+    SearchInput,
     SelectWidget,
     TelInput,
     TextInput,
     TimeInput,
-    RangeInput,
-    SearchInput,
 )
 
 
