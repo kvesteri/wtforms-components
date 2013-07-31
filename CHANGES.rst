@@ -5,6 +5,12 @@ Here you can see the full list of changes between each WTForms-Components
 release.
 
 
+0.6.6 (2013-07-31)
+^^^^^^^^^^^^^^^^^^
+
+- Added HTML5 compatible basic parameters (disabled, required, autofocus and readonly) for all widgets
+
+
 0.6.5 (2013-07-30)
 ^^^^^^^^^^^^^^^^^^
 
