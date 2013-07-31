@@ -75,6 +75,14 @@ class BaseDateTimeInput(HTML5Input):
         return super(BaseDateTimeInput, self).__call__(field, **kwargs)
 
 
+class TextInput(HTML5Input):
+    input_type = 'text'
+
+    def __init__(self, max_length=None, **kwargs):
+        HTML5Input.__init__(self, **kwargs)
+        self.options['maxlength'] = max_length
+
+
 class SearchInput(HTML5Input):
     """
     Renders an input with type "search".

@@ -6,7 +6,7 @@ from wtforms.fields import (
     FormField,
     HiddenField,
     SelectField as _SelectField,
-    StringField
+    StringField as _StringField
 )
 from wtforms.fields import html5
 from wtforms.fields.core import _unset_value
@@ -21,13 +21,14 @@ from .widgets import (
     NumberInput,
     SelectWidget,
     TelInput,
+    TextInput,
     TimeInput,
     RangeInput,
     SearchInput,
 )
 
 
-class EmailField(StringField):
+class EmailField(_StringField):
     widget = EmailInput()
 
 
@@ -61,6 +62,10 @@ class DecimalSliderField(html5.DecimalRangeField):
 
 class SearchField(html5.SearchField):
     widget = SearchInput()
+
+
+class StringField(_StringField):
+    widget = TextInput()
 
 
 class SelectField(_SelectField):

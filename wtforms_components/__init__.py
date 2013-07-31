@@ -15,6 +15,7 @@ from .fields import (
     SearchField,
     SelectField,
     SelectMultipleField,
+    StringField,
     TimeField,
 )
 from .validators import DateRange, Unique, If, Chain, Email, TimeRange
@@ -46,6 +47,7 @@ __all__ = (
     SelectField,
     SelectMultipleField,
     SelectWidget,
+    StringField,
     TimeField,
     TimeRange,
     Unique,
