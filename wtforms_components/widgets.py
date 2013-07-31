@@ -35,7 +35,27 @@ def has_validator(field, validator_class):
 
 
 class HTML5Input(Input):
+    def __init__(
+        self,
+        required=False,
+        autofocus=False,
+        placeholder=None,
+        readonly=False,
+        disabled=False
+    ):
+        self.options = {
+            'required': required,
+            'autofocus': autofocus,
+            'placeholder': placeholder,
+            'readonly': readonly,
+            'disabled': disabled
+        }
+
     def __call__(self, field, **kwargs):
+        for option, value in self.options.iteritems():
+            if value is not False and value is not None:
+                kwargs.setdefault(option, value)
+
         if has_validator(field, DataRequired):
             kwargs.setdefault('required', True)
         return super(HTML5Input, self).__call__(field, **kwargs)
@@ -82,12 +102,11 @@ class RangeInput(HTML5Input):
     """
     input_type = 'range'
 
-    def __init__(self, step=None):
-        self.step = step
+    def __init__(self, step=None, **kwargs):
+        HTML5Input.__init__(self, **kwargs)
+        self.options['step'] = step
 
     def __call__(self, field, **kwargs):
-        if self.step is not None:
-            kwargs.setdefault('step', self.step)
         return super(RangeInput, self).__call__(field, **kwargs)
 
 
@@ -173,15 +192,13 @@ class NumberInput(HTML5Input):
     """
     input_type = 'number'
 
-    def __init__(self, step=None):
-        self.step = step
+    def __init__(self, step=None, **kwargs):
+        HTML5Input.__init__(self, **kwargs)
+        self.options['step'] = step
 
     def __call__(self, field, **kwargs):
         for key, value in min_max(field, NumberRange).items():
             kwargs.setdefault(key, value)
-
-        if self.step is not None:
-            kwargs.setdefault('step', self.step)
         return super(NumberInput, self).__call__(field, **kwargs)
 
 

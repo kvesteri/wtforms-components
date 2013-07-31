@@ -3,19 +3,15 @@ from datetime import date, datetime, time
 from wtforms_components.fields import SplitDateTimeField
 from wtforms.validators import DataRequired
 
-from tests import MultiDict, FieldTestCase
+from tests import MultiDict, SimpleFieldTestCase
 
 
 class Obj(object):
     test_field = None
 
 
-class TestSplitDateTimeField(FieldTestCase):
+class TestSplitDateTimeField(SimpleFieldTestCase):
     field_class = SplitDateTimeField
-
-    def test_assigns_required(self):
-        # Not supported!
-        pass
 
     def test_assigns_required_to_date(self):
         form_class = self.init_form(datetime_form={
