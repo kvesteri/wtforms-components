@@ -53,6 +53,10 @@ class HTML5Input(Input):
         for key, value in self.range_validators(field).items():
             kwargs.setdefault(key, value)
 
+        if hasattr(field, 'widget_options'):
+            for key, value in self.field.widget_options:
+                kwargs.setdefault(key, value)
+
         options_copy = copy(self.options)
         options_copy.update(kwargs)
         return super(HTML5Input, self).__call__(field, **options_copy)
