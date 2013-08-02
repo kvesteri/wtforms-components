@@ -1,4 +1,5 @@
 from cgi import escape
+from copy import copy
 from wtforms.widgets import (
     HTMLString,
     html_params,
@@ -28,6 +29,13 @@ def min_max(field, validator_class):
 
 
 def has_validator(field, validator_class):
+    """
+    Returns whether or not given field has an instance of given validator class
+    in the validators property.
+
+    :param field: WTForms Field object
+    :param validator_class: WTForms Validator class
+    """
     return any([
         isinstance(validator, validator_class)
         for validator in field.validators
@@ -35,30 +43,22 @@ def has_validator(field, validator_class):
 
 
 class HTML5Input(Input):
-    def __init__(
-        self,
-        required=False,
-        autofocus=False,
-        placeholder=None,
-        readonly=False,
-        disabled=False
-    ):
-        self.options = {
-            'required': required,
-            'autofocus': autofocus,
-            'placeholder': placeholder,
-            'readonly': readonly,
-            'disabled': disabled
-        }
+    def __init__(self, **kwargs):
+        self.options = kwargs
 
     def __call__(self, field, **kwargs):
-        for option, value in self.options.iteritems():
-            if value is not False and value is not None:
-                kwargs.setdefault(option, value)
-
         if has_validator(field, DataRequired):
             kwargs.setdefault('required', True)
-        return super(HTML5Input, self).__call__(field, **kwargs)
+
+        for key, value in self.range_validators(field).items():
+            kwargs.setdefault(key, value)
+
+        options_copy = copy(self.options)
+        options_copy.update(kwargs)
+        return super(HTML5Input, self).__call__(field, **options_copy)
+
+    def range_validators(self, field):
+        return {}
 
 
 class BaseDateTimeInput(HTML5Input):
@@ -68,19 +68,17 @@ class BaseDateTimeInput(HTML5Input):
     """
     range_validator_class = DateRange
 
-    def __call__(self, field, **kwargs):
-        for key, value in min_max(field, self.range_validator_class).items():
-            kwargs.setdefault(key, value.strftime(self.format))
-
-        return super(BaseDateTimeInput, self).__call__(field, **kwargs)
+    def range_validators(self, field):
+        data = min_max(field, self.range_validator_class)
+        if 'min' in data:
+            data['min'] = data['min'].strftime(self.format)
+        if 'max' in data:
+            data['max'] = data['max'].strftime(self.format)
+        return data
 
 
 class TextInput(HTML5Input):
     input_type = 'text'
-
-    def __init__(self, max_length=None, **kwargs):
-        HTML5Input.__init__(self, **kwargs)
-        self.options['maxlength'] = max_length
 
 
 class SearchInput(HTML5Input):
@@ -109,13 +107,6 @@ class RangeInput(HTML5Input):
     Renders an input with type "range".
     """
     input_type = 'range'
-
-    def __init__(self, step=None, **kwargs):
-        HTML5Input.__init__(self, **kwargs)
-        self.options['step'] = step
-
-    def __call__(self, field, **kwargs):
-        return super(RangeInput, self).__call__(field, **kwargs)
 
 
 class URLInput(HTML5Input):
@@ -199,15 +190,10 @@ class NumberInput(HTML5Input):
     validator.
     """
     input_type = 'number'
+    range_validator_class = NumberRange
 
-    def __init__(self, step=None, **kwargs):
-        HTML5Input.__init__(self, **kwargs)
-        self.options['step'] = step
-
-    def __call__(self, field, **kwargs):
-        for key, value in min_max(field, NumberRange).items():
-            kwargs.setdefault(key, value)
-        return super(NumberInput, self).__call__(field, **kwargs)
+    def range_validators(self, field):
+        return min_max(field, self.range_validator_class)
 
 
 class ReadOnlyWidgetProxy(object):
