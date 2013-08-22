@@ -75,6 +75,16 @@ class TestSelectField(FormTestCase):
             str(form.fruit)
         )
 
+    def test_option_selected_by_field_default_value(self):
+        form_class = self.init_form(
+            choices=self.choices, default='pear'
+        )
+        form = form_class()
+        assert (
+            '<option selected="selected" value="pear">Pear</option>' in
+            str(form.fruit)
+        )
+
     def test_data_coercing(self):
         choices = (
             ('Fruits', (
