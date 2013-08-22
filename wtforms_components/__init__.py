@@ -16,6 +16,7 @@ from .fields import (
     SearchField,
     SelectField,
     SelectMultipleField,
+    SplitDateTimeField,
     StringField,
     TimeField,
 )
@@ -49,6 +50,7 @@ __all__ = (
     SelectField,
     SelectMultipleField,
     SelectWidget,
+    SplitDateTimeField,
     StringField,
     TimeField,
     TimeRange,
