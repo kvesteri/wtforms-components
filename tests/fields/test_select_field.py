@@ -53,24 +53,6 @@ class TestSelectField(FormTestCase):
         form.validate()
         assert len(form.errors) == 0
 
-    # def test_sorting(self):
-    #     choices = (
-    #         ('raspberry', 'Raspberry'),
-    #         ('Vegetables', (
-    #             ('cucumber', 'Cucumber'),
-    #             ('potato', 'Potato'),
-    #             ('tomato', 'Tomato'),
-    #         )),
-    #         ('Fruits', (
-    #             ('apple', 'Apple'),
-    #             ('peach', 'Peach'),
-    #             ('pear', 'Pear')
-    #         )),
-    #     )
-
-    #     form_class = self.init_form(choices=choices, sort=True)
-    #     print form_class().fruit.choices
-
     def test_understands_functions_as_choices(self):
         form_class = self.init_form(choices=lambda: [])
         form = form_class(
