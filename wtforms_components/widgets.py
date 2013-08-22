@@ -11,6 +11,26 @@ from .validators import DateRange, TimeRange
 
 
 def min_max(field, validator_class):
+    """
+    Returns maximum minimum and minimum maximum value for given validator class
+    of given field.
+
+    :param field: WTForms Field object
+    :param validator_class: WTForms Validator class
+
+    Example::
+
+
+        class MyForm(Form):
+            some_integer_field = IntegerField(
+                validators=[Length(min=3, max=6), Length(min=4, max=7)]
+            )
+
+        form = MyForm()
+
+        min_max(form.some_integer_field, Length)
+        # {'min': 4, 'max': 6}
+    """
     min_values = []
     max_values = []
     for validator in field.validators:
