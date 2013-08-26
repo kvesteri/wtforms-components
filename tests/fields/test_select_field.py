@@ -53,7 +53,7 @@ class TestSelectField(FormTestCase):
         form.validate()
         assert len(form.errors) == 0
 
-    def test_understands_functions_as_choices(self):
+    def test_understands_callables_as_choices(self):
         form_class = self.init_form(choices=lambda: [])
         form = form_class(
             MultiDict([('fruit', 'invalid')])
@@ -87,6 +87,21 @@ class TestSelectField(FormTestCase):
 
     def test_option_selected_by_field_default_value(self):
         choices = [
+            ('apple', 'Apple'),
+            ('peach', 'Peach'),
+            ('pear', 'Pear')
+        ]
+        form_class = self.init_form(
+            choices=choices, default='pear'
+        )
+        form = form_class()
+        assert (
+            '<option selected="selected" value="pear">Pear</option>' in
+            str(form.fruit)
+        )
+
+    def test_callable_option_selected_by_field_default_value(self):
+        choices = lambda: [
             ('apple', 'Apple'),
             ('peach', 'Peach'),
             ('pear', 'Pear')
