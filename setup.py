@@ -31,7 +31,10 @@ setup(
     author_email='konsta@fastmonkeys.com',
     description='Additional fields, validators and widgets for WTForms.',
     long_description=__doc__,
-    packages=['wtforms_components'],
+    packages=[
+        'wtforms_components',
+        'wtforms_components.fields'
+    ],
     zip_safe=False,
     include_package_data=True,
     platforms='any',
