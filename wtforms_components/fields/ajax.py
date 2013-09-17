@@ -9,7 +9,7 @@ except ImportError:
 
 from wtforms import fields, widgets
 from wtforms.validators import ValidationError
-from wtforms_components.fields import get_pk_from_identity
+from wtforms.ext.sqlalchemy.fields import get_pk_from_identity
 
 
 class ImproperlyConfigured(Exception):
