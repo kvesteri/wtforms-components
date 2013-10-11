@@ -5,6 +5,12 @@ Here you can see the full list of changes between each WTForms-Components
 release.
 
 
+0.8.0 (2013-10-11)
+^^^^^^^^^^^^^^^^^^
+
+- Added Python 3 support
+
+
 0.7.1 (2013-09-07)
 ^^^^^^^^^^^^^^^^^^
 
