@@ -38,9 +38,9 @@ class Chain(ControlStructure):
         for validator in self.validators:
             try:
                 validator(form, field)
-            except ValidationError, exc:
+            except ValidationError as exc:
                 self.reraise(exc)
-            except StopValidation, exc:
+            except StopValidation as exc:
                 self.reraise(exc)
 
 
@@ -65,9 +65,9 @@ class If(ControlStructure):
         if self.condition(form, field):
             try:
                 self.validator(form, field)
-            except ValidationError, exc:
+            except ValidationError as exc:
                 self.reraise(exc)
-            except StopValidation, exc:
+            except StopValidation as exc:
                 self.reraise(exc)
 
 

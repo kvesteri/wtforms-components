@@ -42,6 +42,7 @@ setup(
         'WTForms>=1.0.4',
         'SQLAlchemy>=0.8.0',
         'SQLAlchemy-Utils>=0.16.0',
+        'six>=1.4.1'
     ],
     cmdclass={'test': PyTest},
     classifiers=[

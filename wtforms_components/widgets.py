@@ -1,5 +1,6 @@
 from cgi import escape
 from copy import copy
+import six
 from wtforms.widgets import (
     HTMLString,
     html_params,
@@ -250,7 +251,7 @@ class SelectWidget(_Select):
                 children.append(item_html)
 
             html = u'<optgroup label="%s">%s</optgroup>'
-            data = (escape(unicode(value)), u'\n'.join(children))
+            data = (escape(six.text_type(value)), u'\n'.join(children))
         else:
             coerce_func, data = mixed
             if isinstance(data, list) or isinstance(data, tuple):
@@ -264,6 +265,6 @@ class SelectWidget(_Select):
                 options['selected'] = u'selected'
 
             html = u'<option %s>%s</option>'
-            data = (html_params(**options), escape(unicode(label)))
+            data = (html_params(**options), escape(six.text_type(label)))
 
         return HTMLString(html % data)
