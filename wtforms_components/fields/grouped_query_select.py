@@ -48,7 +48,7 @@ class GroupedQuerySelectField(SelectField):
     def _pre_process_object_list(self, object_list):
         return sorted(
             object_list,
-            key=lambda x: (x[1], self.get_label(x[2]) or u'')
+            key=lambda x: (x[1] or u'', self.get_label(x[2]) or u'')
         )
 
     @property
