@@ -1,4 +1,5 @@
 from itertools import groupby
+import six
 from sqlalchemy.orm.util import identity_key
 from wtforms.validators import ValidationError
 
@@ -8,7 +9,7 @@ from ..widgets import SelectWidget
 
 def get_pk_from_identity(obj):
     cls, key = identity_key(instance=obj)
-    return ':'.join(unicode(x) for x in key)
+    return ':'.join(six.text_type(x) for x in key)
 
 
 class GroupedQuerySelectField(SelectField):
@@ -42,7 +43,7 @@ class GroupedQuerySelectField(SelectField):
 
     def _get_object_list(self):
         query = self.query or self.query_factory()
-        return list((unicode(self.get_pk(obj)), obj) for obj in query)
+        return list((six.text_type(self.get_pk(obj)), obj) for obj in query)
 
     def _pre_process_object_list(self, object_list):
         return sorted(
