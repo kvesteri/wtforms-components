@@ -47,7 +47,6 @@ extras_require = {
     'color': ['colour>=0.0.4'],
     'ipaddress': ['ipaddr'] if not PY3 else [],
     'timezone': ['python-dateutil'],
-    'validators': ['validators>=0.1.0']
 }
 
 
@@ -82,7 +81,8 @@ setup(
         'WTForms>=1.0.4',
         'SQLAlchemy>=0.8.0',
         'SQLAlchemy-Utils>=0.16.0',
-        'six>=1.4.1'
+        'six>=1.4.1',
+        'validators>=0.1.0'
     ],
     extras_require=extras_require,
     cmdclass={'test': PyTest},
