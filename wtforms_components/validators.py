@@ -1,5 +1,9 @@
 from __future__ import absolute_import
-from validators import is_email
+try:
+    from validators import email
+except ImportError:
+    from validators import is_email as email
+
 from wtforms import ValidationError
 from wtforms.validators import StopValidation
 
@@ -222,5 +226,5 @@ class Email(object):
             self.domain_whitelist = whitelist
 
     def __call__(self, form, field):
-        if not is_email(field.data, self.domain_whitelist):
+        if not email(field.data, self.domain_whitelist):
             raise ValidationError(self.message)
