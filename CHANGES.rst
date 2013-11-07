@@ -8,6 +8,7 @@ release.
 ^^^^^^^^^^^^^^^^^^
 
 - Fix import error with new versions of `validators` package.
+- Support WTForms2 development trunk
 
 
 0.8.0 (2013-10-11)
