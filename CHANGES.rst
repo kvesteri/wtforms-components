@@ -4,6 +4,11 @@ Changelog
 Here you can see the full list of changes between each WTForms-Components
 release.
 
+0.8.1 (unreleased)
+^^^^^^^^^^^^^^^^^^
+
+- Fix import error with new versions of `validators` package.
+
 
 0.8.0 (2013-10-11)
 ^^^^^^^^^^^^^^^^^^
