@@ -58,7 +58,7 @@ for name, requirements in extras_require.items():
 
 setup(
     name='WTForms-Components',
-    version='0.8.0',
+    version='0.8.1dev',
     url='https://github.com/kvesteri/wtforms-components',
     license='BSD',
     author='Konsta Vesterinen',
@@ -82,7 +82,7 @@ setup(
         'SQLAlchemy>=0.8.0',
         'SQLAlchemy-Utils>=0.16.0',
         'six>=1.4.1',
-        'validators>=0.1.0'
+        'validators>=0.5.0'
     ],
     extras_require=extras_require,
     cmdclass={'test': PyTest},
