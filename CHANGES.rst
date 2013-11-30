@@ -11,6 +11,12 @@ release.
 - Support WTForms2 development trunk
 
 
+0.8.1 (2013-11-30)
+^^^^^^^^^^^^^^^^^^
+
+- Added initial WTForms 2.0 support
+
+
 0.8.0 (2013-10-11)
 ^^^^^^^^^^^^^^^^^^
 
