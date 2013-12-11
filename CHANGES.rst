@@ -4,16 +4,11 @@ Changelog
 Here you can see the full list of changes between each WTForms-Components
 release.
 
-0.8.1 (unreleased)
-^^^^^^^^^^^^^^^^^^
-
-- Fix import error with new versions of `validators` package.
-- Support WTForms2 development trunk
-
 
 0.8.1 (2013-11-30)
 ^^^^^^^^^^^^^^^^^^
 
+- Fix import error with new versions of `validators` package.
 - Added initial WTForms 2.0 support
 
 
