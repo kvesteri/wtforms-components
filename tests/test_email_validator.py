@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import pytest
 from wtforms.validators import ValidationError
 
@@ -76,3 +77,11 @@ class TestEmailValidator(object):
         validate_email = Email()
         with pytest.raises(ValidationError):
             validate_email(self.form, DummyField(email))
+
+    def test_default_validation_error_message(self):
+        validate_email = Email()
+        try:
+            validate_email(self.form, DummyField('@@@'))
+            assert False, 'No validation error thrown.'
+        except ValidationError, e:
+            assert e.message == 'Invalid email address.'

@@ -227,4 +227,6 @@ class Email(object):
 
     def __call__(self, form, field):
         if not email(field.data, self.domain_whitelist):
+            if self.message is None:
+                self.message = field.gettext(u'Invalid email address.')
             raise ValidationError(self.message)
