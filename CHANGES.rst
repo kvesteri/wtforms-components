@@ -5,6 +5,12 @@ Here you can see the full list of changes between each WTForms-Components
 release.
 
 
+0.8.2 (2013-12-12)
+^^^^^^^^^^^^^^^^^^
+
+- Add default validation message for Email validator
+
+
 0.8.1 (2013-11-30)
 ^^^^^^^^^^^^^^^^^^
 
