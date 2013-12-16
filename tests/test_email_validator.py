@@ -84,4 +84,4 @@ class TestEmailValidator(object):
             validate_email(self.form, DummyField('@@@'))
             assert False, 'No validation error thrown.'
         except ValidationError as e:
-            assert e.message == 'Invalid email address.'
+            assert str(e) == 'Invalid email address.'
