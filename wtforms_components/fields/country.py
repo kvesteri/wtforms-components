@@ -1,6 +1,6 @@
 import operator
 from .select import SelectField
-from sqlalchemy_utils.fields import Country
+from sqlalchemy_utils.types import Country
 from sqlalchemy_utils import i18n
 
 
