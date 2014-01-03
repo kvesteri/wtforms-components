@@ -238,33 +238,38 @@ class SelectWidget(_Select):
     Add support of choices with ``optgroup`` to the ``Select`` widget.
     """
     @classmethod
+    def render_optgroup(cls, value, label, mixed):
+        children = []
+
+        for item_value, item_label in label:
+            item_html = cls.render_option(item_value, item_label, mixed)
+            children.append(item_html)
+
+        html = u'<optgroup label="%s">%s</optgroup>'
+        data = (escape(six.text_type(value)), u'\n'.join(children))
+        return HTMLString(html % data)
+
+    @classmethod
     def render_option(cls, value, label, mixed):
         """
         Render option as HTML tag, but not forget to wrap options into
         ``optgroup`` tag if ``label`` var is ``list`` or ``tuple``.
         """
         if isinstance(label, (list, tuple)):
-            children = []
+            return cls.render_optgroup(value, label, mixed)
 
-            for item_value, item_label in label:
-                item_html = cls.render_option(item_value, item_label, mixed)
-                children.append(item_html)
-
-            html = u'<optgroup label="%s">%s</optgroup>'
-            data = (escape(six.text_type(value)), u'\n'.join(children))
+        coerce_func, data = mixed
+        if isinstance(data, list) or isinstance(data, tuple):
+            selected = coerce_func(value) in data
         else:
-            coerce_func, data = mixed
-            if isinstance(data, list) or isinstance(data, tuple):
-                selected = coerce_func(value) in data
-            else:
-                selected = coerce_func(value) == data
+            selected = coerce_func(value) == data
 
-            options = {'value': value}
+        options = {'value': value}
 
-            if selected:
-                options['selected'] = u'selected'
+        if selected:
+            options['selected'] = u'selected'
 
-            html = u'<option %s>%s</option>'
-            data = (html_params(**options), escape(six.text_type(label)))
+        html = u'<option %s>%s</option>'
+        data = (html_params(**options), escape(six.text_type(label)))
 
         return HTMLString(html % data)

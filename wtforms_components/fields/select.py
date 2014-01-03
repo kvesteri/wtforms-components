@@ -56,10 +56,7 @@ class SelectField(_SelectField):
         Don't forget to validate also values from embedded lists.
         """
         values = self.choice_values
-        if self.data is None and u'' in values:
-            return True
-
-        if self.data in values:
+        if (self.data is None and u'' in values) or self.data in values:
             return True
 
         raise ValidationError(self.gettext(u'Not a valid choice'))
