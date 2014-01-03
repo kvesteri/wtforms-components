@@ -71,7 +71,7 @@ class TestSelectField(FormTestCase):
             obj=obj
         )
         assert (
-            '<option selected="selected" value="peach">Peach</option>' in
+            '<option selected value="peach">Peach</option>' in
             str(form.fruit)
         )
 
@@ -81,7 +81,7 @@ class TestSelectField(FormTestCase):
         )
         form = form_class()
         assert (
-            '<option selected="selected" value="pear">Pear</option>' in
+            '<option selected value="pear">Pear</option>' in
             str(form.fruit)
         )
 
@@ -96,7 +96,7 @@ class TestSelectField(FormTestCase):
         )
         form = form_class()
         assert (
-            '<option selected="selected" value="pear">Pear</option>' in
+            '<option selected value="pear">Pear</option>' in
             str(form.fruit)
         )
 
@@ -111,11 +111,11 @@ class TestSelectField(FormTestCase):
         )
         form = form_class()
         assert (
-            '<option selected="selected" value="pear">Pear</option>' in
+            '<option selected value="pear">Pear</option>' in
             str(form.fruit)
         )
 
-    def test_data_coercing(self):
+    def test_data_coercion(self):
         choices = (
             ('Fruits', (
                 (0, 'Apple'),

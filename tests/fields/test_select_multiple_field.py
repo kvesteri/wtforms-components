@@ -52,6 +52,6 @@ class TestSelectMultipleField(FormTestCase):
             obj=obj
         )
         assert (
-            '<option selected="selected" value="peach">Peach</option>' in
+            '<option selected value="peach">Peach</option>' in
             str(form.fruits)
         )
