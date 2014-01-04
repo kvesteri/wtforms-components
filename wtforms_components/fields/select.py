@@ -6,25 +6,18 @@ import six
 from wtforms.fields import SelectFieldBase
 from wtforms.validators import ValidationError
 from wtforms.widgets import html_params, HTMLString
+try:
+    from wtforms.utils import unset_value as _unset_value
+except ImportError:
+    from wtforms.fields import _unset_value
 from ..widgets import SelectWidget
 
 
-# def pad(l, pred=identity, padding=0):
-#     if not padding:
-#         return l
-#     return list(l) + list(repeat(pred(l), padding - len(l)))
-
-
-class EMPTY(object):
-    pass
-
-
-
 class Choice(object):
-    def __init__(self, key, label=EMPTY, value=EMPTY):
+    def __init__(self, key, label=_unset_value, value=_unset_value):
         self.key = key
-        self.label = self.key if label is EMPTY else label
-        self.value = self.key if value is EMPTY else value
+        self.label = self.key if label is _unset_value else label
+        self.value = self.key if value is _unset_value else value
 
     def __repr__(self):
         return '%s(key=%r, label=%r, value=%r)' % (
@@ -33,6 +26,33 @@ class Choice(object):
             self.label,
             self.value
         )
+
+    def __add__(self, other):
+        return Choices([self, other])
+
+
+class Chain(object):
+    def __iter__(self, *iterables):
+        self.iterables = iterables
+
+    def __iter__(self):
+        for iterable in self.iterables:
+            for value in iterable:
+                yield value
+
+    def __len__(self):
+        return sum(map(len, self.iterables))
+
+    def __repr__(self):
+        return '%s(%r)' % (self.__class__.__name__, list(self.iterables))
+
+
+class ChoicesChain(Chain):
+    @property
+    def values(self):
+        for choices in self.iterables:
+            for value in choice.values:
+                yield value
 
 
 class Choices(object):
@@ -55,6 +75,9 @@ class Choices(object):
             else:
                 yield choice.value
 
+    def __len__(self):
+        return len(self.choices)
+
     def __getitem__(self, key):
         for choice in self.choices:
             if isinstance(choice, Choice):
@@ -75,38 +98,20 @@ class Choices(object):
         return '%s(%r)' % (self.__class__.__name__, list(self.choices))
 
 
-# class ComboChoices(AbstractChoices):
-#     def __init__(self, *choices):
-#         self.choices = choices
-
-#     @property
-#     def values(self):
-#         for choices in self.choices:
-#             for value in choices.values:
-#                 yield value
-
-#     def __getitem__(self, value):
-#         for choices in self.choices:
-#             try:
-#                 return choices[value]
-#             except KeyError:
-#                 pass
-#         raise KeyError(value)
-
-#     def __iter__(self):
-#         for choice in chain(*self.choices):
-#             yield choice
-
-
 def choice_factory(data):
-    if not isinstance(data, (list, tuple)):
-        return Choice(data)
-    else:
+    if isinstance(data, (list, tuple)):
         data = list(data)
         if isinstance(data[1], (list, tuple)):
             return Choices(data[1], label=data[0])
         else:
             return Choice(*data)
+    else:
+        if isinstance(data, Choice):
+            return data
+        else:
+            return Choice(data)
+
+
 
 
 class SelectField(SelectFieldBase):
@@ -204,42 +209,3 @@ class SelectField(SelectFieldBase):
     def pre_validate(self, form):
         if not self.data in self.choices.values:
              raise ValueError(self.gettext('Not a valid choice'))
-
-
-# class SelectField(_SelectField):
-#     widget = SelectWidget()
-
-#     def iter_choices(self):
-#         """
-#         We should update how choices are iter to make sure that value from
-#         internal list or tuple should be selected.
-#         """
-#         for value, label in self.concrete_choices:
-#             yield (value, label, (self.coerce, self.data))
-
-#     @property
-#     def concrete_choices(self):
-#         if callable(self.choices):
-#             return self.choices()
-#         return self.choices
-
-#     @property
-#     def choice_values(self):
-#         values = []
-#         for value, label in self.concrete_choices:
-#             if isinstance(label, (list, tuple)):
-#                 for subvalue, sublabel in label:
-#                     values.append(subvalue)
-#             else:
-#                 values.append(value)
-#         return values
-
-#     def pre_validate(self, form):
-#         """
-#         Don't forget to validate also values from embedded lists.
-#         """
-#         values = self.choice_values
-#         if (self.data is None and u'' in values) or self.data in values:
-#             return True
-
-#         raise ValidationError(self.gettext(u'Not a valid choice'))
