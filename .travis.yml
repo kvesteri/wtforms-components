@@ -10,4 +10,4 @@ install:
   - pip install $WTFORMS
   - pip install -e ".[test]"
 script:
-  - python setup.py test
+  - py.test

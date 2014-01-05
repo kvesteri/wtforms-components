@@ -5,23 +5,8 @@ WTForms-Components
 Additional fields, validators and widgets for WTForms.
 """
 
-from setuptools import setup, Command
-import subprocess
+from setuptools import setup
 import sys
-
-
-class PyTest(Command):
-    user_options = []
-
-    def initialize_options(self):
-        pass
-
-    def finalize_options(self):
-        pass
-
-    def run(self):
-        errno = subprocess.call(['py.test'])
-        raise SystemExit(errno)
 
 
 PY3 = sys.version_info[0] == 3
@@ -85,7 +70,6 @@ setup(
         'validators>=0.5.0'
     ],
     extras_require=extras_require,
-    cmdclass={'test': PyTest},
     classifiers=[
         'Environment :: Web Environment',
         'Intended Audience :: Developers',
