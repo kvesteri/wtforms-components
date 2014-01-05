@@ -26,7 +26,7 @@ class NumberRangeField(StringField):
                 self.data = None
             else:
                 try:
-                    self.data = NumberRange.from_str(valuelist[0])
+                    self.data = NumberRange(valuelist[0])
                 except NumberRangeException:
                     self.data = None
                     raise ValueError(self.gettext(self.error_msg))
