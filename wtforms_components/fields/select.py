@@ -1,7 +1,7 @@
 from cgi import escape
 from collections import Sequence
 from functools import partial
-from itertools import repeat
+from itertools import chain, repeat
 import six
 from wtforms.fields import SelectFieldBase
 from wtforms.validators import ValidationError
@@ -28,17 +28,22 @@ class Choice(object):
         )
 
     def __add__(self, other):
+        if not isinstance(other, Choice):
+            return NotImplemented
         return Choices([self, other])
 
 
 class Chain(object):
-    def __iter__(self, *iterables):
+    def __init__(self, *iterables):
         self.iterables = iterables
 
     def __iter__(self):
         for iterable in self.iterables:
             for value in iterable:
                 yield value
+
+    def __contains__(self, value):
+        return any(value in iterable for iterable in self.iterables)
 
     def __len__(self):
         return sum(map(len, self.iterables))
@@ -54,6 +59,29 @@ class ChoicesChain(Chain):
             for value in choice.values:
                 yield value
 
+    def __add__(self, other):
+        iterables = list(self.iterables)
+        if isinstance(other, Choice):
+            iterables.append(Choices([other]))
+            return ChoicesChain(*iterables)
+        elif isinstance(other, Choices):
+            iterables.append(other)
+            return ChoicesChain(*iterables)
+        elif isinstance(other, ChoicesChain):
+            iterables.extend(other.iterables)
+            return ChoicesChain(*iterables)
+        return NotImplemented
+
+    def __radd__(self, other):
+        iterables = list(self.iterables)
+        if isinstance(other, Choice):
+            iterables.insert(0, Choices([other]))
+            return ChoicesChain(*iterables)
+        elif isinstance(other, Choices):
+            iterables.insert(0, other)
+            return ChoicesChain(*iterables)
+        return NotImplemented
+
 
 class Choices(object):
     def __init__(self, choices, label=''):
@@ -64,7 +92,16 @@ class Choices(object):
         self.label = label
 
     def __add__(self, other):
-        return Choices([self.choices, other])
+        if isinstance(other, Choice):
+            return Choices(self.choices + [other])
+        elif isinstance(other, Choices):
+            return ChoicesChain(self, other)
+        return NotImplemented
+
+    def __radd__(self, other):
+        if isinstance(other, Choice):
+            return Choices([other] + self.choices)
+        return NotImplemented
 
     @property
     def values(self):
@@ -112,8 +149,6 @@ def choice_factory(data):
             return Choice(data)
 
 
-
-
 class SelectField(SelectFieldBase):
     """
     Compared to old wtforms.fields.SelectField this class offers the following
@@ -141,8 +176,7 @@ class SelectField(SelectFieldBase):
     2. Both fields accepts callables as choices allowing lazy evaluation of
        choices
     3. The Choices class. Both fields can combine query choices to regular
-       choices
-    4. Both fields can render options as disabled
+       choices.
     """
     widget = SelectWidget()
 
