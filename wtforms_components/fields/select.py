@@ -39,6 +39,27 @@ class Choice(object):
 
 
 class ChoicesChain(Chain):
+    """
+    Represents a chain of choices. SelectField renders a chain of choices
+    without optgroups.
+
+
+    Normally objects of this class are not initalized manually. The public API
+    for chaining choices is by concatenating them with add(+) operator.
+
+    ::
+
+
+        chain = Choices(
+            [('janitor', 'Janitor')]
+        ) + Choices(
+            [('admin', 'Admin']
+        )
+
+    ChoicesChain also supports add operator so you can either add individual
+    choices, collections of choices or choices chains to given chain of
+    choices.
+    """
     @property
     def values(self):
         for choices in self.iterables:
@@ -122,6 +143,23 @@ class Choices(object):
 
 
 def choice_factory(data):
+    """
+    Constructs a choice from given data. This function is used internally by
+    Choices class constructor.
+
+    Examples
+
+    ::
+
+        >>> choice_factory(Choice(1))
+        Choice(key=1, label=1, value=1)
+
+        >>> choice_factory(2)
+        Choice(key=2, label=2, value=2)
+
+        >>> choice_factory(['admin', 'Admin', True])
+        Choice(key='admin', label='Admin', value=True)
+    """
     if isinstance(data, (list, tuple)):
         data = list(data)
         if isinstance(data[1], (list, tuple)):
