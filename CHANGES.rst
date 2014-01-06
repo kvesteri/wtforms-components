@@ -8,7 +8,7 @@ release.
 0.8.3 (2013-01-05)
 ^^^^^^^^^^^^^^^^^^
 
-- Updated SQLAlchemy-Utils dependency to version 0.22.0
+- Updated SQLAlchemy-Utils dependency to version 0.22.1
 
 
 0.8.2 (2013-12-12)
