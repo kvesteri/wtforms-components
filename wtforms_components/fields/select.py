@@ -11,9 +11,14 @@ try:
 except ImportError:
     from wtforms.fields import _unset_value
 from ..widgets import SelectWidget
+from ..utils import Chain
 
 
 class Choice(object):
+    """
+    Represents an individual choice used by SelectField. Each choice object
+    has key, label and value.
+    """
     def __init__(self, key, label=_unset_value, value=_unset_value):
         self.key = key
         self.label = self.key if label is _unset_value else label
@@ -31,25 +36,6 @@ class Choice(object):
         if not isinstance(other, Choice):
             return NotImplemented
         return Choices([self, other])
-
-
-class Chain(object):
-    def __init__(self, *iterables):
-        self.iterables = iterables
-
-    def __iter__(self):
-        for iterable in self.iterables:
-            for value in iterable:
-                yield value
-
-    def __contains__(self, value):
-        return any(value in iterable for iterable in self.iterables)
-
-    def __len__(self):
-        return sum(map(len, self.iterables))
-
-    def __repr__(self):
-        return '%s(%r)' % (self.__class__.__name__, list(self.iterables))
 
 
 class ChoicesChain(Chain):
