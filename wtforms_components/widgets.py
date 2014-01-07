@@ -3,9 +3,9 @@ from copy import copy
 import six
 from wtforms.widgets import (
     HTMLString,
-    html_params,
-    Select as _Select
+    html_params
 )
+from wtforms.compat import text_type
 from wtforms.validators import NumberRange, DataRequired
 from wtforms.widgets import Input
 from .validators import DateRange, TimeRange
