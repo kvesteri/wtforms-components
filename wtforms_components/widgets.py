@@ -233,61 +233,43 @@ class ReadOnlyWidgetProxy(object):
         return self.widget(field, **kwargs)
 
 
-class SelectWidget(object):
+class SelectWidget(_Select):
     """
     Add support of choices with ``optgroup`` to the ``Select`` widget.
     """
-    def __init__(self, multiple=False):
-        self.multiple = multiple
-
-    def __call__(self, field, **kwargs):
-        kwargs.setdefault('id', field.id)
-        if self.multiple:
-            kwargs['multiple'] = True
-        html = ['<select %s>' % html_params(name=field.name, **kwargs)]
-        html.extend(
-            self.render_choice(field, choice)
-            for choice in field.iter_choices()
-        )
-        html.append('</select>')
-        return HTMLString(''.join(html))
-
     @classmethod
-    def render_choice(cls, field, choice):
-        from wtforms_components.fields.select import Choice, Choices
+    def render_optgroup(cls, value, label, mixed):
+        children = []
 
-        if isinstance(choice, Choices):
-            return cls.render_optgroup(field, choice)
-        elif isinstance(choice, Choice):
-            if isinstance(field.data, list):
-                selected = choice.value in field.data
-            else:
-                selected = field.data == choice.value
+        for item_value, item_label in label:
+            item_html = cls.render_option(item_value, item_label, mixed)
+            children.append(item_html)
 
-            return cls.render_option(
-                choice.key,
-                choice.label,
-                selected
-            )
-
-    @classmethod
-    def render_optgroup(cls, field, choices):
         html = u'<optgroup label="%s">%s</optgroup>'
-        data = (escape(six.text_type(choices.label)), u'\n'.join(
-            cls.render_choice(field, choice) for choice in choices
-        ))
+        data = (escape(six.text_type(value)), u'\n'.join(children))
         return HTMLString(html % data)
 
     @classmethod
-    def render_option(cls, value, label, selected, **kwargs):
-        if value is True:
-            # Handle the special case of a 'True' value.
-            value = text_type(value)
+    def render_option(cls, value, label, mixed):
+        """
+        Render option as HTML tag, but not forget to wrap options into
+        ``optgroup`` tag if ``label`` var is ``list`` or ``tuple``.
+        """
+        if isinstance(label, (list, tuple)):
+            return cls.render_optgroup(value, label, mixed)
 
-        options = dict(kwargs, value=value)
+        coerce_func, data = mixed
+        if isinstance(data, list) or isinstance(data, tuple):
+            selected = coerce_func(value) in data
+        else:
+            selected = coerce_func(value) == data
+
+        options = {'value': value}
+
         if selected:
             options['selected'] = True
-        return HTMLString('<option %s>%s</option>' % (
-            html_params(**options), escape(six.text_type(label)))
-        )
 
+        html = u'<option %s>%s</option>'
+        data = (html_params(**options), escape(six.text_type(label)))
+
+        return HTMLString(html % data)

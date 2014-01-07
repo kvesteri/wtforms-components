@@ -29,8 +29,9 @@ class SelectMultipleField(SelectField):
 
     def pre_validate(self, form):
         if self.data:
+            values = self.choice_values
             for value in self.data:
-                if value not in self.choices.values:
+                if value not in values:
                     raise ValueError(
                         self.gettext(
                             "'%(value)s' is not a valid"
