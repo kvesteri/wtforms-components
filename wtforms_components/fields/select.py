@@ -1,11 +1,5 @@
-from cgi import escape
-from collections import Sequence
-from functools import partial
-from itertools import chain, repeat
 import six
 from wtforms.fields import SelectFieldBase
-from wtforms.validators import ValidationError
-from wtforms.widgets import html_params, HTMLString
 try:
     from wtforms.utils import unset_value as _unset_value
 except ImportError:
@@ -63,7 +57,7 @@ class ChoicesChain(Chain):
     @property
     def values(self):
         for choices in self.iterables:
-            for value in choice.values:
+            for value in choices.values:
                 yield value
 
     def __add__(self, other):
@@ -260,7 +254,7 @@ class SelectField(SelectFieldBase):
                 id='%s-%d' % (self.id, i),
                 **opts
             )
-            opt.process(None, value)
+            opt.process(None, choice.value)
             opt.checked = self.data == choice.value
             yield opt
 
