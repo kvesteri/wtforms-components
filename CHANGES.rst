@@ -10,6 +10,7 @@ release.
 
 - Deprecated NumberRangeField
 - Added IntIntervalField, FloatIntervalField, DecimalIntervalField, DateIntervalField, DateTimeIntervalField
+- Updated SQLAlchemy-Utils dependency to version 0.23.0
 
 
 0.8.3 (2014-01-05)
