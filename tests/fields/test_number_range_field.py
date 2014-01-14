@@ -1,10 +1,10 @@
-from wtforms_components import NumberRangeField
+from wtforms_components import IntIntervalField
 from wtforms_test import FormTestCase
 from wtforms import Form
 from tests import MultiDict
 
 
-class TestNumberRangeField(FormTestCase):
+class TestIntIntervalField(FormTestCase):
     def setup_method(self, method):
         self.valid_ranges = [
             '13 - 14',
@@ -19,7 +19,7 @@ class TestNumberRangeField(FormTestCase):
 
     def init_form(self, **kwargs):
         class TestForm(Form):
-            number_range = NumberRangeField(**kwargs)
+            number_range = IntIntervalField(**kwargs)
 
         self.form_class = TestForm
         return self.form_class

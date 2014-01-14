@@ -13,7 +13,13 @@ from .html5 import (
 )
 from .color import ColorField
 from .grouped_query_select import GroupedQuerySelectField
-from .number_range import NumberRangeField
+from .interval import (
+    DateIntervalField,
+    DateTimeIntervalField,
+    DecimalIntervalField,
+    FloatIntervalField,
+    IntIntervalField,
+)
 from .passive_hidden import PassiveHiddenField
 from .phone_number import PhoneNumberField
 from .select import SelectField
@@ -26,15 +32,19 @@ __all__ = (
     AjaxField,
     ColorField,
     DateField,
+    DateIntervalField,
     DateTimeField,
+    DateTimeIntervalField,
     DateTimeLocalField,
     DecimalField,
+    DecimalIntervalField,
     DecimalSliderField,
     EmailField,
+    FloatIntervalField,
     GroupedQuerySelectField,
     IntegerField,
     IntegerSliderField,
-    NumberRangeField,
+    IntIntervalField,
     PassiveHiddenField,
     PhoneNumberField,
     SearchField,

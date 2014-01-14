@@ -67,7 +67,8 @@ setup(
         'SQLAlchemy>=0.8.0',
         'SQLAlchemy-Utils>=0.22.1',
         'six>=1.4.1',
-        'validators>=0.5.0'
+        'validators>=0.5.0',
+        'intervals>=0.2.0'
     ],
     extras_require=extras_require,
     classifiers=[
