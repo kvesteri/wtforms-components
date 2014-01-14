@@ -5,7 +5,14 @@ Here you can see the full list of changes between each WTForms-Components
 release.
 
 
-0.8.3 (2013-01-05)
+0.9.0 (2014-01-14)
+^^^^^^^^^^^^^^^^^^
+
+- Deprecated NumberRangeField
+- Added IntIntervalField, FloatIntervalField, DecimalIntervalField, DateIntervalField, DateTimeIntervalField
+
+
+0.8.3 (2014-01-05)
 ^^^^^^^^^^^^^^^^^^
 
 - Updated SQLAlchemy-Utils dependency to version 0.22.1
