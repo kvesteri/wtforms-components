@@ -1,42 +1,187 @@
-from pytest import raises
+from pytest import raises, mark
 import sqlalchemy as sa
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import relationship
 
 from wtforms_components import ModelForm, Unique
 from wtforms.fields import TextField
 from tests import MultiDict, DatabaseTestCase
 
 
+base = declarative_base()
+
+class Color(base):
+    __tablename__ = 'color'
+    id = sa.Column(sa.Integer, primary_key=True)
+    name = sa.Column(sa.Unicode(255), unique=True)
+
+class User(base):
+    __tablename__ = 'event'
+    id = sa.Column(sa.Integer, primary_key=True)
+    name = sa.Column(sa.Unicode(255), unique=True)
+    email = sa.Column(sa.Unicode(255))
+    favorite_color_id = sa.Column(sa.Integer, sa.ForeignKey(Color.id))
+    favorite_color = relationship(Color)
+
+
 class TestUniqueValidator(DatabaseTestCase):
     def create_models(self):
-        class User(self.base):
-            __tablename__ = 'event'
-            id = sa.Column(sa.Integer, primary_key=True)
-            name = sa.Column(sa.Unicode(255), unique=True)
+        # This is a hack so we can use our classes
+        # without initializing self first
+        self.base = base
 
-        self.User = User
+    def _test_syntax(self, column, expected_dict):
+        class MyForm(ModelForm):
+            name = TextField()
+            email = TextField()
 
-    def test_raises_exception_if_improperly_configured(self):
+        validator = Unique(
+            column,
+            get_session=lambda: self.session
+        )
+        form = MyForm()
+        if not hasattr(form, 'Meta'):
+            form.Meta = lambda: None
+        form.Meta.model = User
+        result = validator._syntaxes_as_tuples(form, form.name, column)
+        assert result == expected_dict
+
+    @mark.parametrize(['column', 'expected_dict'], (
+        (User.name, (('name', User.name),)),
+        ('name', (('name', User.name),)),
+        (('name', 'email'), (('name', User.name), ('email', User.email))),
+        ({'exampleName': User.name}, (('exampleName', User.name),)),
+        ((User.name, User.email), (('name', User.name), ('email', User.email)))
+    ))
+    def test_columns_as_tuples(self, column, expected_dict):
+        self._test_syntax(column, expected_dict)
+
+    def test_columns_as_tuples_classical_mapping(self):
+        users = sa.Table(
+            'users',
+            sa.MetaData(None),
+            sa.Column('name', sa.Unicode(255))
+        )
+        self._test_syntax(
+            users.c.name,
+            (('name', users.c.name),)
+        )
+
+    @mark.parametrize('column', (
+        User.name,
+        {'name': User.name},
+        (('name', User.name),)
+    ))
+    def test_raises_exception_if_improperly_configured(self, column):
         with raises(Exception):
             class MyForm(ModelForm):
                 name = TextField(
                     validators=[Unique(
-                        self.User.name,
+                        column,
                     )]
                 )
+
+    def test_raises_exception_string_if_improperly_configured(self):
+        class MyForm(ModelForm):
+            name = TextField(
+                validators=[Unique(
+                    ('name', 'email'),
+                )]
+            )
+        with raises(Exception):
+            MyForm().validate()
 
     def test_existing_name_collision(self):
         class MyForm(ModelForm):
             name = TextField(
                 validators=[Unique(
-                    self.User.name,
+                    User.name,
                     get_session=lambda: self.session
                 )]
             )
 
-        self.session.add(self.User(name=u'someone'))
+        self.session.add(User(name=u'someone'))
         self.session.commit()
 
         form = MyForm(MultiDict({'name': u'someone'}))
+        form.validate()
+        assert form.errors == {'name': [u'Already exists.']}
+
+    def test_existing_name_collision_multiple(self):
+        class MyForm(ModelForm):
+            name = TextField(
+                validators=[Unique(
+                    [User.name, User.email],
+                    get_session=lambda: self.session
+                )]
+            )
+            email = TextField()
+
+        self.session.add(User(
+            name=u'someone',
+            email=u'someone@example.com'
+        ))
+        self.session.commit()
+
+        form = MyForm(MultiDict({
+            'name': u'someone',
+            'email': u'someone@example.com'
+        }))
+        form.validate()
+        assert form.errors == {'name': [u'Already exists.']}
+
+    def test_existing_name_collision_classical_mapping(self):
+        user_table = sa.Table(
+            'user',
+            sa.MetaData(None),
+            sa.Column('name', sa.String(255)),
+            sa.Column('email', sa.String(255))
+        )
+
+        class MyForm(ModelForm):
+            name = TextField(
+                validators=[Unique(
+                    [User.name, User.email],
+                    get_session=lambda: self.session
+                )]
+            )
+            email = TextField()
+
+        self.session.add(User(
+            name=u'someone',
+            email=u'someone@example.com'
+        ))
+        self.session.commit()
+
+        form = MyForm(MultiDict({
+            'name': u'someone',
+            'email': u'someone@example.com'
+        }))
+        form.validate()
+        assert form.errors == {'name': [u'Already exists.']}
+
+    def test_existing_name_collision_relationship(self):
+        class MyForm(ModelForm):
+            name = TextField(
+                validators=[Unique(
+                    [User.name, User.email],
+                    get_session=lambda: self.session
+                )]
+            )
+            email = TextField()
+
+        self.session.add(User(
+            name=u'someone',
+            email=u'someone@example.com',
+            favorite_color=Color(name='red')
+        ))
+        self.session.commit()
+
+        form = MyForm(MultiDict({
+            'name': u'someone',
+            'email': u'someone@example.com',
+            'favorite_color_id': self.session.query(Color).first().id
+        }))
         form.validate()
         assert form.errors == {'name': [u'Already exists.']}
 
@@ -44,39 +189,79 @@ class TestUniqueValidator(DatabaseTestCase):
         class MyForm(ModelForm):
             name = TextField(
                 validators=[Unique(
-                    self.User.name,
+                    User.name,
                     get_session=lambda: self.session
                 )]
             )
 
-        self.session.add(self.User(name=u'someone else'))
+        self.session.add(User(name=u'someone else'))
         self.session.commit()
 
         form = MyForm(MultiDict({'name': u'someone'}))
+        assert form.validate()
+
+    def test_without_obj_without_collision_multiple(self):
+        class MyForm(ModelForm):
+            name = TextField(
+                validators=[Unique(
+                    [User.name, User.email],
+                    get_session=lambda: self.session
+                )]
+            )
+            email = TextField()
+
+        self.session.add(User(
+            name=u'someone',
+            email=u'someone@example.com'
+        ))
+        self.session.commit()
+
+        form = MyForm(MultiDict({
+            'name': u'someone',
+            'email': u'else@example.com'
+        }))
         assert form.validate()
 
     def test_existing_name_no_collision(self):
         class MyForm(ModelForm):
             name = TextField(
                 validators=[Unique(
-                    self.User.name,
+                    User.name,
                     get_session=lambda: self.session
                 )]
             )
 
-        obj = self.User(name=u'someone')
+        obj = User(name=u'someone')
         self.session.add(obj)
 
         form = MyForm(MultiDict({'name': u'someone'}), obj=obj)
         assert form.validate()
 
+    def test_existing_name_no_collision_multiple(self):
+        class MyForm(ModelForm):
+            name = TextField(
+                validators=[Unique(
+                    (User.name, User.email),
+                    get_session=lambda: self.session
+                )]
+            )
+            email = TextField()
+
+        obj = User(name=u'someone', email=u'hello@world.com')
+        self.session.add(obj)
+
+        form = MyForm(MultiDict(
+            {'name': u'someone', 'email': 'hello@world.com'}
+        ), obj=obj)
+        assert form.validate()
+
     def test_supports_model_query_parameter(self):
-        self.User.query = self.session.query(self.User)
+        User.query = self.session.query(User)
 
         class MyForm(ModelForm):
             name = TextField(
                 validators=[Unique(
-                    self.User.name,
+                    User.name,
                 )]
             )
 
