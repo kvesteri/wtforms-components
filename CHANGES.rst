@@ -5,6 +5,12 @@ Here you can see the full list of changes between each WTForms-Components
 release.
 
 
+0.9.1 (2014-01-27)
+^^^^^^^^^^^^^^^^^^
+
+- New unique validator
+
+
 0.9.0 (2014-01-14)
 ^^^^^^^^^^^^^^^^^^
 
