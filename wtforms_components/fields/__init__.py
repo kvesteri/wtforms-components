@@ -26,6 +26,7 @@ from .select import SelectField
 from .select_multiple import SelectMultipleField
 from .split_date_time import SplitDateTimeField
 from .time import TimeField
+from .weekdays import WeekDaysField
 
 
 __all__ = (
@@ -53,4 +54,5 @@ __all__ = (
     SplitDateTimeField,
     StringField,
     TimeField,
+    WeekDaysField
 )

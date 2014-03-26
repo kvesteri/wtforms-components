@@ -23,6 +23,7 @@ from .fields import (
     SplitDateTimeField,
     StringField,
     TimeField,
+    WeekDaysField
 )
 from .validators import DateRange, Unique, If, Chain, Email, TimeRange
 from .widgets import ReadOnlyWidgetProxy, NumberInput, SelectWidget
@@ -63,6 +64,7 @@ __all__ = (
     TimeField,
     TimeRange,
     Unique,
+    WeekDaysField
 )
 
 
