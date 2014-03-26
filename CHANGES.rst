@@ -5,10 +5,16 @@ Here you can see the full list of changes between each WTForms-Components
 release.
 
 
+0.9.2 (2014-03-26)
+^^^^^^^^^^^^^^^^^^
+
+- Added WeekDaysField
+
+
 0.9.1 (2014-01-27)
 ^^^^^^^^^^^^^^^^^^
 
-- New unique validator
+- Added new unique validator
 
 
 0.9.0 (2014-01-14)
