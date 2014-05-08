@@ -130,6 +130,30 @@ class TestUniqueValidator(DatabaseTestCase):
         form.validate()
         assert form.errors == {'name': [u'Already exists.']}
 
+    def test_works_with_flask_sqlalchemy_syntax(self, monkeypatch):
+        monkeypatch.setattr(User, 'query', self.session.query(User), False)
+        class MyForm(ModelForm):
+            name = TextField(
+                validators=[Unique(
+                    [User.name, User.email],
+                    get_session=lambda: self.session
+                )]
+            )
+            email = TextField()
+
+        self.session.add(User(
+            name=u'someone',
+            email=u'someone@example.com'
+        ))
+        self.session.commit()
+
+        form = MyForm(MultiDict({
+            'name': u'someone',
+            'email': u'someone@example.com'
+        }))
+        form.validate()
+        assert form.errors == {'name': [u'Already exists.']}
+
     def test_existing_name_collision_classical_mapping(self):
         user_table = sa.Table(
             'user',
