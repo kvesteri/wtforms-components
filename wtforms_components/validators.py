@@ -239,9 +239,7 @@ class Unique(object):
                 self._syntaxes_as_tuples(form, field, x)[0]
                 for x in column
             )
-        elif isinstance(column, InstrumentedAttribute):
-            return ((column.name, column),)
-        elif isinstance(column, Column):
+        elif isinstance(column, (Column, InstrumentedAttribute)):
             return ((column.key, column),)
         else:
             raise TypeError("Invalid syntax for column")

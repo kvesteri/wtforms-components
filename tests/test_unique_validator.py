@@ -1,11 +1,12 @@
 from pytest import raises, mark
-import sqlalchemy as sa
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
+import sqlalchemy as sa
 
-from wtforms_components import ModelForm, Unique
-from wtforms.fields import TextField
 from tests import MultiDict, DatabaseTestCase
+from wtforms.ext.sqlalchemy.fields import QuerySelectField
+from wtforms.fields import TextField
+from wtforms_components import ModelForm, Unique
 
 
 base = declarative_base()
@@ -51,7 +52,14 @@ class TestUniqueValidator(DatabaseTestCase):
         ('name', (('name', User.name),)),
         (('name', 'email'), (('name', User.name), ('email', User.email))),
         ({'exampleName': User.name}, (('exampleName', User.name),)),
-        ((User.name, User.email), (('name', User.name), ('email', User.email)))
+        (
+            (User.name, User.email),
+            (('name', User.name), ('email', User.email))
+        ),
+        (
+            (User.name, User.favorite_color),
+            (('name', User.name), ('favorite_color', User.favorite_color))
+        ),
     ))
     def test_columns_as_tuples(self, column, expected_dict):
         self._test_syntax(column, expected_dict)
@@ -155,7 +163,7 @@ class TestUniqueValidator(DatabaseTestCase):
         assert form.errors == {'name': [u'Already exists.']}
 
     def test_existing_name_collision_classical_mapping(self):
-        user_table = sa.Table(
+        sa.Table(
             'user',
             sa.MetaData(None),
             sa.Column('name', sa.String(255)),
@@ -184,30 +192,71 @@ class TestUniqueValidator(DatabaseTestCase):
         form.validate()
         assert form.errors == {'name': [u'Already exists.']}
 
-    def test_existing_name_collision_relationship(self):
+    def test_relationship_multiple_collision(self):
         class MyForm(ModelForm):
             name = TextField(
                 validators=[Unique(
-                    [User.name, User.email],
+                    [User.name, User.favorite_color],
                     get_session=lambda: self.session
                 )]
             )
             email = TextField()
+            favorite_color = QuerySelectField(
+                query_factory=lambda: self.session.query(Color).all(),
+                allow_blank=True
+            )
 
+        red_color = Color(name='red')
+        blue_color = Color(name='blue')
+        self.session.add(red_color)
+        self.session.add(blue_color)
         self.session.add(User(
             name=u'someone',
-            email=u'someone@example.com',
-            favorite_color=Color(name='red')
+            email=u'first.email@example.com',
+            favorite_color=red_color
         ))
         self.session.commit()
 
         form = MyForm(MultiDict({
             'name': u'someone',
-            'email': u'someone@example.com',
-            'favorite_color_id': self.session.query(Color).first().id
+            'email': u'second.email@example.com',
+            'favorite_color': str(red_color.id)
         }))
         form.validate()
         assert form.errors == {'name': [u'Already exists.']}
+
+    def test_relationship_multiple_no_collision(self):
+        class MyForm(ModelForm):
+            name = TextField(
+                validators=[Unique(
+                    [User.name, User.favorite_color],
+                    get_session=lambda: self.session
+                )]
+            )
+            email = TextField()
+            favorite_color = QuerySelectField(
+                query_factory=lambda: self.session.query(Color).all(),
+                allow_blank=True
+            )
+
+        red_color = Color(name='red')
+        blue_color = Color(name='blue')
+        self.session.add(red_color)
+        self.session.add(blue_color)
+        self.session.add(User(
+            name=u'someone',
+            email=u'first.email@example.com',
+            favorite_color=red_color
+        ))
+        self.session.commit()
+
+        form = MyForm(MultiDict({
+            'name': u'someone',
+            'email': u'second.email@example.com',
+            'favorite_color': str(blue_color.id)
+        }))
+        form.validate()
+        assert form.errors == {}
 
     def test_without_obj_without_collision(self):
         class MyForm(ModelForm):
