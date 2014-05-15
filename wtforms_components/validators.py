@@ -211,9 +211,15 @@ class Unique(object):
     @property
     def query(self):
         self._check_for_session(self.model)
-        if hasattr(self.model, 'query'):
+        if self.get_session:
+            return self.get_session().query(self.model)
+        elif hasattr(self.model, 'query'):
             return getattr(self.model, 'query')
-        return self.get_session().query(self.model)
+        else:
+            raise Exception(
+                'Validator requires either get_session or Flask-SQLAlchemy'
+                ' styled query parameter'
+            )
 
     def _check_for_session(self, model):
         if not hasattr(model, 'query') and not self.get_session:
@@ -233,9 +239,7 @@ class Unique(object):
                 self._syntaxes_as_tuples(form, field, x)[0]
                 for x in column
             )
-        elif isinstance(column, InstrumentedAttribute):
-            return ((column.name, column),)
-        elif isinstance(column, Column):
+        elif isinstance(column, (Column, InstrumentedAttribute)):
             return ((column.key, column),)
         else:
             raise TypeError("Invalid syntax for column")
