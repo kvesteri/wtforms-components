@@ -5,6 +5,13 @@ Here you can see the full list of changes between each WTForms-Components
 release.
 
 
+0.9.3 (2014-05-15)
+^^^^^^^^^^^^^^^^^^
+
+- Fixed InstrumentedAttribute support for Unique validator, issue #13
+- Removed CountryField (now part of WTForms-Alchemy)
+
+
 0.9.2 (2014-03-26)
 ^^^^^^^^^^^^^^^^^^
 
