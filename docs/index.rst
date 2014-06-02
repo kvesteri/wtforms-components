@@ -16,8 +16,8 @@ HTML5 compatible min and max validators. WTForms-Components is smart enough to a
 attach HTML5 min and max validators based on field's NumberRange and DateRange validators.
 
 Example:
-
 ::
+
 
     from wtforms import Form
     from wtforms_components import DateTimeField
@@ -41,9 +41,8 @@ Example:
 
 
 Same applies to IntegerField:
-
-
 ::
+
 
     from wtforms import Form
     from wtforms_components import IntegerField
@@ -83,7 +82,9 @@ PhoneNumberField is a string field representing a PhoneNumber object from
    https://github.com/kvesteri/sqlalchemy-utils
 
 The following example shows that the field takes the phone number's country
-code and display format as parameters. ::
+code and display format as parameters.
+::
+
 
     from wtforms import Form
     from wtforms_components import PhoneNumberField
@@ -103,7 +104,9 @@ ColorField is a string field representing a Color object from `colour`_  package
 .. _colour:
    https://github.com/vaab/colour
 
-Example ::
+Example:
+::
+
 
     from wtforms import Form
     from wtforms_components import ColorField
@@ -122,7 +125,9 @@ NumberRangeField is a string field representing a NumberRange object from
 .. _SQLAlchemy-Utils:
    https://github.com/kvesteri/sqlalchemy-utils
 
-Example: ::
+Example:
+::
+
 
     from wtforms import Form
     from wtforms_components import NumberRangeField
@@ -138,7 +143,9 @@ PassiveHiddenField
 PassiveHiddenField acts just like normal wtforms.fields.HiddenField except it
 doesn't populate object values with populate_obj function.
 
-Example: ::
+Example:
+::
+
 
     from wtforms import Form, TextField
     from wtforms_components import PassiveHiddenField
@@ -152,6 +159,7 @@ TimeField
 ---------
 
 TimeField is a string field which stores a `datetime.time` matching a format.
+::
 
 
     from wtforms import Form, DateField
@@ -168,6 +176,7 @@ Read-only fields
 WTForms-Components provides a convenient function for making fields read-only.
 
 In the following example we define a form where name field is defined as read-only.
+::
 
 
     from wtforms import Form, DateField, TextField
@@ -206,7 +215,9 @@ Email validator
 
 Validates an email address. This validator is based on `Django's email validator`_ and is stricter than the standard email validator included in WTForms.
 
-Example: ::
+Example:
+::
+
 
     from wtforms import Form
     from wtforms.fields import TextField
@@ -222,7 +233,8 @@ If validator
 ------------
 
 The If validator provides means for having conditional validations. In the following example we only
-validate field email if field user_id is provided. ::
+validate field email if field user_id is provided.
+::
 
 
     from wtforms import Form
@@ -241,7 +253,8 @@ Chain validator
 
 
 Chain validator chains validators together. Chain validator can be combined with If validator
-to provide nested conditional validations. ::
+to provide nested conditional validations.
+::
 
 
     from wtforms import Form
