@@ -54,8 +54,9 @@ def datetime_form(options):
     options.setdefault('time', {})
     options['date'].setdefault('label', u'Date')
     options['time'].setdefault('label', u'Time')
+    base_form = options.pop('base_form', Form)
 
-    class DateTimeForm(Form):
+    class DateTimeForm(base_form):
         date = DateField(**options['date'])
         time = TimeField(**options['time'])
     return DateTimeForm
