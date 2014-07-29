@@ -1,6 +1,7 @@
 from datetime import date, datetime, time
 
 from wtforms_components.fields import SplitDateTimeField
+from wtforms import Form
 from wtforms.validators import DataRequired
 
 from tests import MultiDict, SimpleFieldTestCase
@@ -79,3 +80,15 @@ class TestSplitDateTimeField(SimpleFieldTestCase):
         }))
         assert form.test_field.data['date'] == date(2000, 3, 2)
         assert form.test_field.data['time'] == time(19, 10)
+
+    def test_default_base_form(self):
+        form_class = self.init_form()
+        form = form_class()
+        assert form.test_field.form.__class__.__bases__ == (Form,)
+
+    def test_custom_base_form(self):
+        class A(Form):
+            pass
+        form_class = self.init_form(datetime_form={'base_form': A})
+        form = form_class()
+        assert form.test_field.form.__class__.__bases__ == (A,)
