@@ -92,3 +92,12 @@ class TestSplitDateTimeField(SimpleFieldTestCase):
         form_class = self.init_form(datetime_form={'base_form': A})
         form = form_class()
         assert form.test_field.form.__class__.__bases__ == (A,)
+
+    def test_custom_base_form_with_two_instances(self):
+        class A(Form):
+            pass
+        form_class = self.init_form(datetime_form={'base_form': A})
+        form = form_class()
+        form2 = form_class()
+        assert form.test_field.form.__class__.__bases__ == (A,)
+        assert form2.test_field.form.__class__.__bases__ == (A,)
