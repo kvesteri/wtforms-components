@@ -5,6 +5,12 @@ Here you can see the full list of changes between each WTForms-Components
 release.
 
 
+0.9.5 (2014-07-31)
+^^^^^^^^^^^^^^^^^^
+
+- Fixed base_form option in SplitDateTimeField getting lost if form is initialized more than once.
+
+
 0.9.4 (2014-07-29)
 ^^^^^^^^^^^^^^^^^^
 

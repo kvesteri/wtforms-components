@@ -40,7 +40,7 @@ for name, requirements in extras_require.items():
 
 setup(
     name='WTForms-Components',
-    version='0.9.4',
+    version='0.9.5',
     url='https://github.com/kvesteri/wtforms-components',
     license='BSD',
     author='Konsta Vesterinen',
