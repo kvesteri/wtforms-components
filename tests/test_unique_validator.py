@@ -81,13 +81,14 @@ class TestUniqueValidator(DatabaseTestCase):
         (('name', User.name),)
     ))
     def test_raises_exception_if_improperly_configured(self, column):
+        class MyForm(ModelForm):
+            name = TextField(
+                validators=[Unique(
+                    column,
+                )]
+            )
         with raises(Exception):
-            class MyForm(ModelForm):
-                name = TextField(
-                    validators=[Unique(
-                        column,
-                    )]
-                )
+            MyForm().validate()
 
     def test_raises_exception_string_if_improperly_configured(self):
         class MyForm(ModelForm):

@@ -5,6 +5,12 @@ Here you can see the full list of changes between each WTForms-Components
 release.
 
 
+0.9.6 (2014-09-04)
+^^^^^^^^^^^^^^^^^^
+
+- Fixed Unique validator session checking (#19).
+
+
 0.9.5 (2014-07-31)
 ^^^^^^^^^^^^^^^^^^
 
