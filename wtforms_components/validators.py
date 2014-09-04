@@ -194,20 +194,6 @@ class Unique(object):
         self.message = message
         self.get_session = get_session
 
-        # Check if we can obtain SQLAlchemy session
-        if isinstance(self.column, Mapping):
-            self._check_for_session(
-                next(six.itervalues(self.column)).class_
-            )
-        elif (
-            isinstance(self.column, Iterable) and
-            not isinstance(self.column[0], six.string_types) and
-            isinstance(self.column[0], Iterable)
-        ):
-            self._check_for_session(self.column[0][1].class_)
-        elif isinstance(self.column, InstrumentedAttribute):
-            self._check_for_session(self.column.class_)
-
     @property
     def query(self):
         self._check_for_session(self.model)
