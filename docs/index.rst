@@ -183,9 +183,13 @@ In the following example we define a form where name field is defined as read-on
     from wtforms_components import TimeField, read_only
 
     class EventForm(Form):
-        name = read_only(TextField('Name'))
+        name = TextField('Name')
         start_date = DateField('Start date')
         start_time = TimeField('Start time')
+
+        def __init__(self, *args, **kwargs):
+            super(EventForm, self).__init__(*args, **kwargs)
+            read_only(self.name)
 
 
 Validators
