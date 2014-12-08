@@ -44,3 +44,11 @@ class TestTimeField(FieldTestCase):
             '<input id="test_field" max="13:30:00" min="12:12:00"'
             ' name="test_field" type="time" value="13:20">'
         )
+
+    def test_renders_input_time_at_midnight(self):
+        form_class = self.init_form()
+        form = form_class(data={'test_field': time(0, 0)})
+        assert str(form.test_field) == (
+            '<input id="test_field" name="test_field"'
+            ' type="time" value="00:00">'
+        )
