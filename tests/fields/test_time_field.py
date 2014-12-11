@@ -47,7 +47,7 @@ class TestTimeField(FieldTestCase):
 
     def test_renders_input_time_at_midnight(self):
         form_class = self.init_form()
-        form = form_class(data={'test_field': time(0, 0)})
+        form = form_class(MultiDict(test_field='00:00'))
         assert str(form.test_field) == (
             '<input id="test_field" name="test_field"'
             ' type="time" value="00:00">'
