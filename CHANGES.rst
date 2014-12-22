@@ -10,6 +10,7 @@ release.
 
 - Added blank_value option for GroupedQuerySelectField
 - Add py34 to test matrix
+- Fixed midnight handling for TimeField
 
 
 0.9.6 (2014-09-04)
