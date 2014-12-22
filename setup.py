@@ -6,11 +6,21 @@ Additional fields, validators and widgets for WTForms.
 """
 
 from setuptools import setup
+import os
+import re
 import sys
 
 
+HERE = os.path.dirname(os.path.abspath(__file__))
 PY3 = sys.version_info[0] == 3
 
+
+def get_version():
+    filename = os.path.join(HERE, 'wtforms_components', '__init__.py')
+    with open(filename) as f:
+        contents = f.read()
+    pattern = r"^__version__ = '(.*?)'$"
+    return re.search(pattern, contents, re.MULTILINE).group(1)
 
 extras_require = {
     'test': [
@@ -40,7 +50,7 @@ for name, requirements in extras_require.items():
 
 setup(
     name='WTForms-Components',
-    version='0.9.7',
+    version=get_version(),
     url='https://github.com/kvesteri/wtforms-components',
     license='BSD',
     author='Konsta Vesterinen',
