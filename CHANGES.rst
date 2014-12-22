@@ -5,6 +5,12 @@ Here you can see the full list of changes between each WTForms-Components
 release.
 
 
+0.9.7 (2014-12-22)
+^^^^^^^^^^^^^^^^^^
+
+- Added blank_value option for GroupedQuerySelectField
+
+
 0.9.6 (2014-09-04)
 ^^^^^^^^^^^^^^^^^^
 

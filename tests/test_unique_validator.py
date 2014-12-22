@@ -11,10 +11,12 @@ from wtforms_components import ModelForm, Unique
 
 base = declarative_base()
 
+
 class Color(base):
     __tablename__ = 'color'
     id = sa.Column(sa.Integer, primary_key=True)
     name = sa.Column(sa.Unicode(255), unique=True)
+
 
 class User(base):
     __tablename__ = 'event'
@@ -141,6 +143,7 @@ class TestUniqueValidator(DatabaseTestCase):
 
     def test_works_with_flask_sqlalchemy_syntax(self, monkeypatch):
         monkeypatch.setattr(User, 'query', self.session.query(User), False)
+
         class MyForm(ModelForm):
             name = TextField(
                 validators=[Unique(

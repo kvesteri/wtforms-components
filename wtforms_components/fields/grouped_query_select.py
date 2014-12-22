@@ -15,9 +15,19 @@ def get_pk_from_identity(obj):
 class GroupedQuerySelectField(SelectField):
     widget = SelectWidget()
 
-    def __init__(self, label=None, validators=None, query_factory=None,
-                 get_pk=None, get_label=None, get_group=None,
-                 allow_blank=False, blank_text='', **kwargs):
+    def __init__(
+        self,
+        label=None,
+        validators=None,
+        query_factory=None,
+        get_pk=None,
+        get_label=None,
+        get_group=None,
+        allow_blank=False,
+        blank_text='',
+        blank_value='__None',
+        **kwargs
+    ):
         super(GroupedQuerySelectField, self).__init__(
             label,
             validators,
@@ -38,6 +48,7 @@ class GroupedQuerySelectField(SelectField):
 
         self.allow_blank = allow_blank
         self.blank_text = blank_text
+        self.blank_value = blank_value
 
         self._choices = None
 
@@ -59,7 +70,9 @@ class GroupedQuerySelectField(SelectField):
                 self._get_object_list()
             )
             # object_list is (key, group, value) tuple
-            choices = [('__None', self.blank_text)] if self.allow_blank else []
+            choices = [
+                (self.blank_value, self.blank_text)
+            ] if self.allow_blank else []
             object_list = self._pre_process_object_list(object_list)
             for group, data in groupby(object_list, key=lambda x: x[1]):
                 if group is not None:
@@ -102,13 +115,13 @@ class GroupedQuerySelectField(SelectField):
                 label,
                 (
                     self.coerce,
-                    self.get_pk(self.data) if self.data else u'__None'
+                    self.get_pk(self.data) if self.data else self.blank_value
                 )
             )
 
     def process_formdata(self, valuelist):
         if valuelist:
-            if self.allow_blank and valuelist[0] == '__None':
+            if self.allow_blank and valuelist[0] == self.blank_value:
                 self.data = None
             else:
                 self._data = None
