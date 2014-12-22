@@ -19,8 +19,10 @@ class TimeField(Field):
     def _value(self):
         if self.raw_data:
             return ' '.join(self.raw_data)
+        elif self.data is not None:
+            return self.data.strftime(self.format)
         else:
-            return self.data and self.data.strftime(self.format) or ''
+            return ''
 
     def process_formdata(self, valuelist):
         if valuelist:
