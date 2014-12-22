@@ -9,6 +9,7 @@ release.
 ^^^^^^^^^^^^^^^^^^
 
 - Added blank_value option for GroupedQuerySelectField
+- Add py34 to test matrix
 
 
 0.9.6 (2014-09-04)
