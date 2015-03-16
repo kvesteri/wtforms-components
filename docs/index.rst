@@ -201,9 +201,9 @@ DateRange validator
 The DateRange validator is essentially the same as wtforms.validators.NumberRange validator but validates
 dates.
 
-In the following example we define a start_time field, which does not accept dates in the past. ::
+In the following example we define a start_time and a start_date field, which do not accept dates in the past. ::
 
-    from datetime import datetime
+    from datetime import datetime, date
     from wtforms import Form
     from wtforms.fields import DateField
     from wtforms_components import DateRange
@@ -211,6 +211,9 @@ In the following example we define a start_time field, which does not accept dat
     class EventForm(Form):
         start_time = DateField(
             validators=[DateRange(min=datetime.now())]
+        )
+        start_date = DateField(
+            validators=[DateRange(min=date.today())]
         )
 
 
