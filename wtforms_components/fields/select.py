@@ -5,7 +5,7 @@ from ..widgets import SelectWidget
 
 class SelectField(_SelectField):
     """
-    Add support of ``optgorup``'s' to default WTForms' ``SelectField`` class.
+    Add support of ``optgroup``'s' to default WTForms' ``SelectField`` class.
 
     So, next choices would be supported as well::
 
