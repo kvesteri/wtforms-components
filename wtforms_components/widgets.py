@@ -127,13 +127,6 @@ class WeekInput(HTML5Input):
     input_type = 'week'
 
 
-class RangeInput(HTML5Input):
-    """
-    Renders an input with type "range".
-    """
-    input_type = 'range'
-
-
 class URLInput(HTML5Input):
     """
     Renders an input with type "url".
@@ -219,6 +212,12 @@ class NumberInput(HTML5Input):
 
     def range_validators(self, field):
         return min_max(field, self.range_validator_class)
+
+class RangeInput(NumberInput):
+    """
+    Renders an input with type "range".
+    """
+    input_type = 'range'
 
 
 class ReadOnlyWidgetProxy(object):
