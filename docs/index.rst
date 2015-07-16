@@ -66,11 +66,17 @@ Same applies to IntegerField:
 
 
 
-SelectField
+SelectField & SelectMultipleField
 -----------
 
 WTForms-Components provides enhanced versions of WTForms SelectFields. Both WTForms-Components
-SelectField and SelectFieldMultiple support optgroups.
+SelectField and SelectMultipleField support the following enhancements:
+
+- Ability to generate `optgroup`_ elements.
+- ``choices`` can be a callable, which allows for dynamic choices. With the plain version of WTForms this has to be added manually, after instantiation of the form.
+
+.. _`optgroup`:
+   https://developer.mozilla.org/en-US/docs/Web/HTML/Element/optgroup
 
 PhoneNumberField
 ----------------
