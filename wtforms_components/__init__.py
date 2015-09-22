@@ -86,4 +86,5 @@ def do_nothing(*args, **kwargs):
 def read_only(field):
     field.widget = ReadOnlyWidgetProxy(field.widget)
     field.process = do_nothing
+    field.populate_obj = do_nothing
     return field

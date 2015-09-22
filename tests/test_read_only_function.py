@@ -24,3 +24,17 @@ class TestReadOnlyFunction(FormTestCase):
         read_only(form.name)
         form.process(MultiDict({'name': 'New value'}))
         assert form.name.data == 'Previous value'
+
+    def test_prevents_value_population(self):
+        class MyForm(Form):
+            name = TextField()
+
+        class MyModel(object):
+            pass
+
+        form = MyForm()
+        model = MyModel()
+        form.name.data = 'Existing value'
+        read_only(form.name)
+        form.populate_obj(model)
+        assert not hasattr(model, 'name')
