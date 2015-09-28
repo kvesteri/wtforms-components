@@ -79,6 +79,12 @@ class ModelForm(Form):
         self._obj = obj
 
 
+def do_nothing(*args, **kwargs):
+    pass
+
+
 def read_only(field):
     field.widget = ReadOnlyWidgetProxy(field.widget)
+    field.process = do_nothing
+    field.populate_obj = do_nothing
     return field
