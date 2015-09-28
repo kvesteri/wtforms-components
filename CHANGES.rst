@@ -5,6 +5,13 @@ Here you can see the full list of changes between each WTForms-Components
 release.
 
 
+0.9.8 (2015-09-28)
+^^^^^^^^^^^^^^^^^^
+
+- Added isort and flake8 checks to ensure all code is PEP8 compliant
+- Fields marked read only are no longer processed and populated
+
+
 0.9.7 (2014-12-22)
 ^^^^^^^^^^^^^^^^^^
 

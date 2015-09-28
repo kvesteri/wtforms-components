@@ -29,7 +29,7 @@ from .fields import (
 from .validators import Chain, DateRange, Email, If, TimeRange, Unique
 from .widgets import NumberInput, ReadOnlyWidgetProxy, SelectWidget
 
-__version__ = '0.9.7'
+__version__ = '0.9.8'
 
 
 __all__ = (
