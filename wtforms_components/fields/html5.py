@@ -25,8 +25,19 @@ class DecimalField(html5.DecimalField):
 
 
 class DateTimeLocalField(html5.DateTimeField):
-    def __init__(self, label=None, validators=None, format='%Y-%m-%dT%H:%M:%S', **kwargs):
-        super(DateTimeLocalField, self).__init__(label, validators, format, **kwargs)
+    def __init__(
+        self,
+        label=None,
+        validators=None,
+        format='%Y-%m-%dT%H:%M:%S',
+        **kwargs
+    ):
+        super(DateTimeLocalField, self).__init__(
+            label,
+            validators,
+            format,
+            **kwargs
+        )
     widget = DateTimeLocalInput()
 
 
