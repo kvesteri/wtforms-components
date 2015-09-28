@@ -1,7 +1,8 @@
 from wtforms import Form
-from wtforms_components import PassiveHiddenField
 from wtforms_test import FormTestCase
+
 from tests import MultiDict
+from wtforms_components import PassiveHiddenField
 
 
 class TestPassiveHiddenField(FormTestCase):

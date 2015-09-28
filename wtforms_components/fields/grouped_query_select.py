@@ -1,10 +1,11 @@
 from itertools import groupby
+
 import six
 from sqlalchemy.orm.util import identity_key
 from wtforms.validators import ValidationError
 
-from .select import SelectField
 from ..widgets import SelectWidget
+from .select import SelectField
 
 
 def get_pk_from_identity(obj):

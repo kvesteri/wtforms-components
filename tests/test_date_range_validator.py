@@ -1,9 +1,11 @@
 from datetime import date
-from wtforms_components import DateRange
-from wtforms_test import FormTestCase
+
 from wtforms import Form
 from wtforms.fields import DateField
+from wtforms_test import FormTestCase
+
 from tests import MultiDict
+from wtforms_components import DateRange
 
 
 class TestDateRangeValidator(FormTestCase):

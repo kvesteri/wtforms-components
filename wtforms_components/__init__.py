@@ -1,4 +1,5 @@
 from wtforms import Form
+
 from .fields import (
     ColorField,
     DateField,
@@ -25,9 +26,8 @@ from .fields import (
     TimeField,
     WeekDaysField
 )
-from .validators import DateRange, Unique, If, Chain, Email, TimeRange
-from .widgets import ReadOnlyWidgetProxy, NumberInput, SelectWidget
-
+from .validators import Chain, DateRange, Email, If, TimeRange, Unique
+from .widgets import NumberInput, ReadOnlyWidgetProxy, SelectWidget
 
 __version__ = '0.9.7'
 

@@ -1,6 +1,7 @@
 from datetime import datetime
-from wtforms_components import DateTimeLocalField, DateRange
-from tests import MultiDict, FieldTestCase
+
+from tests import FieldTestCase, MultiDict
+from wtforms_components import DateRange, DateTimeLocalField
 
 
 class TestDateTimeLocalField(FieldTestCase):

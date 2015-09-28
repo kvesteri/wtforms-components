@@ -1,8 +1,10 @@
 from datetime import time
-from wtforms_components import TimeRange, TimeField
-from wtforms_test import FormTestCase
+
 from wtforms import Form
+from wtforms_test import FormTestCase
+
 from tests import MultiDict
+from wtforms_components import TimeField, TimeRange
 
 
 class TestTimeRangeValidator(FormTestCase):

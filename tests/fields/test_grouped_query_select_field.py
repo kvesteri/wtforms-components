@@ -1,8 +1,8 @@
 import sqlalchemy as sa
-from wtforms_components import GroupedQuerySelectField
 from wtforms import Form
 
-from tests import MultiDict, DatabaseTestCase
+from tests import DatabaseTestCase, MultiDict
+from wtforms_components import GroupedQuerySelectField
 
 
 class TestGroupedQuerySelectField(DatabaseTestCase):

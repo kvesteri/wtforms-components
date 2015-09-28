@@ -1,4 +1,6 @@
 from .ajax import AjaxField
+from .color import ColorField
+from .grouped_query_select import GroupedQuerySelectField
 from .html5 import (
     DateField,
     DateTimeField,
@@ -9,16 +11,14 @@ from .html5 import (
     IntegerField,
     IntegerSliderField,
     SearchField,
-    StringField,
+    StringField
 )
-from .color import ColorField
-from .grouped_query_select import GroupedQuerySelectField
 from .interval import (
     DateIntervalField,
     DateTimeIntervalField,
     DecimalIntervalField,
     FloatIntervalField,
-    IntIntervalField,
+    IntIntervalField
 )
 from .passive_hidden import PassiveHiddenField
 from .phone_number import PhoneNumberField
@@ -27,7 +27,6 @@ from .select_multiple import SelectMultipleField
 from .split_date_time import SplitDateTimeField
 from .time import TimeField
 from .weekdays import WeekDaysField
-
 
 __all__ = (
     AjaxField,

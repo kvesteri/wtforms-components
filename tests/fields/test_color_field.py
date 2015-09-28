@@ -1,7 +1,8 @@
-from wtforms_components import ColorField
-from wtforms_test import FormTestCase
 from wtforms import Form
+from wtforms_test import FormTestCase
+
 from tests import MultiDict
+from wtforms_components import ColorField
 
 
 class TestColorField(FormTestCase):

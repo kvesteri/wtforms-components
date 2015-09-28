@@ -1,5 +1,6 @@
 from wtforms import SelectField as _SelectField
 from wtforms.validators import ValidationError
+
 from ..widgets import SelectWidget
 
 

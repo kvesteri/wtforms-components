@@ -1,11 +1,12 @@
 from intervals import (
-    DecimalInterval,
-    FloatInterval,
-    IntInterval,
     DateInterval,
     DateTimeInterval,
-    IntervalException
+    DecimalInterval,
+    FloatInterval,
+    IntervalException,
+    IntInterval
 )
+
 from .html5 import StringField
 
 

@@ -1,9 +1,10 @@
-from wtforms_components import If
-from wtforms_test import FormTestCase
 from wtforms import Form
 from wtforms.fields import TextField
 from wtforms.validators import DataRequired
+from wtforms_test import FormTestCase
+
 from tests import MultiDict
+from wtforms_components import If
 
 
 class TestIfValidator(FormTestCase):

@@ -1,10 +1,10 @@
 from datetime import date, datetime, time
 
-from wtforms_components.fields import SplitDateTimeField
 from wtforms import Form
 from wtforms.validators import DataRequired
 
 from tests import MultiDict, SimpleFieldTestCase
+from wtforms_components.fields import SplitDateTimeField
 
 
 class Obj(object):

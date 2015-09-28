@@ -1,5 +1,5 @@
-from .select import SelectField
 from ..widgets import SelectWidget
+from .select import SelectField
 
 
 class SelectMultipleField(SelectField):

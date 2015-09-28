@@ -1,5 +1,5 @@
-from .html5 import StringField
 from ..widgets import ColorInput
+from .html5 import StringField
 
 
 class ColorField(StringField):

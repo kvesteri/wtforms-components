@@ -1,7 +1,8 @@
+from wtforms.validators import NumberRange
+
+from tests import FieldTestCase, MultiDict
 from wtforms_components import DecimalField
 from wtforms_components.widgets import NumberInput
-from wtforms.validators import NumberRange
-from tests import MultiDict, FieldTestCase
 
 
 class TestDecimalField(FieldTestCase):

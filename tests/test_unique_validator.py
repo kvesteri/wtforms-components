@@ -1,13 +1,12 @@
-from pytest import raises, mark
+import sqlalchemy as sa
+from pytest import mark, raises
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
-import sqlalchemy as sa
-
-from tests import MultiDict, DatabaseTestCase
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from wtforms.fields import TextField
-from wtforms_components import ModelForm, Unique
 
+from tests import DatabaseTestCase, MultiDict
+from wtforms_components import ModelForm, Unique
 
 base = declarative_base()
 

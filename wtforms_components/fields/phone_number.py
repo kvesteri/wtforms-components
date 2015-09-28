@@ -1,6 +1,7 @@
-from .html5 import StringField
-from ..widgets import TelInput
 from sqlalchemy_utils import PhoneNumber
+
+from ..widgets import TelInput
+from .html5 import StringField
 
 
 class PhoneNumberField(StringField):

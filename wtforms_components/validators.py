@@ -1,16 +1,18 @@
 from __future__ import absolute_import
+
 from collections import Iterable, Mapping
 
 import six
 from sqlalchemy import Column
 from sqlalchemy.orm.attributes import InstrumentedAttribute
+from wtforms import ValidationError
+from wtforms.validators import StopValidation
+
 try:
     from validators import email
 except ImportError:
     from validators import is_email as email
 
-from wtforms import ValidationError
-from wtforms.validators import StopValidation
 
 
 class ControlStructure(object):

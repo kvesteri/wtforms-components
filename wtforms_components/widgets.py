@@ -1,13 +1,11 @@
 from cgi import escape
 from copy import copy
+
 import six
-from wtforms.widgets import (
-    HTMLString,
-    html_params,
-    Select as _Select
-)
-from wtforms.validators import NumberRange, DataRequired
-from wtforms.widgets import Input
+from wtforms.validators import DataRequired, NumberRange
+from wtforms.widgets import Select as _Select
+from wtforms.widgets import html_params, HTMLString, Input
+
 from .validators import DateRange, TimeRange
 
 

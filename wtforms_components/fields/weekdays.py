@@ -1,6 +1,7 @@
-from .select_multiple import SelectMultipleField
 from sqlalchemy_utils.primitives import WeekDay, WeekDays
-from wtforms.widgets import ListWidget, CheckboxInput
+from wtforms.widgets import CheckboxInput, ListWidget
+
+from .select_multiple import SelectMultipleField
 
 
 class WeekDaysField(SelectMultipleField):

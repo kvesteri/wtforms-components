@@ -1,9 +1,9 @@
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
-from wtforms_test import FormTestCase
+from sqlalchemy.orm import sessionmaker
 from wtforms import Form
 from wtforms.validators import DataRequired
+from wtforms_test import FormTestCase
 
 
 class MultiDict(dict):

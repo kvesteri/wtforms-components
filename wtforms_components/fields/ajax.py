@@ -1,16 +1,17 @@
 # -*- coding: utf-8 -*-
 import operator
 
+import six
+from wtforms import fields, widgets
+from wtforms.ext.sqlalchemy.fields import get_pk_from_identity
+from wtforms.validators import ValidationError
+
 anyjson = None
 try:
     import anyjson
 except ImportError:
     pass
 
-import six
-from wtforms import fields, widgets
-from wtforms.validators import ValidationError
-from wtforms.ext.sqlalchemy.fields import get_pk_from_identity
 
 
 class ImproperlyConfigured(Exception):

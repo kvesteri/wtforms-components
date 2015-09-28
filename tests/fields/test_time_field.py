@@ -1,6 +1,7 @@
 from datetime import time
+
+from tests import FieldTestCase, MultiDict
 from wtforms_components import TimeField, TimeRange
-from tests import MultiDict, FieldTestCase
 
 
 class TestTimeField(FieldTestCase):

@@ -1,6 +1,7 @@
-from wtforms_components import IntegerField
 from wtforms.validators import NumberRange
-from tests import MultiDict, FieldTestCase
+
+from tests import FieldTestCase, MultiDict
+from wtforms_components import IntegerField
 
 
 class TestIntegerField(FieldTestCase):

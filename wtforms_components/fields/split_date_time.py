@@ -1,13 +1,16 @@
 import datetime
+
 from wtforms import Form
 from wtforms.fields import FormField
+
+from .html5 import DateField
+from .time import TimeField
+
 try:
     from wtforms.utils import unset_value as _unset_value
 except ImportError:
     from wtforms.fields import _unset_value
 
-from .html5 import DateField
-from .time import TimeField
 
 
 class Date():

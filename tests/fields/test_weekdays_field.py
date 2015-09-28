@@ -1,5 +1,5 @@
-from wtforms_components import WeekDaysField
 from tests import MultiDict, SimpleFieldTestCase
+from wtforms_components import WeekDaysField
 
 
 class TestWeekDaysField(SimpleFieldTestCase):
