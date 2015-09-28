@@ -14,7 +14,6 @@ except ImportError:
     from validators import is_email as email
 
 
-
 class ControlStructure(object):
     """
     Base object for validator control structures

@@ -12,7 +12,6 @@ except ImportError:
     from wtforms.fields import _unset_value
 
 
-
 class Date():
     date = None
     time = None

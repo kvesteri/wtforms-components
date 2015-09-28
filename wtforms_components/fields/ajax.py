@@ -13,7 +13,6 @@ except ImportError:
     pass
 
 
-
 class ImproperlyConfigured(Exception):
     pass
 
