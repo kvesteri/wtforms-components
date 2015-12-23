@@ -73,7 +73,7 @@ setup(
         '#egg=phonenumbers3k-5.6b1',
     ],
     install_requires=[
-        'WTForms>=1.0.4',
+        'WTForms >= 1.0.4, < 3',
         'SQLAlchemy>=0.8.0',
         'SQLAlchemy-Utils>=0.23.0',
         'six>=1.4.1',
