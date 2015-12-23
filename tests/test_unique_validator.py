@@ -2,6 +2,7 @@ import sqlalchemy as sa
 from pytest import mark, raises
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
+from wtforms import Form
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from wtforms.fields import TextField
 
@@ -335,6 +336,19 @@ class TestUniqueValidator(DatabaseTestCase):
         User.query = self.session.query(User)
 
         class MyForm(ModelForm):
+            name = TextField(
+                validators=[Unique(
+                    User.name,
+                )]
+            )
+
+        form = MyForm(MultiDict({'name': u'someone'}))
+        assert form.validate()
+
+    def test_supports_naked_wtforms_form(self):
+        User.query = self.session.query(User)
+
+        class MyForm(Form):
             name = TextField(
                 validators=[Unique(
                     User.name,
