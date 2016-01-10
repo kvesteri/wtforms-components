@@ -32,8 +32,7 @@ extras_require = {
         'psycopg2>=2.4.6',
         'WTForms-Test>=0.1.1',
         'flake8>=2.4.0',
-        'isort==3.9.6',
-        'natsort==3.5.6'
+        'isort>=4.2.2',
     ],
     'babel': ['Babel>=1.3'],
     'arrow': ['arrow>=0.3.4'],
