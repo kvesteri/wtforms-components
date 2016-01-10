@@ -239,7 +239,14 @@ class Unique(object):
             query = query.filter(column == form[field_name].data)
         obj = query.first()
 
-        if not hasattr(form, '_obj') or (obj and not form._obj == obj):
+        if not hasattr(form, '_obj'):
+            raise Exception(
+                "Couldn't access Form._obj attribute. Either make your form "
+                "inherit WTForms-Alchemy ModelForm or WTForms-Components "
+                "ModelForm or make this attribute available in your form."
+            )
+
+        if obj and not form._obj == obj:
             if self.message is None:
                 self.message = field.gettext(u'Already exists.')
             raise ValidationError(self.message)

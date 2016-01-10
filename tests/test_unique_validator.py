@@ -2,6 +2,7 @@ import sqlalchemy as sa
 from pytest import mark, raises
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
+from wtforms import Form
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from wtforms.fields import TextField
 
@@ -47,6 +48,19 @@ class TestUniqueValidator(DatabaseTestCase):
         form.Meta.model = User
         result = validator._syntaxes_as_tuples(form, form.name, column)
         assert result == expected_dict
+
+    def test_with_form_obj_unavailable(self):
+        class MyForm(Form):
+            name = TextField(
+                validators=[
+                    Unique(User.name, get_session=lambda: self.session)
+                ]
+            )
+
+        form = MyForm()
+        with raises(Exception) as e:
+            form.validate()
+        assert "Couldn't access Form._obj attribute" in str(e)
 
     @mark.parametrize(['column', 'expected_dict'], (
         (User.name, (('name', User.name),)),

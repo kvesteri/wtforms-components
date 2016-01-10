@@ -5,6 +5,12 @@ Here you can see the full list of changes between each WTForms-Components
 release.
 
 
+0.9.9 (2016-01-10)
+^^^^^^^^^^^^^^^^^^
+
+- Added sane error handling with Unique validator when Form is missing `_obj` attribute (#34)
+
+
 0.9.8 (2015-09-28)
 ^^^^^^^^^^^^^^^^^^
 
