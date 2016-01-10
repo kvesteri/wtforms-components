@@ -239,7 +239,7 @@ class Unique(object):
             query = query.filter(column == form[field_name].data)
         obj = query.first()
 
-        if not hasattr(form, '_obj') or (obj and not form._obj == obj):
+        if obj and obj != getattr(form, '_obj', None):
             if self.message is None:
                 self.message = field.gettext(u'Already exists.')
             raise ValidationError(self.message)
