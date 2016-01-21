@@ -5,8 +5,10 @@ import six
 from wtforms import fields, widgets
 from wtforms.validators import ValidationError
 
-try: from wtforms.ext.sqlalchemy.fields import get_pk_from_identity
-except ImportError: from wtforms_sqlalchemy.fields import get_pk_from_identity
+try:
+    from wtforms.ext.sqlalchemy.fields import get_pk_from_identity
+except ImportError:
+    from wtforms_sqlalchemy.fields import get_pk_from_identity
 
 anyjson = None
 try:
