@@ -102,11 +102,12 @@ class TestSelectField(FormTestCase):
         )
 
     def test_callable_option_selected_by_field_default_value(self):
-        choices = lambda: [
-            ('apple', 'Apple'),
-            ('peach', 'Peach'),
-            ('pear', 'Pear')
-        ]
+        def choices():
+            return [
+                ('apple', 'Apple'),
+                ('peach', 'Peach'),
+                ('pear', 'Pear')
+            ]
         form_class = self.init_form(
             choices=choices, default='pear'
         )
