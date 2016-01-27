@@ -33,7 +33,7 @@ class IntervalField(StringField):
                 self.data = None
             else:
                 try:
-                    self.data = self.interval_class(valuelist[0])
+                    self.data = self.interval_class.from_string(valuelist[0])
                 except IntervalException:
                     self.data = None
                     raise ValueError(self.gettext(self.error_msg))
