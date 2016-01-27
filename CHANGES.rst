@@ -9,6 +9,7 @@ release.
 ^^^^^^^^^^^^^^^^^^^
 
 - Move GroupedQuerySelectField to WTForms-Alchemy
+- Move PhoneNumber to WTForms-Alchemy
 - Move WeekdaysField to WTForms-Alchemy
 - Remove AJAXField dependency on SQLAlchemy-Utils
 

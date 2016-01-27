@@ -21,12 +21,10 @@ from .interval import (
     IntIntervalField
 )
 from .passive_hidden import PassiveHiddenField
-from .phone_number import PhoneNumberField
 from .select import SelectField
 from .select_multiple import SelectMultipleField
 from .split_date_time import SplitDateTimeField
 from .time import TimeField
-from .weekdays import WeekDaysField
 
 __all__ = (
     AjaxField,
@@ -41,17 +39,14 @@ __all__ = (
     DecimalSliderField,
     EmailField,
     FloatIntervalField,
-    GroupedQuerySelectField,
     IntegerField,
     IntegerSliderField,
     IntIntervalField,
     PassiveHiddenField,
-    PhoneNumberField,
     SearchField,
     SelectField,
     SelectMultipleField,
     SplitDateTimeField,
     StringField,
     TimeField,
-    WeekDaysField
 )

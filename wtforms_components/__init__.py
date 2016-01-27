@@ -12,24 +12,21 @@ from .fields import (
     DecimalSliderField,
     EmailField,
     FloatIntervalField,
-    GroupedQuerySelectField,
     IntegerField,
     IntegerSliderField,
     IntIntervalField,
     PassiveHiddenField,
-    PhoneNumberField,
     SearchField,
     SelectField,
     SelectMultipleField,
     SplitDateTimeField,
     StringField,
-    TimeField,
-    WeekDaysField
+    TimeField
 )
 from .validators import Chain, DateRange, Email, If, TimeRange, Unique
 from .widgets import NumberInput, ReadOnlyWidgetProxy, SelectWidget
 
-__version__ = '0.9.9'
+__version__ = '0.10.0'
 
 
 __all__ = (
@@ -47,14 +44,12 @@ __all__ = (
     Email,
     EmailField,
     FloatIntervalField,
-    GroupedQuerySelectField,
     If,
     IntegerField,
     IntegerSliderField,
     IntIntervalField,
     NumberInput,
     PassiveHiddenField,
-    PhoneNumberField,
     SearchField,
     SelectField,
     SelectMultipleField,
@@ -63,8 +58,7 @@ __all__ = (
     StringField,
     TimeField,
     TimeRange,
-    Unique,
-    WeekDaysField
+    Unique
 )
 
 
