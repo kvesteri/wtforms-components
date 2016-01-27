@@ -23,7 +23,7 @@ from .fields import (
     StringField,
     TimeField
 )
-from .validators import Chain, DateRange, Email, If, TimeRange, Unique
+from .validators import Chain, DateRange, Email, If, TimeRange
 from .widgets import NumberInput, ReadOnlyWidgetProxy, SelectWidget
 
 __version__ = '0.10.0'
@@ -57,8 +57,7 @@ __all__ = (
     SplitDateTimeField,
     StringField,
     TimeField,
-    TimeRange,
-    Unique
+    TimeRange
 )
 
 

@@ -1,6 +1,5 @@
 from .ajax import AjaxField
 from .color import ColorField
-from .grouped_query_select import GroupedQuerySelectField
 from .html5 import (
     DateField,
     DateTimeField,
