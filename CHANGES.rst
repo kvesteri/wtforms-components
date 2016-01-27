@@ -5,6 +5,13 @@ Here you can see the full list of changes between each WTForms-Components
 release.
 
 
+0.10.0 (2016-01-27)
+^^^^^^^^^^^^^^^^^^^
+
+- Move GroupedQuerySelectField to WTForms-Alchemy
+- Remove AJAXField dependency on SQLAlchemy-Utils
+
+
 0.9.9 (2016-01-10)
 ^^^^^^^^^^^^^^^^^^
 

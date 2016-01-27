@@ -3,7 +3,6 @@ import operator
 
 import six
 from wtforms import fields, widgets
-from wtforms.ext.sqlalchemy.fields import get_pk_from_identity
 from wtforms.validators import ValidationError
 
 anyjson = None
@@ -43,10 +42,7 @@ class AjaxField(fields.Field):
         if data_url is None:
             raise Exception('data_url must be given')
 
-        if get_pk is None:
-            self.get_pk = get_pk_from_identity
-        else:
-            self.get_pk = get_pk
+        self.get_pk = get_pk
 
         if get_label is None:
             self.get_label = lambda x: x
