@@ -5,14 +5,17 @@ Here you can see the full list of changes between each WTForms-Components
 release.
 
 
-0.10.0 (2016-01-27)
+0.10.0 (2016-01-28)
 ^^^^^^^^^^^^^^^^^^^
 
-- Move GroupedQuerySelectField to WTForms-Alchemy
-- Move PhoneNumber to WTForms-Alchemy
-- Move WeekdaysField to WTForms-Alchemy
-- Move Unique validator to WTForms-Alchemy
+- Moved GroupedQuerySelectField to WTForms-Alchemy
+- Moved PhoneNumber to WTForms-Alchemy
+- Moved WeekdaysField to WTForms-Alchemy
+- Moved Unique validator to WTForms-Alchemy
 - Remove AJAXField dependency on SQLAlchemy-Utils
+- Added PyPy support
+- Fixed IntervalFields to work with intervals 0.6.0
+- Updated intervals requirement to 0.6.0
 
 
 0.9.9 (2016-01-10)

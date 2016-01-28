@@ -24,20 +24,12 @@ def get_version():
 
 extras_require = {
     'test': [
-        'pytest==2.2.3',
-        'Pygments>=1.2',
-        'Jinja2>=2.3',
-        'docutils>=0.10',
+        'pytest>=2.2.3',
         'flexmock>=0.9.7',
-        'psycopg2>=2.4.6',
         'WTForms-Test>=0.1.1',
         'flake8>=2.4.0',
         'isort>=4.2.2',
     ],
-    'babel': ['Babel>=1.3'],
-    'arrow': ['arrow>=0.3.4'],
-    'phone': ['phonenumbers>=5.9.2'],
-    'password': ['passlib >= 1.6, < 2.0'],
     'color': ['colour>=0.0.4'],
     'ipaddress': ['ipaddr'] if not PY3 else [],
     'timezone': ['python-dateutil'],
@@ -75,7 +67,7 @@ setup(
         'WTForms>=1.0.4',
         'six>=1.4.1',
         'validators>=0.5.0',
-        'intervals>=0.2.0'
+        'intervals>=0.6.0'
     ],
     extras_require=extras_require,
     classifiers=[
@@ -84,6 +76,14 @@ setup(
         'License :: OSI Approved :: BSD License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
+        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.3',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: Implementation :: CPython',
+        'Programming Language :: Python :: Implementation :: PyPy',
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
         'Topic :: Software Development :: Libraries :: Python Modules'
     ]
