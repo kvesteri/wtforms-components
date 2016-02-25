@@ -12,6 +12,7 @@ from .fields import (
     DecimalSliderField,
     EmailField,
     FloatIntervalField,
+    GenderField,
     IntegerField,
     IntegerSliderField,
     IntIntervalField,

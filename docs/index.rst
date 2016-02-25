@@ -102,6 +102,12 @@ code and display format as parameters.
         )
 
 
+GenderField
+-----------
+
+.. automodule:: wtforms_components.fields.gender
+
+
 ColorField
 ----------
 
