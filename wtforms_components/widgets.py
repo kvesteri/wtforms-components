@@ -306,4 +306,6 @@ class GenderWidget(_Select):
             kwargs.setdefault('type', 'text')
             if 'value' not in kwargs:
                 kwargs['value'] = field._value()
-            return HTMLString('<input %s>' % html_params(name=field.name, **kwargs))
+            return HTMLString('<input %s>' % html_params(
+                name=field.name, **kwargs
+            ))

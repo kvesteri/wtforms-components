@@ -45,6 +45,7 @@ __all__ = (
     Email,
     EmailField,
     FloatIntervalField,
+    GenderField,
     If,
     IntegerField,
     IntegerSliderField,

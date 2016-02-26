@@ -14,7 +14,8 @@ Simple example::
 
 To make this field fully functional, you should also add some Javascript to
 the page so that when the user selects a non-binary gender, the user is able
-to type in their own gender identity. Here is an example script that you can use:
+to type in their own gender identity.
+Here is an example script that you can use:
 
 .. code-block:: javascript
 
@@ -77,13 +78,14 @@ To change these options, pass a list of value-label pairs to the
     class UserProfileForm(Form):
         gender = GenderField(simple_genders=simple_genders)
 
-By default, the "Non-Binary" option includes a ``data-render-as-text`` attribute,
-which indicates to the Javascript on the page that when the user selects this
-option, the ``<select>`` element should transform into an ``<input type="text">``
-element so that the user can input an arbitrary gender identity. To change
-which option (or options) include this attribute, pass a list of values to
-the ``render_as_text`` parameter when creating this field. For example, to
-replace the word "Non-binary" with "Genderqueer", you could do the following::
+By default, the "Non-Binary" option includes a ``data-render-as-text``
+attribute, which indicates to the Javascript on the page that when the
+user selects this option, the ``<select>`` element should transform into
+an ``<input type="text">`` element so that the user can input an
+arbitrary gender identity. To change which option (or options) include
+this attribute, pass a list of values to the ``render_as_text`` parameter
+when creating this field. For example, to replace the word "Non-binary"
+with "Genderqueer", you could do the following::
 
     simple_genders = (
         ('', "Not Specified"),

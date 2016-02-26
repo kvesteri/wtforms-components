@@ -1,6 +1,4 @@
-import pytest
 from wtforms import Form
-from wtforms_test import FormTestCase
 
 from tests import MultiDict
 from wtforms_components import GenderField
@@ -14,10 +12,10 @@ def test_no_value():
     gender_html = form.gender()
     expected_html = (
         '<select id="gender" name="gender">'
-            '<option value="">Not Specified</option>'
-            '<option value="male">Male</option>'
-            '<option value="female">Female</option>'
-            '<option data-render-as-text value="non-binary">Non-binary</option>'
+          '<option value="">Not Specified</option>'  # noqa
+          '<option value="male">Male</option>'
+          '<option value="female">Female</option>'
+          '<option data-render-as-text value="non-binary">Non-binary</option>'
         '</select>'
     )
     assert gender_html == expected_html
@@ -33,10 +31,10 @@ def test_male_value():
     gender_html = form.gender()
     expected_html = (
         '<select id="gender" name="gender">'
-            '<option value="">Not Specified</option>'
-            '<option selected value="male">Male</option>'
-            '<option value="female">Female</option>'
-            '<option data-render-as-text value="non-binary">Non-binary</option>'
+          '<option value="">Not Specified</option>'  # noqa
+          '<option selected value="male">Male</option>'
+          '<option value="female">Female</option>'
+          '<option data-render-as-text value="non-binary">Non-binary</option>'
         '</select>'
     )
     assert gender_html == expected_html
@@ -52,10 +50,10 @@ def test_female_value():
     gender_html = form.gender()
     expected_html = (
         '<select id="gender" name="gender">'
-            '<option value="">Not Specified</option>'
-            '<option value="male">Male</option>'
-            '<option selected value="female">Female</option>'
-            '<option data-render-as-text value="non-binary">Non-binary</option>'
+          '<option value="">Not Specified</option>'  # noqa
+          '<option value="male">Male</option>'
+          '<option selected value="female">Female</option>'
+          '<option data-render-as-text value="non-binary">Non-binary</option>'
         '</select>'
     )
     assert gender_html == expected_html
@@ -105,11 +103,11 @@ def test_customizable_simple_values():
     gender_html = form.gender()
     expected_html = (
         '<select id="gender" name="gender">'
-            '<option value="">Not Specified</option>'
-            '<option value="female">Female</option>'
-            '<option value="male">Male</option>'
-            '<option value="trans">Transgender</option>'
-            '<option data-render-as-text value="non-binary">Custom</option>'
+          '<option value="">Not Specified</option>'  # noqa
+          '<option value="female">Female</option>'
+          '<option value="male">Male</option>'
+          '<option value="trans">Transgender</option>'
+          '<option data-render-as-text value="non-binary">Custom</option>'
         '</select>'
     )
     assert gender_html == expected_html
@@ -133,11 +131,11 @@ def test_customizable_simple_value_selected():
     gender_html = form.gender()
     expected_html = (
         '<select id="gender" name="gender">'
-            '<option value="">Not Specified</option>'
-            '<option value="female">Female</option>'
-            '<option value="male">Male</option>'
-            '<option selected value="trans">Transgender</option>'
-            '<option data-render-as-text value="non-binary">Custom</option>'
+          '<option value="">Not Specified</option>'  # noqa
+          '<option value="female">Female</option>'
+          '<option value="male">Male</option>'
+          '<option selected value="trans">Transgender</option>'
+          '<option data-render-as-text value="non-binary">Custom</option>'
         '</select>'
     )
     assert gender_html == expected_html
