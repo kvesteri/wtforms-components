@@ -32,7 +32,7 @@ class TimeField(Field):
             time_str = ' '.join(valuelist)
             try:
                 self.data = datetime.time(
-                    *time.strptime(time_str, self.format)[3:5]
+                    *time.strptime(time_str, self.format)[3:6]
                 )
             except ValueError:
                 self.data = None

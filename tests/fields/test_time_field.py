@@ -53,3 +53,21 @@ class TestTimeField(FieldTestCase):
             '<input id="test_field" name="test_field"'
             ' type="time" value="00:00">'
         )
+
+
+class TestTimeFieldWithSeconds(TestTimeField):
+    def setup_method(self, method):
+        self.valid_times = [
+            '00:00:00',
+            '11:11:11',
+            '12:15:17'
+        ]
+        self.invalid_times = [
+            '00:61',
+            '01:01:61',
+            'unknown',
+        ]
+
+    def init_form(self, **kwargs):
+        kwargs['format'] = '%H:%M:%S'
+        return super(TestTimeFieldWithSeconds, self).init_form(**kwargs)
