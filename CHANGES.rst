@@ -5,6 +5,12 @@ Here you can see the full list of changes between each WTForms-Components
 release.
 
 
+0.10.2 (2016-12-05)
+^^^^^^^^^^^^^^^^^^^
+
+- Made read_only also add disabled attribute (#51, pull request courtesy quantus)
+
+
 0.10.1 (2016-11-22)
 ^^^^^^^^^^^^^^^^^^^
 
