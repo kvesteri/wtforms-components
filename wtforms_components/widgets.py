@@ -228,6 +228,9 @@ class ReadOnlyWidgetProxy(object):
 
     def __call__(self, field, **kwargs):
         kwargs.setdefault('readonly', True)
+        # Some html elements also need disabled attribute to achieve the
+        # expected UI behaviour.
+        kwargs.setdefault('disabled', True)
         return self.widget(field, **kwargs)
 
 
