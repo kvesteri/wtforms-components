@@ -259,11 +259,15 @@ class SelectWidget(_Select):
         if isinstance(label, (list, tuple)):
             return cls.render_optgroup(value, label, mixed)
 
-        coerce_func, data = mixed
-        if isinstance(data, list) or isinstance(data, tuple):
-            selected = coerce_func(value) in data
+        try:
+            coerce_func, data = mixed
+        except TypeError:
+            selected = mixed
         else:
-            selected = coerce_func(value) == data
+            if isinstance(data, list) or isinstance(data, tuple):
+                selected = coerce_func(value) in data
+            else:
+                selected = coerce_func(value) == data
 
         options = {'value': value}
 
