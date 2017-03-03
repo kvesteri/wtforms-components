@@ -5,6 +5,12 @@ Here you can see the full list of changes between each WTForms-Components
 release.
 
 
+0.10.3 (2017-03-03)
+^^^^^^^^^^^^^^^^^^^
+
+- Make SelectWidget backwards compatible (#52, pull request courtesy tvuotila)
+
+
 0.10.2 (2016-12-05)
 ^^^^^^^^^^^^^^^^^^^
 
