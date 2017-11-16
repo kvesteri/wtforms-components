@@ -141,7 +141,7 @@ class URLInput(HTML5Input):
 
 class ColorInput(HTML5Input):
     """
-    Renders an input with type "tel".
+    Renders an input with type "color".
     """
     input_type = 'color'
 
