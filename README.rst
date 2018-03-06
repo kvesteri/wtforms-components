@@ -15,7 +15,7 @@ Resources
 
 .. |Build Status| image:: https://travis-ci.org/kvesteri/wtforms-components.png?branch=master
    :target: https://travis-ci.org/kvesteri/wtforms-components
-.. |Version Status| image:: https://pypip.in/v/WTForms-Components/badge.png
+.. |Version Status| image:: https://img.shields.io/pypi/v/WTForms-Components.svg
    :target: https://crate.io/packages/WTForms-Components/
-.. |Downloads| image:: https://pypip.in/d/WTForms-Components/badge.png
+.. |Downloads| image:: https://img.shields.io/pypi/dm/WTForms-Components.svg
    :target: https://crate.io/packages/WTForms-Components/
