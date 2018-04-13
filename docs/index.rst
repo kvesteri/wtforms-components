@@ -97,7 +97,7 @@ code and display format as parameters.
 
     class UserForm(Form):
         phone_number = PhoneNumberField(
-            country_code='FI'
+            country_code='FI',
             display_format='national'
         )
 
