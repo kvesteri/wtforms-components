@@ -81,25 +81,10 @@ SelectField and SelectMultipleField support the following enhancements:
 PhoneNumberField
 ----------------
 
-PhoneNumberField is a string field representing a PhoneNumber object from
-`SQLAlchemy-Utils`_.
+Older versions of WTForms-Components had a PhoneNumberField. As of version 0.10.0 this field has now been moved to `WTForms-Alchemy`_.
 
-.. _SQLAlchemy-Utils:
-   https://github.com/kvesteri/sqlalchemy-utils
-
-The following example shows that the field takes the phone number's country
-code and display format as parameters.
-::
-
-
-    from wtforms import Form
-    from wtforms_components import PhoneNumberField
-
-    class UserForm(Form):
-        phone_number = PhoneNumberField(
-            country_code='FI'
-            display_format='national'
-        )
+.. _WTForms-Alchemy:
+   https://github.com/kvesteri/wtforms-alchemy
 
 
 ColorField
