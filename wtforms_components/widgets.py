@@ -1,4 +1,3 @@
-from cgi import escape
 from copy import copy
 
 import six
@@ -6,6 +5,7 @@ from wtforms.validators import DataRequired, NumberRange
 from wtforms.widgets import Select as _Select
 from wtforms.widgets import html_params, HTMLString, Input
 
+from ._compat import html_escape
 from .validators import DateRange, TimeRange
 
 
@@ -247,7 +247,7 @@ class SelectWidget(_Select):
             children.append(item_html)
 
         html = u'<optgroup label="%s">%s</optgroup>'
-        data = (escape(six.text_type(value)), u'\n'.join(children))
+        data = (html_escape(six.text_type(value)), u'\n'.join(children))
         return HTMLString(html % data)
 
     @classmethod
@@ -275,6 +275,6 @@ class SelectWidget(_Select):
             options['selected'] = True
 
         html = u'<option %s>%s</option>'
-        data = (html_params(**options), escape(six.text_type(label)))
+        data = (html_params(**options), html_escape(six.text_type(label)))
 
         return HTMLString(html % data)
