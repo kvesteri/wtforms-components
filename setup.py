@@ -5,11 +5,11 @@ WTForms-Components
 Additional fields, validators and widgets for WTForms.
 """
 
-from setuptools import setup
 import os
 import re
 import sys
 
+from setuptools import setup
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 PY3 = sys.version_info[0] == 3

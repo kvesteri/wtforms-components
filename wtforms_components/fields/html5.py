@@ -1,5 +1,5 @@
-from wtforms.fields import StringField as _StringField
 from wtforms.fields import html5
+from wtforms.fields import StringField as _StringField
 
 from ..widgets import (
     DateInput,
