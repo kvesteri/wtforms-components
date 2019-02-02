@@ -5,11 +5,11 @@ WTForms-Components
 Additional fields, validators and widgets for WTForms.
 """
 
-from setuptools import setup
 import os
 import re
 import sys
 
+from setuptools import setup
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 PY3 = sys.version_info[0] == 3
@@ -74,10 +74,10 @@ setup(
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: Implementation :: CPython',
         'Programming Language :: Python :: Implementation :: PyPy',
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',

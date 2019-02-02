@@ -3,8 +3,8 @@ from copy import copy
 
 import six
 from wtforms.validators import DataRequired, NumberRange
-from wtforms.widgets import Select as _Select
 from wtforms.widgets import html_params, HTMLString, Input
+from wtforms.widgets import Select as _Select
 
 from .validators import DateRange, TimeRange
 
