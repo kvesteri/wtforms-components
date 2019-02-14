@@ -5,11 +5,11 @@ WTForms-Components
 Additional fields, validators and widgets for WTForms.
 """
 
-from setuptools import setup
 import os
 import re
 import sys
 
+from setuptools import setup
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 PY3 = sys.version_info[0] == 3
@@ -58,11 +58,6 @@ setup(
     zip_safe=False,
     include_package_data=True,
     platforms='any',
-    dependency_links=[
-        # 5.6b1 only supports python 3.x / pending release
-        'git+git://github.com/daviddrysdale/python-phonenumbers.git@python3'
-        '#egg=phonenumbers3k-5.6b1',
-    ],
     install_requires=[
         'WTForms>=1.0.4',
         'six>=1.4.1',
@@ -79,7 +74,6 @@ setup(
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
