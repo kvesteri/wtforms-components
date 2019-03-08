@@ -21,7 +21,8 @@ from .fields import (
     SelectMultipleField,
     SplitDateTimeField,
     StringField,
-    TimeField
+    TimeField,
+    JSONField
 )
 from .validators import Chain, DateRange, Email, If, TimeRange
 from .widgets import NumberInput, ReadOnlyWidgetProxy, SelectWidget
@@ -57,7 +58,8 @@ __all__ = (
     SplitDateTimeField,
     StringField,
     TimeField,
-    TimeRange
+    TimeRange,
+    JSONField
 )
 
 
