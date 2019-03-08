@@ -1,4 +1,4 @@
-from tests import SimpleFieldTestCase, MultiDict
+from tests import MultiDict, SimpleFieldTestCase
 from wtforms_components import JSONField
 
 

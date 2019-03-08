@@ -1,9 +1,9 @@
 import json
-from wtforms import widgets
-from wtforms.fields import StringField
+
+from wtforms import fields, widgets
 
 
-class JSONField(StringField):
+class JSONField(fields.StringField):
     """
     A text field which stores a `json`.
     """

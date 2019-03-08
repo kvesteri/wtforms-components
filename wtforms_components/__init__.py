@@ -15,14 +15,14 @@ from .fields import (
     IntegerField,
     IntegerSliderField,
     IntIntervalField,
+    JSONField,
     PassiveHiddenField,
     SearchField,
     SelectField,
     SelectMultipleField,
     SplitDateTimeField,
     StringField,
-    TimeField,
-    JSONField
+    TimeField
 )
 from .validators import Chain, DateRange, Email, If, TimeRange
 from .widgets import NumberInput, ReadOnlyWidgetProxy, SelectWidget
