@@ -19,12 +19,12 @@ from .interval import (
     FloatIntervalField,
     IntIntervalField
 )
+from .json_field import JSONField
 from .passive_hidden import PassiveHiddenField
 from .select import SelectField
 from .select_multiple import SelectMultipleField
 from .split_date_time import SplitDateTimeField
 from .time import TimeField
-from .json_field import JSONField
 
 __all__ = (
     AjaxField,
@@ -42,12 +42,12 @@ __all__ = (
     IntegerField,
     IntegerSliderField,
     IntIntervalField,
+    JSONField,
     PassiveHiddenField,
     SearchField,
     SelectField,
     SelectMultipleField,
     SplitDateTimeField,
     StringField,
-    TimeField,
-    JSONField
+    TimeField
 )

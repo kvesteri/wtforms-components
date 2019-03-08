@@ -49,6 +49,7 @@ __all__ = (
     IntegerField,
     IntegerSliderField,
     IntIntervalField,
+    JSONField,
     NumberInput,
     PassiveHiddenField,
     SearchField,
@@ -58,8 +59,7 @@ __all__ = (
     SplitDateTimeField,
     StringField,
     TimeField,
-    TimeRange,
-    JSONField
+    TimeRange
 )
 
 

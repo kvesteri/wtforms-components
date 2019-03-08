@@ -1,6 +1,6 @@
-from wtforms.fields import StringField
-from wtforms import widgets
 import json
+from wtforms import widgets
+from wtforms.fields import StringField
 
 
 class JSONField(StringField):
