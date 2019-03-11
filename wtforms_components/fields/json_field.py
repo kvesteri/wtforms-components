@@ -9,9 +9,6 @@ class JSONField(fields.StringField):
     """
     widget = widgets.TextArea()
 
-    def __init__(self, label=None, validators=None, **kwargs):
-        super(JSONField, self).__init__(label, validators, **kwargs)
-
     def _value(self):
         return json.dumps(self.data) if self.data else ''
 
