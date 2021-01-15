@@ -1,3 +1,5 @@
+from copy import copy
+
 from wtforms import SelectField as _SelectField
 from wtforms.validators import ValidationError
 
@@ -26,6 +28,14 @@ class SelectField(_SelectField):
     Also supports lazy choices (callables that return an iterable)
     """
     widget = SelectWidget()
+
+    def __init__(self, *args, **kwargs):
+        choices = kwargs.pop('choices', None)
+        if callable(choices):
+            super(SelectField, self).__init__(*args, **kwargs)
+            self.choices = copy(choices)
+        else:
+            super(SelectField, self).__init__(*args, choices=choices, **kwargs)
 
     def iter_choices(self):
         """

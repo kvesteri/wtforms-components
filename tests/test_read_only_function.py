@@ -1,9 +1,13 @@
 from wtforms import Form
-from wtforms.fields import TextField
 from wtforms_test import FormTestCase
 
 from tests import MultiDict
 from wtforms_components import read_only
+
+try:
+    from wtforms.fields import TextField
+except ImportError:  # wtforms3
+    from wtforms.fields import StringField as TextField
 
 
 class TestReadOnlyFunction(FormTestCase):
