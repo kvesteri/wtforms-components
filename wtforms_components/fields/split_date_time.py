@@ -28,7 +28,7 @@ class SplitDateTimeField(FormField):
             **kwargs
         )
 
-    def process(self, formdata, data=_unset_value):
+    def process(self, formdata, data=_unset_value, extra_filters=None):
         if data is _unset_value:
             try:
                 data = self.default()
@@ -40,7 +40,12 @@ class SplitDateTimeField(FormField):
             obj.time = data.time()
         else:
             obj = None
-        FormField.process(self, formdata, data=obj)
+
+        kwargs = dict()
+        if extra_filters is not None:
+            # do not enforce extra_filters=None injection to wtforms<3
+            kwargs['extra_filters'] = extra_filters
+        FormField.process(self, formdata, data=obj, **kwargs)
 
     def populate_obj(self, obj, name):
         if hasattr(obj, name):

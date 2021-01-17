@@ -27,8 +27,8 @@ extras_require = {
         'pytest>=2.2.3',
         'flexmock>=0.9.7',
         'WTForms-Test>=0.1.1',
-        'flake8>=2.4.0',
-        'isort>=4.2.2',
+        'flake8==3.8.4',
+        'isort==4.3.21',
     ],
     'color': ['colour>=0.0.4'],
     'ipaddress': ['ipaddr'] if not PY3 else [],
@@ -61,8 +61,10 @@ setup(
     install_requires=[
         'WTForms>=1.0.4',
         'six>=1.4.1',
-        'validators>=0.5.0',
-        'intervals>=0.6.0'
+        'email_validator>=1.0.0',
+        'validators>=0.5.0' if PY3 else 'validators<=0.15',
+        'intervals>=0.6.0',
+        'MarkupSafe>=1.0.0'
     ],
     extras_require=extras_require,
     classifiers=[

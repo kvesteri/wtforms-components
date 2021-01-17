@@ -1,3 +1,5 @@
+from wtforms.validators import ValidationError
+
 from ..widgets import SelectWidget
 from .select import SelectField
 
@@ -32,7 +34,7 @@ class SelectMultipleField(SelectField):
             values = self.choice_values
             for value in self.data:
                 if value not in values:
-                    raise ValueError(
+                    raise ValidationError(
                         self.gettext(
                             "'%(value)s' is not a valid"
                             " choice for this field"
