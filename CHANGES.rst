@@ -5,6 +5,12 @@ Here you can see the full list of changes between each WTForms-Components
 release.
 
 
+0.10.5 (2021-01-17)
+^^^^^^^^^^^^^^^^^^^
+
+- Added WTForms 3.0 support (#71, pull request courtesy of jpic)
+
+
 0.10.4 (2019-04-01)
 ^^^^^^^^^^^^^^^^^^^
 
