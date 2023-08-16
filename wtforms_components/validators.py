@@ -186,7 +186,11 @@ class Email(object):
             self.domain_whitelist = whitelist
 
     def __call__(self, form, field):
-        if not email(field.data, self.domain_whitelist):
+        if not field.data or field.data.count("@") != 1:
+            return False
+        _, domain_part = field.data.rsplit("@", 1)
+
+        if not email(field.data) or domain_part in self.domain_whitelist:
             if self.message is None:
                 self.message = field.gettext(u'Invalid email address.')
             raise ValidationError(self.message)
