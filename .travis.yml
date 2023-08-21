@@ -1,7 +1,6 @@
 dist: xenial
 language: python
 python:
-  - 2.7
   - 3.4
   - 3.5
   - 3.6
@@ -18,8 +17,6 @@ env:
     - WTFORMS=WTForms==3.0.0a1
 jobs:
   exclude:
-    - python: 2.7
-      env: WTFORMS=WTForms==3.0.0a1
     - python: 3.4
       env: WTFORMS=WTForms==3.0.0a1
     - python: 3.5
