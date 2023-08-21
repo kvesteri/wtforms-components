@@ -62,7 +62,7 @@ setup(
         'WTForms>=1.0.4',
         'six>=1.4.1',
         'email_validator>=1.0.0',
-        'validators>=0.5.0' if PY3 else 'validators<=0.15',
+        'validators>=0.21',
         'intervals>=0.6.0',
         'MarkupSafe>=1.0.0'
     ],

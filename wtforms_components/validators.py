@@ -165,28 +165,20 @@ class DateRange(BaseDateTimeRange):
 
 class Email(object):
     """
-    Validates an email address. This validator is based on `Django's
-    email validator`_ and is stricter than the standard email
+    Validates an email address.
+    This validator is is stricter than the standard email
     validator included in WTForms.
-
-    .. _Django's email validator:
-       https://github.com/django/django/blob/master/django/core/validators.py
 
     :param message:
         Error message to raise in case of a validation error.
-
-    :copyright: (c) Django Software Foundation and individual contributors.
-    :license: BSD
     """
-    domain_whitelist = ['localhost']
 
-    def __init__(self, message=None, whitelist=None):
+    def __init__(self, message=None):
         self.message = message
-        if whitelist is not None:
-            self.domain_whitelist = whitelist
 
     def __call__(self, form, field):
-        if not email(field.data, self.domain_whitelist):
-            if self.message is None:
-                self.message = field.gettext(u'Invalid email address.')
-            raise ValidationError(self.message)
+        if not email(field.data):
+            message = self.message
+            if message is None:
+                message = field.gettext(u'Invalid email address.')
+            raise ValidationError(message)
