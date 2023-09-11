@@ -19,7 +19,7 @@ class ColorField(StringField):
         if self.raw_data:
             return self.raw_data[0]
         if self.data:
-            return str(self.data)
+            return str(self.data.hex_l)
         else:
             return u''
 
