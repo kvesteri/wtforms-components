@@ -151,9 +151,9 @@ class DateRange(BaseDateTimeRange):
         are provided depending on the existence of min and max.
     """
 
-    greater_than_msg = u'Date must be greater than %(min)s.'
+    greater_than_msg = u'Date must be equal to or later than %(min)s.'
 
-    less_than_msg = u'Date must be less than %(max)s.'
+    less_than_msg = u'Date must be equal to or earlier than %(max)s.'
 
     between_msg = u'Date must be between %(min)s and %(max)s.'
 
