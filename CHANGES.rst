@@ -5,6 +5,13 @@ Here you can see the full list of changes between each WTForms-Components
 release.
 
 
+UNRELEASED
+^^^^^^^^^^
+
+- Drop whitelist argument from email validator (#75, pull request courtesy tvuotila)
+- Dropper Python 2.7 support
+
+
 0.10.5 (2021-01-17)
 ^^^^^^^^^^^^^^^^^^^
 

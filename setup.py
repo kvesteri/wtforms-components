@@ -7,12 +7,10 @@ Additional fields, validators and widgets for WTForms.
 
 import os
 import re
-import sys
 
 from setuptools import setup
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-PY3 = sys.version_info[0] == 3
 
 
 def get_version():
@@ -31,7 +29,7 @@ extras_require = {
         'isort==4.3.21',
     ],
     'color': ['colour>=0.0.4'],
-    'ipaddress': ['ipaddr'] if not PY3 else [],
+    'ipaddress': [],
     'timezone': ['python-dateutil'],
 }
 
@@ -62,7 +60,7 @@ setup(
         'WTForms>=1.0.4',
         'six>=1.4.1',
         'email_validator>=1.0.0',
-        'validators>=0.5.0' if PY3 else 'validators<=0.15',
+        'validators>=0.21',
         'intervals>=0.6.0',
         'MarkupSafe>=1.0.0'
     ],
@@ -73,16 +71,16 @@ setup(
         'License :: OSI Approved :: BSD License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3 :: Only',
         'Programming Language :: Python :: Implementation :: CPython',
         'Programming Language :: Python :: Implementation :: PyPy',
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
         'Topic :: Software Development :: Libraries :: Python Modules'
-    ]
+    ],
+    python_requires='>=3.4'
 )
