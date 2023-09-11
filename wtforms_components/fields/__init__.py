@@ -1,5 +1,6 @@
 from .ajax import AjaxField
 from .color import ColorField
+from .gender import GenderField
 from .html5 import (
     DateField,
     DateTimeField,
@@ -29,6 +30,7 @@ from .time import TimeField
 __all__ = (
     AjaxField,
     ColorField,
+    GenderField,
     DateField,
     DateIntervalField,
     DateTimeField,
