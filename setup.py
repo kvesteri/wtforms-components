@@ -25,8 +25,8 @@ extras_require = {
         'pytest>=2.2.3',
         'flexmock>=0.9.7',
         'WTForms-Test>=0.1.1',
-        'flake8==3.8.4',
-        'isort==4.3.21',
+        'flake8==7.1.1',
+        'isort==5.13.2',
     ],
     'color': ['colour>=0.0.4'],
     'ipaddress': [],
@@ -57,8 +57,7 @@ setup(
     include_package_data=True,
     platforms='any',
     install_requires=[
-        'WTForms>=1.0.4',
-        'six>=1.4.1',
+        'WTForms>=3.2.0',
         'email_validator>=1.0.0',
         'validators>=0.21',
         'intervals>=0.6.0',
@@ -82,5 +81,5 @@ setup(
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
         'Topic :: Software Development :: Libraries :: Python Modules'
     ],
-    python_requires='>=3.4'
+    python_requires='>=3.9'
 )

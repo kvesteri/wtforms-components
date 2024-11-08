@@ -9,7 +9,8 @@ UNRELEASED
 ^^^^^^^^^^
 
 - Drop whitelist argument from email validator (#75, pull request courtesy tvuotila)
-- Dropper Python 2.7 support
+- Bump minimum WTForms version to 2.3.0
+- Drop Python < 3.9 support due to WTForms dropping support for Python < 3.9
 
 
 0.10.5 (2021-01-17)

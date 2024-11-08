@@ -43,7 +43,7 @@ class SelectField(_SelectField):
         internal list or tuple should be selected.
         """
         for value, label in self.concrete_choices:
-            yield (value, label, (self.coerce, self.data))
+            yield (value, label, (self.coerce, self.data), {})
 
     @property
     def concrete_choices(self):

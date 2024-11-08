@@ -1,6 +1,5 @@
 from copy import copy
 
-import six
 from wtforms.validators import DataRequired, NumberRange
 from wtforms.widgets import html_params, Input
 from wtforms.widgets import Select as _Select
@@ -62,6 +61,15 @@ def has_validator(field, validator_class):
 
 
 class HTML5Input(Input):
+    validation_attrs = [
+        'required',
+        'disabled',
+        'readonly',
+        'maxlength',
+        'minlength',
+        'pattern',
+    ]
+
     def __init__(self, **kwargs):
         self.options = kwargs
 
@@ -247,7 +255,7 @@ class SelectWidget(_Select):
             children.append(item_html)
 
         html = u'<optgroup label="%s">%s</optgroup>'
-        data = (html_escape(six.text_type(value)), u'\n'.join(children))
+        data = (html_escape(str(value)), u'\n'.join(children))
         return HTMLString(html % data)
 
     @classmethod
@@ -275,6 +283,6 @@ class SelectWidget(_Select):
             options['selected'] = True
 
         html = u'<option %s>%s</option>'
-        data = (html_params(**options), html_escape(six.text_type(label)))
+        data = (html_params(**options), html_escape(str(label)))
 
         return HTMLString(html % data)
