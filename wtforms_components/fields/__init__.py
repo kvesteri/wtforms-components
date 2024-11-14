@@ -10,14 +10,14 @@ from .html5 import (
     IntegerField,
     IntegerSliderField,
     SearchField,
-    StringField
+    StringField,
 )
 from .interval import (
     DateIntervalField,
     DateTimeIntervalField,
     DecimalIntervalField,
     FloatIntervalField,
-    IntIntervalField
+    IntIntervalField,
 )
 from .json_field import JSONField
 from .passive_hidden import PassiveHiddenField

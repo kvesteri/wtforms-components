@@ -6,7 +6,7 @@ try:
         DecimalRangeField,
         IntegerField,
         IntegerRangeField,
-        SearchField
+        SearchField,
     )
 except ImportError:  # wtforms>=3
     from wtforms.fields import (
@@ -16,7 +16,7 @@ except ImportError:  # wtforms>=3
         DecimalRangeField,
         IntegerField,
         IntegerRangeField,
-        SearchField
+        SearchField,
     )
 from wtforms.fields import StringField as _StringField
 
@@ -28,7 +28,7 @@ from ..widgets import (
     NumberInput,
     RangeInput,
     SearchInput,
-    TextInput
+    TextInput,
 )
 
 

@@ -1,10 +1,11 @@
-import six
 from copy import copy
+
+import six
 from wtforms.validators import DataRequired, NumberRange
-from wtforms.widgets import html_params, Input
+from wtforms.widgets import Input, html_params
 from wtforms.widgets import Select as _Select
 
-from ._compat import html_escape, HTMLString
+from ._compat import HTMLString, html_escape
 from .validators import DateRange, TimeRange
 
 
