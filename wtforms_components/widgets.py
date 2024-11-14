@@ -1,10 +1,10 @@
 from copy import copy
 
+from markupsafe import Markup, escape
 from wtforms.validators import DataRequired, NumberRange
 from wtforms.widgets import Input, html_params
 from wtforms.widgets import Select as _Select
 
-from ._compat import HTMLString, html_escape
 from .validators import DateRange, TimeRange
 
 
@@ -262,8 +262,8 @@ class SelectWidget(_Select):
             children.append(item_html)
 
         html = '<optgroup label="%s">%s</optgroup>'
-        data = (html_escape(str(value)), "\n".join(children))
-        return HTMLString(html % data)
+        data = (escape(str(value)), "\n".join(children))
+        return Markup(html % data)
 
     @classmethod
     def render_option(cls, value, label, mixed):
@@ -290,6 +290,6 @@ class SelectWidget(_Select):
             options["selected"] = True
 
         html = "<option %s>%s</option>"
-        data = (html_params(**options), html_escape(str(label)))
+        data = (html_params(**options), escape(str(label)))
 
-        return HTMLString(html % data)
+        return Markup(html % data)
