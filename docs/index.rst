@@ -87,6 +87,12 @@ Older versions of WTForms-Components had a PhoneNumberField. As of version 0.10.
    https://github.com/kvesteri/wtforms-alchemy
 
 
+GenderField
+-----------
+
+.. automodule:: wtforms_components.fields.gender
+
+
 ColorField
 ----------
 

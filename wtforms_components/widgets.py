@@ -293,3 +293,41 @@ class SelectWidget(_Select):
         data = (html_params(**options), html_escape(str(label)))
 
         return HTMLString(html % data)
+
+
+class GenderWidget(_Select):
+    """
+    By default, renders a <select> field with simple gender choices. However,
+    if the field data does not match up with one of these simple choices,
+    renders an <input type="text"> field, so that the user can view and
+    submit arbitrary values.
+    """
+    def __call__(self, field, **kwargs):
+        kwargs.setdefault('id', field.id)
+
+        is_simple_gender = any(
+            field.data == val
+            for val, label in field.simple_genders
+            if val not in field.render_as_text
+        )
+
+        if is_simple_gender or not field.data:
+            # render a <select> field with the simple gender choices
+            html = ['<select %s>' % html_params(name=field.name, **kwargs)]
+            for val, label in field.simple_genders:
+                kwargs = {
+                    "selected": val == field.data
+                }
+                if val in field.render_as_text:
+                    kwargs["data-render-as-text"] = True
+                html.append(self.render_option(val, label, **kwargs))
+            html.append('</select>')
+            return HTMLString(''.join(html))
+        else:
+            # render an <input type="text"> field for maximum input flexibility
+            kwargs.setdefault('type', 'text')
+            if 'value' not in kwargs:
+                kwargs['value'] = field._value()
+            return HTMLString('<input %s>' % html_params(
+                name=field.name, **kwargs
+            ))
