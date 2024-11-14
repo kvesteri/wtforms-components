@@ -16,6 +16,6 @@ class TestChainValidator(FormTestCase):
         class MyForm(Form):
             email = TextField(validators=[Chain([DataRequired(), Email()])])
 
-        form = MyForm(MultiDict({'name': ''}))
+        form = MyForm(MultiDict({"name": ""}))
         form.validate()
-        assert 'email' in form.errors
+        assert "email" in form.errors

@@ -17,7 +17,7 @@ def get_version():
     filename = os.path.join(HERE, 'wtforms_components', '__init__.py')
     with open(filename) as f:
         contents = f.read()
-    pattern = r"^__version__ = '(.*?)'$"
+    pattern = r'^__version__ = "(.*?)"$'
     return re.search(pattern, contents, re.MULTILINE).group(1)
 
 extras_require = {

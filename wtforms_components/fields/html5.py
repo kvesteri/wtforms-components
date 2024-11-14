@@ -37,27 +37,19 @@ class EmailField(_StringField):
 
 
 class IntegerField(IntegerField):
-    widget = NumberInput(step='1')
+    widget = NumberInput(step="1")
 
 
 class DecimalField(DecimalField):
-    widget = NumberInput(step='any')
+    widget = NumberInput(step="any")
 
 
 class DateTimeLocalField(DateTimeField):
     def __init__(
-        self,
-        label=None,
-        validators=None,
-        format='%Y-%m-%dT%H:%M:%S',
-        **kwargs
+        self, label=None, validators=None, format="%Y-%m-%dT%H:%M:%S", **kwargs
     ):
-        super(DateTimeLocalField, self).__init__(
-            label,
-            validators,
-            format,
-            **kwargs
-        )
+        super(DateTimeLocalField, self).__init__(label, validators, format, **kwargs)
+
     widget = DateTimeLocalInput()
 
 
@@ -70,11 +62,11 @@ class DateField(DateField):
 
 
 class IntegerSliderField(IntegerRangeField):
-    widget = RangeInput(step='1')
+    widget = RangeInput(step="1")
 
 
 class DecimalSliderField(DecimalRangeField):
-    widget = RangeInput(step='any')
+    widget = RangeInput(step="any")
 
 
 class SearchField(SearchField):

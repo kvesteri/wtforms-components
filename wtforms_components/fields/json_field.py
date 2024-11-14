@@ -7,10 +7,11 @@ class JSONField(fields.StringField):
     """
     A text field which stores a `json`.
     """
+
     widget = widgets.TextArea()
 
     def _value(self):
-        return json.dumps(self.data) if self.data else ''
+        return json.dumps(self.data) if self.data else ""
 
     def process_formdata(self, valuelist):
         if valuelist:
@@ -18,7 +19,7 @@ class JSONField(fields.StringField):
                 self.data = json.loads(valuelist[0])
             except ValueError:
                 self.data = None
-                raise ValueError('This field contains invalid JSON')
+                raise ValueError("This field contains invalid JSON")
         else:
             self.data = None
 
@@ -28,4 +29,4 @@ class JSONField(fields.StringField):
                 json.dumps(self.data)
             except TypeError:
                 self.data = None
-                raise ValueError('This field contains invalid JSON')
+                raise ValueError("This field contains invalid JSON")

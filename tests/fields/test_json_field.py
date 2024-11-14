@@ -25,4 +25,4 @@ class TestJSONField(SimpleFieldTestCase):
         for time_ in self.invalid_jsons:
             form = form_class(MultiDict(test_field=time_))
             form.validate()
-            assert len(form.errors['test_field']) == 1
+            assert len(form.errors["test_field"]) == 1

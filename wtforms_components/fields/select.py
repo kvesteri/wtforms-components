@@ -27,10 +27,11 @@ class SelectField(_SelectField):
 
     Also supports lazy choices (callables that return an iterable)
     """
+
     widget = SelectWidget()
 
     def __init__(self, *args, **kwargs):
-        choices = kwargs.pop('choices', None)
+        choices = kwargs.pop("choices", None)
         if callable(choices):
             super(SelectField, self).__init__(*args, **kwargs)
             self.choices = copy(choices)
@@ -67,7 +68,7 @@ class SelectField(_SelectField):
         Don't forget to validate also values from embedded lists.
         """
         values = self.choice_values
-        if (self.data is None and u'' in values) or self.data in values:
+        if (self.data is None and "" in values) or self.data in values:
             return True
 
-        raise ValidationError(self.gettext(u'Not a valid choice'))
+        raise ValidationError(self.gettext("Not a valid choice"))

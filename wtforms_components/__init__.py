@@ -27,7 +27,7 @@ from .fields import (
 from .validators import Chain, DateRange, Email, If, TimeRange
 from .widgets import NumberInput, ReadOnlyWidgetProxy, SelectWidget
 
-__version__ = '0.10.5'
+__version__ = "0.10.5"
 
 
 __all__ = (
@@ -59,7 +59,7 @@ __all__ = (
     SplitDateTimeField,
     StringField,
     TimeField,
-    TimeRange
+    TimeRange,
 )
 
 
@@ -67,10 +67,9 @@ class ModelForm(Form):
     """
     Simple ModelForm, use this if your form needs to use the Unique validator
     """
-    def __init__(self, formdata=None, obj=None, prefix='', **kwargs):
-        Form.__init__(
-            self, formdata=formdata, obj=obj, prefix=prefix, **kwargs
-        )
+
+    def __init__(self, formdata=None, obj=None, prefix="", **kwargs):
+        Form.__init__(self, formdata=formdata, obj=obj, prefix=prefix, **kwargs)
         self._obj = obj
 
 

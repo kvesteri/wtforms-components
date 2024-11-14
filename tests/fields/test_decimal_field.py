@@ -9,9 +9,7 @@ class TestDecimalField(FieldTestCase):
     field_class = DecimalField
 
     def test_assigns_min_and_max(self):
-        form_class = self.init_form(
-            validators=[NumberRange(min=2, max=10)]
-        )
+        form_class = self.init_form(validators=[NumberRange(min=2, max=10)])
         form = form_class(MultiDict(test_field=3))
         assert str(form.test_field) == (
             '<input id="test_field" max="10" min="2" '
@@ -19,9 +17,7 @@ class TestDecimalField(FieldTestCase):
         )
 
     def test_assigns_step(self):
-        form_class = self.init_form(
-            widget=NumberInput(step='0.1')
-        )
+        form_class = self.init_form(widget=NumberInput(step="0.1"))
         form = form_class(MultiDict(test_field=3))
         assert str(form.test_field) == (
             '<input id="test_field" '
