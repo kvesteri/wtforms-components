@@ -22,5 +22,4 @@ jobs:
 
       - name: Run linting
         run: |
-          isort --diff --check wtforms_components tests
-          flake8 wtforms_components tests
+          ruff check .

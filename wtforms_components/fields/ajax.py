@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import operator
+
 import six
 from wtforms import fields, widgets
 from wtforms.validators import ValidationError

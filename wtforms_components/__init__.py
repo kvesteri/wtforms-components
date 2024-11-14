@@ -22,7 +22,7 @@ from .fields import (
     SelectMultipleField,
     SplitDateTimeField,
     StringField,
-    TimeField
+    TimeField,
 )
 from .validators import Chain, DateRange, Email, If, TimeRange
 from .widgets import NumberInput, ReadOnlyWidgetProxy, SelectWidget

@@ -24,9 +24,8 @@ extras_require = {
     'test': [
         'pytest>=2.2.3',
         'flexmock>=0.9.7',
+        'ruff==0.7.3',
         'WTForms-Test>=0.1.1',
-        'flake8==7.1.1',
-        'isort==5.13.2',
     ],
     'color': ['colour>=0.0.4'],
     'ipaddress': [],

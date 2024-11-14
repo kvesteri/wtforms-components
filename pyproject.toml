@@ -1,0 +1,12 @@
+[tool.ruff]
+include = ["wtforms_components/**/*.py", "tests/**/*.py"]
+target-version = "py39"
+
+[tool.ruff.lint]
+select = [
+    "C90", # mccabe
+    "E",   # pycodestyle errors
+    "F",   # Pyflakes
+    "I",   # isort
+    "W",   # pycodestyle warnings
+]

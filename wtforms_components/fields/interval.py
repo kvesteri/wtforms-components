@@ -4,7 +4,7 @@ from intervals import (
     DecimalInterval,
     FloatInterval,
     IntervalException,
-    IntInterval
+    IntInterval,
 )
 
 from .html5 import StringField
