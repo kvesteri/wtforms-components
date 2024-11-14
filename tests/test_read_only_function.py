@@ -34,7 +34,7 @@ class TestReadOnlyFunction(FormTestCase):
         class MyForm(Form):
             name = TextField()
 
-        class MyModel(object):
+        class MyModel:
             pass
 
         form = MyForm()

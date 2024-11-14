@@ -16,7 +16,7 @@ def null_or_int(value):
         return None
 
 
-class Chain(object):
+class Chain:
     """
     Generic chain class. Very similar to itertools.chain except this object
     can be iterated over multiple times.
@@ -27,8 +27,7 @@ class Chain(object):
 
     def __iter__(self):
         for iterable in self.iterables:
-            for value in iterable:
-                yield value
+            yield from iterable
 
     def __contains__(self, value):
         return any(value in iterable for iterable in self.iterables)
@@ -37,4 +36,4 @@ class Chain(object):
         return sum(map(len, self.iterables))
 
     def __repr__(self):
-        return "%s(%r)" % (self.__class__.__name__, list(self.iterables))
+        return f"{self.__class__.__name__}({list(self.iterables)!r})"

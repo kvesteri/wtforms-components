@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 import datetime
 import time
 
@@ -17,7 +15,7 @@ class TimeField(Field):
     error_msg = "Not a valid time."
 
     def __init__(self, label=None, validators=None, format="%H:%M", **kwargs):
-        super(TimeField, self).__init__(label, validators, **kwargs)
+        super().__init__(label, validators, **kwargs)
         self.format = format
 
     def _value(self):

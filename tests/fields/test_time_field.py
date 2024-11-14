@@ -58,4 +58,4 @@ class TestTimeFieldWithSeconds(TestTimeField):
 
     def init_form(self, **kwargs):
         kwargs["format"] = "%H:%M:%S"
-        return super(TestTimeFieldWithSeconds, self).init_form(**kwargs)
+        return super().init_form(**kwargs)

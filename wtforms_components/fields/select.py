@@ -33,10 +33,10 @@ class SelectField(_SelectField):
     def __init__(self, *args, **kwargs):
         choices = kwargs.pop("choices", None)
         if callable(choices):
-            super(SelectField, self).__init__(*args, **kwargs)
+            super().__init__(*args, **kwargs)
             self.choices = copy(choices)
         else:
-            super(SelectField, self).__init__(*args, choices=choices, **kwargs)
+            super().__init__(*args, choices=choices, **kwargs)
 
     def iter_choices(self):
         """

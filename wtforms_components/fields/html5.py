@@ -48,7 +48,7 @@ class DateTimeLocalField(DateTimeField):
     def __init__(
         self, label=None, validators=None, format="%Y-%m-%dT%H:%M:%S", **kwargs
     ):
-        super(DateTimeLocalField, self).__init__(label, validators, format, **kwargs)
+        super().__init__(label, validators, format, **kwargs)
 
     widget = DateTimeLocalInput()
 

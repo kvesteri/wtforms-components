@@ -5,7 +5,7 @@ from tests import MultiDict
 from wtforms_components import SelectField
 
 
-class Dummy(object):
+class Dummy:
     fruits = []
 
 
