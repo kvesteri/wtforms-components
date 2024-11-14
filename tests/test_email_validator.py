@@ -1,11 +1,10 @@
-# -*- coding: utf-8 -*-
 import pytest
 from wtforms.validators import ValidationError
 
 from wtforms_components import Email
 
 
-class DummyTranslations(object):
+class DummyTranslations:
     def gettext(self, string):
         return string
 
@@ -20,7 +19,7 @@ class DummyForm(dict):
     pass
 
 
-class DummyField(object):
+class DummyField:
     _translations = DummyTranslations()
 
     def __init__(self, data, errors=(), raw_data=None):
@@ -35,7 +34,7 @@ class DummyField(object):
         return self._translations.ngettext(singular, plural, n)
 
 
-class TestEmailValidator(object):
+class TestEmailValidator:
     def setup_method(self, method):
         self.form = DummyForm()
 

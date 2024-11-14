@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 from wtforms import ValidationError
 from wtforms.validators import StopValidation
 
@@ -9,7 +7,7 @@ except ImportError:
     from validators import is_email as email
 
 
-class ControlStructure(object):
+class ControlStructure:
     """
     Base object for validator control structures
     """
@@ -79,7 +77,7 @@ class If(ControlStructure):
                 self.reraise(exc)
 
 
-class BaseDateTimeRange(object):
+class BaseDateTimeRange:
     def __init__(self, min=None, max=None, format="%H:%M", message=None):
         self.min = min
         self.max = max
@@ -136,9 +134,7 @@ class TimeRange(BaseDateTimeRange):
     between_msg = "Time must be between %(min)s and %(max)s."
 
     def __init__(self, min=None, max=None, format="%H:%M", message=None):
-        super(TimeRange, self).__init__(
-            min=min, max=max, format=format, message=message
-        )
+        super().__init__(min=min, max=max, format=format, message=message)
 
 
 class DateRange(BaseDateTimeRange):
@@ -164,12 +160,10 @@ class DateRange(BaseDateTimeRange):
     between_msg = "Date must be between %(min)s and %(max)s."
 
     def __init__(self, min=None, max=None, format="%Y-%m-%d", message=None):
-        super(DateRange, self).__init__(
-            min=min, max=max, format=format, message=message
-        )
+        super().__init__(min=min, max=max, format=format, message=message)
 
 
-class Email(object):
+class Email:
     """
     Validates an email address.
     This validator is is stricter than the standard email

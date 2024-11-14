@@ -10,7 +10,7 @@ class TestPassiveHiddenField(FormTestCase):
         class MyForm(Form):
             id = PassiveHiddenField()
 
-        class A(object):
+        class A:
             id = None
 
         form = MyForm(MultiDict({"id": 12}))

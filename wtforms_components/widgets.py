@@ -79,7 +79,7 @@ class HTML5Input(Input):
 
         options_copy = copy(self.options)
         options_copy.update(kwargs)
-        return super(HTML5Input, self).__call__(field, **options_copy)
+        return super().__call__(field, **options_copy)
 
     def range_validators(self, field):
         return {}
@@ -234,7 +234,7 @@ class NumberInput(HTML5Input):
         return min_max(field, self.range_validator_class)
 
 
-class ReadOnlyWidgetProxy(object):
+class ReadOnlyWidgetProxy:
     def __init__(self, widget):
         self.widget = widget
 

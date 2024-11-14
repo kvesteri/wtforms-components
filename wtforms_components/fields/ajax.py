@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import operator
 
 import six
@@ -32,7 +31,7 @@ class AjaxField(fields.Field):
         blank_text="",
         **kwargs,
     ):
-        super(AjaxField, self).__init__(label, validators, **kwargs)
+        super().__init__(label, validators, **kwargs)
 
         if anyjson is None:
             raise ImproperlyConfigured(
@@ -95,4 +94,4 @@ class AjaxField(fields.Field):
             kwargs.setdefault("value", self.get_pk(self.data))
         else:
             kwargs.setdefault("value", "")
-        return super(AjaxField, self).__call__(**kwargs)
+        return super().__call__(**kwargs)

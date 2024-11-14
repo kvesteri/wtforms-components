@@ -5,7 +5,7 @@ from wtforms_test import FormTestCase
 from wtforms_components import SelectWidget
 
 
-class Dummy(object):
+class Dummy:
     fruits = None
 
 

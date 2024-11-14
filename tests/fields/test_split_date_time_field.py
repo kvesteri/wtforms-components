@@ -7,7 +7,7 @@ from tests import MultiDict, SimpleFieldTestCase
 from wtforms_components.fields import SplitDateTimeField
 
 
-class Obj(object):
+class Obj:
     test_field = None
 
 
