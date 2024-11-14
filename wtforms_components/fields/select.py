@@ -1,5 +1,4 @@
 from copy import copy
-
 from wtforms import SelectField as _SelectField
 from wtforms.validators import ValidationError
 

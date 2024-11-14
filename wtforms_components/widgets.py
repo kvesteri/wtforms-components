@@ -1,6 +1,5 @@
-from copy import copy
-
 import six
+from copy import copy
 from wtforms.validators import DataRequired, NumberRange
 from wtforms.widgets import html_params, Input
 from wtforms.widgets import Select as _Select
