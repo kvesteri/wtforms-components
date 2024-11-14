@@ -61,6 +61,8 @@ def has_validator(field, validator_class):
 
 
 class HTML5Input(Input):
+    validation_attrs = ['required', 'disabled']
+
     def __init__(self, **kwargs):
         self.options = kwargs
 

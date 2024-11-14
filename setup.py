@@ -57,7 +57,7 @@ setup(
     include_package_data=True,
     platforms='any',
     install_requires=[
-        'WTForms>=1.0.4',
+        'WTForms>=3.1.0',
         'six>=1.4.1',
         'email_validator>=1.0.0',
         'validators>=0.21',
