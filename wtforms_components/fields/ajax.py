@@ -1,6 +1,5 @@
 import operator
 
-import six
 from wtforms import fields, widgets
 from wtforms.validators import ValidationError
 
@@ -45,7 +44,7 @@ class AjaxField(fields.Field):
 
         if get_label is None:
             self.get_label = lambda x: x
-        elif isinstance(get_label, six.string_types):
+        elif isinstance(get_label, str):
             self.get_label = operator.attrgetter(get_label)
         else:
             self.get_label = get_label

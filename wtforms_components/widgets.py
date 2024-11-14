@@ -1,6 +1,5 @@
 from copy import copy
 
-import six
 from wtforms.validators import DataRequired, NumberRange
 from wtforms.widgets import Input, html_params
 from wtforms.widgets import Select as _Select
@@ -263,7 +262,7 @@ class SelectWidget(_Select):
             children.append(item_html)
 
         html = '<optgroup label="%s">%s</optgroup>'
-        data = (html_escape(six.text_type(value)), "\n".join(children))
+        data = (html_escape(str(value)), "\n".join(children))
         return HTMLString(html % data)
 
     @classmethod
@@ -291,6 +290,6 @@ class SelectWidget(_Select):
             options["selected"] = True
 
         html = "<option %s>%s</option>"
-        data = (html_params(**options), html_escape(six.text_type(label)))
+        data = (html_params(**options), html_escape(str(label)))
 
         return HTMLString(html % data)

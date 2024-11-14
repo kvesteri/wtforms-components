@@ -12,6 +12,7 @@ UNRELEASED
 - Add support for Python 3.9, 3.10, 3.11 and 3.12.
 - Drop support for Python 3.8 or older.
 - Add support for WTForms 3.2. The minimum supported WTForms version is now 3.1.0.
+- Remove `six` dependency.
 
 
 0.10.5 (2021-01-17)
