@@ -9,7 +9,8 @@ UNRELEASED
 ^^^^^^^^^^
 
 - Drop whitelist argument from email validator (#75, pull request courtesy tvuotila)
-- Dropper Python 2.7 support
+- Add support for Python 3.9, 3.10, 3.11 and 3.12.
+- Drop support for Python 3.8 or older.
 
 
 0.10.5 (2021-01-17)
