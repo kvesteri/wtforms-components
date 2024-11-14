@@ -35,6 +35,7 @@ class Chain(ControlStructure):
         child validators raise a ValidationError, an exception is being raised
         again with this custom message.
     """
+
     def __init__(self, validators, message=None):
         self.validators = validators
         if message:
@@ -60,6 +61,7 @@ class If(ControlStructure):
     :param message: custom message, which overrides child validator's
                     validation error message
     """
+
     def __init__(self, condition, validator, message=None):
         self.condition = condition
         self.validator = validator
@@ -78,7 +80,7 @@ class If(ControlStructure):
 
 
 class BaseDateTimeRange(object):
-    def __init__(self, min=None, max=None, format='%H:%M', message=None):
+    def __init__(self, min=None, max=None, format="%H:%M", message=None):
         self.min = min
         self.max = max
         self.format = format
@@ -88,8 +90,11 @@ class BaseDateTimeRange(object):
         data = field.data
         min_ = self.min() if callable(self.min) else self.min
         max_ = self.max() if callable(self.max) else self.max
-        if (data is None or (min_ is not None and data < min_) or
-                (max_ is not None and data > max_)):
+        if (
+            data is None
+            or (min_ is not None and data < min_)
+            or (max_ is not None and data > max_)
+        ):
             if self.message is None:
                 if max_ is None:
                     self.message = field.gettext(self.greater_than_msg)
@@ -99,10 +104,11 @@ class BaseDateTimeRange(object):
                     self.message = field.gettext(self.between_msg)
 
             raise ValidationError(
-                self.message % dict(
+                self.message
+                % dict(
                     field_label=field.label,
-                    min=min_.strftime(self.format) if min_ else '',
-                    max=max_.strftime(self.format) if max_ else ''
+                    min=min_.strftime(self.format) if min_ else "",
+                    max=max_.strftime(self.format) if max_ else "",
                 )
             )
 
@@ -123,13 +129,13 @@ class TimeRange(BaseDateTimeRange):
         are provided depending on the existence of min and max.
     """
 
-    greater_than_msg = u'Time must be greater than %(min)s.'
+    greater_than_msg = "Time must be greater than %(min)s."
 
-    less_than_msg = u'Time must be less than %(max)s.'
+    less_than_msg = "Time must be less than %(max)s."
 
-    between_msg = u'Time must be between %(min)s and %(max)s.'
+    between_msg = "Time must be between %(min)s and %(max)s."
 
-    def __init__(self, min=None, max=None, format='%H:%M', message=None):
+    def __init__(self, min=None, max=None, format="%H:%M", message=None):
         super(TimeRange, self).__init__(
             min=min, max=max, format=format, message=message
         )
@@ -151,13 +157,13 @@ class DateRange(BaseDateTimeRange):
         are provided depending on the existence of min and max.
     """
 
-    greater_than_msg = u'Date must be greater than %(min)s.'
+    greater_than_msg = "Date must be greater than %(min)s."
 
-    less_than_msg = u'Date must be less than %(max)s.'
+    less_than_msg = "Date must be less than %(max)s."
 
-    between_msg = u'Date must be between %(min)s and %(max)s.'
+    between_msg = "Date must be between %(min)s and %(max)s."
 
-    def __init__(self, min=None, max=None, format='%Y-%m-%d', message=None):
+    def __init__(self, min=None, max=None, format="%Y-%m-%d", message=None):
         super(DateRange, self).__init__(
             min=min, max=max, format=format, message=message
         )
@@ -180,5 +186,5 @@ class Email(object):
         if not email(field.data):
             message = self.message
             if message is None:
-                message = field.gettext(u'Invalid email address.')
+                message = field.gettext("Invalid email address.")
             raise ValidationError(message)

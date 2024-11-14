@@ -49,5 +49,5 @@ __all__ = (
     SelectMultipleField,
     SplitDateTimeField,
     StringField,
-    TimeField
+    TimeField,
 )

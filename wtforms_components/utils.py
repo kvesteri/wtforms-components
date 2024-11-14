@@ -21,6 +21,7 @@ class Chain(object):
     Generic chain class. Very similar to itertools.chain except this object
     can be iterated over multiple times.
     """
+
     def __init__(self, *iterables):
         self.iterables = iterables
 
@@ -36,4 +37,4 @@ class Chain(object):
         return sum(map(len, self.iterables))
 
     def __repr__(self):
-        return '%s(%r)' % (self.__class__.__name__, list(self.iterables))
+        return "%s(%r)" % (self.__class__.__name__, list(self.iterables))

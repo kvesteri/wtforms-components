@@ -13,7 +13,7 @@ class TestPassiveHiddenField(FormTestCase):
         class A(object):
             id = None
 
-        form = MyForm(MultiDict({'id': 12}))
+        form = MyForm(MultiDict({"id": 12}))
         a = A()
         form.populate_obj(a)
         assert a.id is None

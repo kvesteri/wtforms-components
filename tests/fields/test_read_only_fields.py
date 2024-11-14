@@ -9,7 +9,7 @@ class TestReadOnlyCheckboxField(SimpleFieldTestCase):
 
     def test_has_readonly_and_disabled_attributes_in_html(self):
         form_class = self.init_form()
-        form = form_class(MultiDict(test_field='y'))
+        form = form_class(MultiDict(test_field="y"))
         read_only(form.test_field)
         assert (
             '<input checked disabled id="test_field" '
