@@ -1,5 +1,4 @@
 from datetime import time
-
 from wtforms import Form
 from wtforms_test import FormTestCase
 
