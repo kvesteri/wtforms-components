@@ -57,7 +57,6 @@ setup(
     platforms='any',
     install_requires=[
         'WTForms>=3.1.0',
-        'email_validator>=1.0.0',
         'validators>=0.21',
         'intervals>=0.6.0',
         'MarkupSafe>=1.0.0'
