@@ -1,23 +1,12 @@
-try:
-    from wtforms.fields.html5 import (
-        DateField,
-        DateTimeField,
-        DecimalField,
-        DecimalRangeField,
-        IntegerField,
-        IntegerRangeField,
-        SearchField,
-    )
-except ImportError:  # wtforms>=3
-    from wtforms.fields import (
-        DateField,
-        DateTimeField,
-        DecimalField,
-        DecimalRangeField,
-        IntegerField,
-        IntegerRangeField,
-        SearchField,
-    )
+from wtforms.fields import (
+    DateField,
+    DateTimeField,
+    DecimalField,
+    DecimalRangeField,
+    IntegerField,
+    IntegerRangeField,
+    SearchField,
+)
 from wtforms.fields import StringField as _StringField
 
 from ..widgets import (
