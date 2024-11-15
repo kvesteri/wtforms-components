@@ -20,14 +20,14 @@ class TestDateRangeValidator(FormTestCase):
         form_class = self.init_form(min=date(1990, 1, 1))
         form = form_class(MultiDict(date="1980-1-1"))
         form.validate()
-        error_msg = "Date must be greater than 1990-01-01."
+        error_msg = "Date must be equal to or later than 1990-01-01."
         assert form.errors["date"] == [error_msg]
 
     def test_date_less_than_validator(self):
         form_class = self.init_form(max=date(1990, 1, 1))
         form = form_class(MultiDict(date="1991-1-1"))
         form.validate()
-        error_msg = "Date must be less than 1990-01-01."
+        error_msg = "Date must be equal to or earlier than 1990-01-01."
         assert form.errors["date"] == [error_msg]
 
     def test_date_between_validator(self):
