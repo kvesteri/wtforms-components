@@ -1,5 +1,4 @@
 [tool.ruff]
-include = ["wtforms_components/**/*.py", "tests/**/*.py"]
 target-version = "py39"
 
 [tool.ruff.lint]
