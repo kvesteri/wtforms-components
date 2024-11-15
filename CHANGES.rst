@@ -8,13 +8,13 @@ release.
 UNRELEASED
 ^^^^^^^^^^
 
-- Drop whitelist argument from email validator (#75, pull request courtesy tvuotila)
+- Drop ``whitelist`` argument from ``email`` validator (#75, pull request courtesy tvuotila)
 - Add support for Python 3.9, 3.10, 3.11 and 3.12.
 - Drop support for Python 3.8 or older.
 - Add support for WTForms 3.2. The minimum supported WTForms version is now 3.1.0.
-- Remove `email_validator` and `six` dependencies.
-- Remove `_compat` and `utils` modules.
-- Remove `try..except` from email validator import.
+- Remove ``email_validator`` and ``six`` dependencies.
+- Remove ``_compat`` and ``utils`` modules.
+- Remove ``try..except`` from email validator import.
 
 
 0.10.5 (2021-01-17)
@@ -63,7 +63,7 @@ UNRELEASED
 0.9.9 (2016-01-10)
 ^^^^^^^^^^^^^^^^^^
 
-- Added sane error handling with Unique validator when Form is missing `_obj` attribute (#34)
+- Added sane error handling with Unique validator when Form is missing ``_obj`` attribute (#34)
 
 
 0.9.8 (2015-09-28)
@@ -141,7 +141,7 @@ UNRELEASED
 0.8.1 (2013-11-30)
 ^^^^^^^^^^^^^^^^^^
 
-- Fix import error with new versions of `validators` package.
+- Fix import error with new versions of ``validators`` package.
 - Added initial WTForms 2.0 support
 
 
