@@ -2,14 +2,10 @@ import datetime
 
 from wtforms import Form
 from wtforms.fields import FormField
+from wtforms.utils import unset_value
 
 from .html5 import DateField
 from .time import TimeField
-
-try:
-    from wtforms.utils import unset_value as _unset_value
-except ImportError:
-    from wtforms.fields import _unset_value
 
 
 class Date:
@@ -28,8 +24,8 @@ class SplitDateTimeField(FormField):
             **kwargs,
         )
 
-    def process(self, formdata, data=_unset_value, extra_filters=None):
-        if data is _unset_value:
+    def process(self, formdata, data=unset_value, extra_filters=None):
+        if data is unset_value:
             try:
                 data = self.default()
             except TypeError:
