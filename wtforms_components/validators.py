@@ -1,10 +1,6 @@
+from validators import email
 from wtforms import ValidationError
 from wtforms.validators import StopValidation
-
-try:
-    from validators import email
-except ImportError:
-    from validators import is_email as email
 
 
 class ControlStructure:

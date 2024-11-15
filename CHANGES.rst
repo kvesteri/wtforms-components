@@ -14,6 +14,7 @@ UNRELEASED
 - Add support for WTForms 3.2. The minimum supported WTForms version is now 3.1.0.
 - Remove `email_validator` and `six` dependencies.
 - Remove `_compat` and `utils` modules.
+- Remove `try..except` from email validator import.
 
 
 0.10.5 (2021-01-17)
