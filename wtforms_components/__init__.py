@@ -27,7 +27,7 @@ from .fields import (
 from .validators import Chain, DateRange, Email, If, TimeRange
 from .widgets import NumberInput, ReadOnlyWidgetProxy, SelectWidget
 
-__version__ = "0.10.5"
+__version__ = "0.11.0"
 
 
 __all__ = (

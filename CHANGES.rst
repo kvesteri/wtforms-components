@@ -5,8 +5,8 @@ Here you can see the full list of changes between each WTForms-Components
 release.
 
 
-UNRELEASED
-^^^^^^^^^^
+0.11.0 (2024-11-15)
+^^^^^^^^^^^^^^^^^^^
 
 - Drop ``whitelist`` argument from ``email`` validator (#75, pull request courtesy tvuotila)
 - Add support for Python 3.9, 3.10, 3.11 and 3.12.
