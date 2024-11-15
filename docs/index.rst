@@ -81,25 +81,10 @@ SelectField and SelectMultipleField support the following enhancements:
 PhoneNumberField
 ----------------
 
-PhoneNumberField is a string field representing a PhoneNumber object from
-`SQLAlchemy-Utils`_.
+Older versions of WTForms-Components had a PhoneNumberField. As of version 0.10.0 this field has now been moved to `WTForms-Alchemy`_.
 
-.. _SQLAlchemy-Utils:
-   https://github.com/kvesteri/sqlalchemy-utils
-
-The following example shows that the field takes the phone number's country
-code and display format as parameters.
-::
-
-
-    from wtforms import Form
-    from wtforms_components import PhoneNumberField
-
-    class UserForm(Form):
-        phone_number = PhoneNumberField(
-            country_code='FI'
-            display_format='national'
-        )
+.. _WTForms-Alchemy:
+   https://github.com/kvesteri/wtforms-alchemy
 
 
 ColorField
@@ -289,40 +274,4 @@ Unique Validator
 
 Unique validator provides convenient way for checking the unicity of given field in database.
 
-Let's say we have the following model defined (using SQLAlchemy):
-::
-
-
-    import sqlalchemy as sa
-    from sqlalchemy import create_engine
-    from sqlalchemy.ext.declarative import declarative_base
-    from sqlalchemy.orm import sessionmaker
-
-    engine = create_engine('sqlite:///:memory:')
-    Base = declarative_base(engine)
-    Session = sessionmaker(bind=engine)
-    session = Session()
-
-    class User(Base):
-        __tablename__ = 'user'
-
-        id = sa.Column(sa.BigInteger, autoincrement=True, primary_key=True)
-        name = sa.Column(sa.Unicode(100), nullable=False)
-        email = sa.Column(sa.Unicode(255), nullable=False)
-
-
-Now creating a form that validates email unicity is as easy as:
-::
-
-
-    from wtforms_components import ModelForm, Unique
-
-    class UserForm(ModelForm):
-        name = TextField()
-        email = TextField(validators=[
-            Unique(
-                User.email,
-                get_session=lambda: session
-            )
-        ])
-
+As of WTForms-Components version 0.10.0 the Unique validator has been moved to WTForms-Alchemy due to its SQLAlchemy dependency.

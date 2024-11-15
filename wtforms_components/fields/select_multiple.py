@@ -1,3 +1,5 @@
+from wtforms.validators import ValidationError
+
 from ..widgets import SelectWidget
 from .select import SelectField
 
@@ -8,6 +10,7 @@ class SelectMultipleField(SelectField):
     validate) multiple choices.  You'll need to specify the HTML `rows`
     attribute to the select field when rendering.
     """
+
     widget = SelectWidget(multiple=True)
 
     def process_data(self, value):
@@ -22,8 +25,7 @@ class SelectMultipleField(SelectField):
         except ValueError:
             raise ValueError(
                 self.gettext(
-                    'Invalid choice(s): one or more data inputs '
-                    'could not be coerced'
+                    "Invalid choice(s): one or more data inputs " "could not be coerced"
                 )
             )
 
@@ -32,9 +34,9 @@ class SelectMultipleField(SelectField):
             values = self.choice_values
             for value in self.data:
                 if value not in values:
-                    raise ValueError(
+                    raise ValidationError(
                         self.gettext(
-                            "'%(value)s' is not a valid"
-                            " choice for this field"
-                        ) % dict(value=value)
+                            "'%(value)s' is not a valid" " choice for this field"
+                        )
+                        % dict(value=value)
                     )

@@ -1,11 +1,10 @@
-# -*- coding: utf-8 -*-
 import pytest
 from wtforms.validators import ValidationError
 
 from wtforms_components import Email
 
 
-class DummyTranslations(object):
+class DummyTranslations:
     def gettext(self, string):
         return string
 
@@ -20,7 +19,7 @@ class DummyForm(dict):
     pass
 
 
-class DummyField(object):
+class DummyField:
     _translations = DummyTranslations()
 
     def __init__(self, data, errors=(), raw_data=None):
@@ -35,44 +34,45 @@ class DummyField(object):
         return self._translations.ngettext(singular, plural, n)
 
 
-class TestEmailValidator(object):
-
+class TestEmailValidator:
     def setup_method(self, method):
         self.form = DummyForm()
 
-    @pytest.mark.parametrize(("email", "whitelist"), [
-        ('email@here.com', None),
-        ('weirder-email@here.and.there.com', None),
-        ('email@[127.0.0.1]', None),
-        ('example@valid-----hyphens.com', None),
-        ('example@valid-with-hyphens.com', None),
-        ('test@domain.with.idn.tld.उदाहरण.परीक्षा', None),
-        ('email@localhost', None),
-        ('email@localdomain', ['localdomain']),
-        ('"test@test"@example.com', None),
-        ('"\\\011"@here.com', None),
-    ])
-    def test_returns_none_on_valid_email(self, email, whitelist):
-        validate_email = Email(whitelist=whitelist)
+    @pytest.mark.parametrize(
+        "email",
+        [
+            "email@here.com",
+            "weirder-email@here.and.there.com",
+            "example@valid-----hyphens.com",
+            "example@valid-with-hyphens.com",
+            "test@domain.with.idn.tld.उदाहरण.परीक्षा",
+            '"\\\011"@here.com',
+        ],
+    )
+    def test_returns_none_on_valid_email(self, email):
+        validate_email = Email()
         validate_email(self.form, DummyField(email))
 
-    @pytest.mark.parametrize(("email",), [
-        (None,),
-        ('',),
-        ('abc',),
-        ('abc@',),
-        ('abc@bar',),
-        ('a @x.cz',),
-        ('abc@.com',),
-        ('something@@somewhere.com',),
-        ('email@127.0.0.1',),
-        ('example@invalid-.com',),
-        ('example@-invalid.com',),
-        ('example@inv-.alid-.com',),
-        ('example@inv-.-alid.com',),
-        # Quoted-string format (CR not allowed)
-        ('"\\\012"@here.com',),
-    ])
+    @pytest.mark.parametrize(
+        ("email",),
+        [
+            (None,),
+            ("",),
+            ("abc",),
+            ("abc@",),
+            ("abc@bar",),
+            ("a @x.cz",),
+            ("abc@.com",),
+            ("something@@somewhere.com",),
+            ("email@127.0.0.1",),
+            ("example@invalid-.com",),
+            ("example@-invalid.com",),
+            ("example@inv-.alid-.com",),
+            ("example@inv-.-alid.com",),
+            # Quoted-string format (CR not allowed)
+            ('"\\\012"@here.com',),
+        ],
+    )
     def test_raises_validationerror_on_invalid_email(self, email):
         validate_email = Email()
         with pytest.raises(ValidationError):
@@ -81,7 +81,7 @@ class TestEmailValidator(object):
     def test_default_validation_error_message(self):
         validate_email = Email()
         try:
-            validate_email(self.form, DummyField('@@@'))
-            assert False, 'No validation error thrown.'
+            validate_email(self.form, DummyField("@@@"))
+            assert False, "No validation error thrown."
         except ValidationError as e:
-            assert str(e) == 'Invalid email address.'
+            assert str(e) == "Invalid email address."

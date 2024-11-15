@@ -1,15 +1,9 @@
-from __future__ import absolute_import
-
+from validators import email
 from wtforms import ValidationError
 from wtforms.validators import StopValidation
 
-try:
-    from validators import email
-except ImportError:
-    from validators import is_email as email
 
-
-class ControlStructure(object):
+class ControlStructure:
     """
     Base object for validator control structures
     """
@@ -35,6 +29,7 @@ class Chain(ControlStructure):
         child validators raise a ValidationError, an exception is being raised
         again with this custom message.
     """
+
     def __init__(self, validators, message=None):
         self.validators = validators
         if message:
@@ -60,6 +55,7 @@ class If(ControlStructure):
     :param message: custom message, which overrides child validator's
                     validation error message
     """
+
     def __init__(self, condition, validator, message=None):
         self.condition = condition
         self.validator = validator
@@ -77,8 +73,8 @@ class If(ControlStructure):
                 self.reraise(exc)
 
 
-class BaseDateTimeRange(object):
-    def __init__(self, min=None, max=None, format='%H:%M', message=None):
+class BaseDateTimeRange:
+    def __init__(self, min=None, max=None, format="%H:%M", message=None):
         self.min = min
         self.max = max
         self.format = format
@@ -88,8 +84,11 @@ class BaseDateTimeRange(object):
         data = field.data
         min_ = self.min() if callable(self.min) else self.min
         max_ = self.max() if callable(self.max) else self.max
-        if (data is None or (min_ is not None and data < min_) or
-                (max_ is not None and data > max_)):
+        if (
+            data is None
+            or (min_ is not None and data < min_)
+            or (max_ is not None and data > max_)
+        ):
             if self.message is None:
                 if max_ is None:
                     self.message = field.gettext(self.greater_than_msg)
@@ -99,10 +98,11 @@ class BaseDateTimeRange(object):
                     self.message = field.gettext(self.between_msg)
 
             raise ValidationError(
-                self.message % dict(
+                self.message
+                % dict(
                     field_label=field.label,
-                    min=min_.strftime(self.format) if min_ else '',
-                    max=max_.strftime(self.format) if max_ else ''
+                    min=min_.strftime(self.format) if min_ else "",
+                    max=max_.strftime(self.format) if max_ else "",
                 )
             )
 
@@ -123,16 +123,14 @@ class TimeRange(BaseDateTimeRange):
         are provided depending on the existence of min and max.
     """
 
-    greater_than_msg = u'Time must be greater than %(min)s.'
+    greater_than_msg = "Time must be greater than %(min)s."
 
-    less_than_msg = u'Time must be less than %(max)s.'
+    less_than_msg = "Time must be less than %(max)s."
 
-    between_msg = u'Time must be between %(min)s and %(max)s.'
+    between_msg = "Time must be between %(min)s and %(max)s."
 
-    def __init__(self, min=None, max=None, format='%H:%M', message=None):
-        super(TimeRange, self).__init__(
-            min=min, max=max, format=format, message=message
-        )
+    def __init__(self, min=None, max=None, format="%H:%M", message=None):
+        super().__init__(min=min, max=max, format=format, message=message)
 
 
 class DateRange(BaseDateTimeRange):
@@ -151,42 +149,32 @@ class DateRange(BaseDateTimeRange):
         are provided depending on the existence of min and max.
     """
 
-    greater_than_msg = u'Date must be equal to or later than %(min)s.'
+    greater_than_msg = "Date must be equal to or later than %(min)s."
 
-    less_than_msg = u'Date must be equal to or earlier than %(max)s.'
+    less_than_msg = "Date must be equal to or earlier than %(max)s."
 
-    between_msg = u'Date must be between %(min)s and %(max)s.'
+    between_msg = "Date must be between %(min)s and %(max)s."
 
-    def __init__(self, min=None, max=None, format='%Y-%m-%d', message=None):
-        super(DateRange, self).__init__(
-            min=min, max=max, format=format, message=message
-        )
+    def __init__(self, min=None, max=None, format="%Y-%m-%d", message=None):
+        super().__init__(min=min, max=max, format=format, message=message)
 
 
-class Email(object):
+class Email:
     """
-    Validates an email address. This validator is based on `Django's
-    email validator`_ and is stricter than the standard email
+    Validates an email address.
+    This validator is is stricter than the standard email
     validator included in WTForms.
-
-    .. _Django's email validator:
-       https://github.com/django/django/blob/master/django/core/validators.py
 
     :param message:
         Error message to raise in case of a validation error.
-
-    :copyright: (c) Django Software Foundation and individual contributors.
-    :license: BSD
     """
-    domain_whitelist = ['localhost']
 
-    def __init__(self, message=None, whitelist=None):
+    def __init__(self, message=None):
         self.message = message
-        if whitelist is not None:
-            self.domain_whitelist = whitelist
 
     def __call__(self, form, field):
-        if not email(field.data, self.domain_whitelist):
-            if self.message is None:
-                self.message = field.gettext(u'Invalid email address.')
-            raise ValidationError(self.message)
+        if not email(field.data):
+            message = self.message
+            if message is None:
+                message = field.gettext("Invalid email address.")
+            raise ValidationError(message)

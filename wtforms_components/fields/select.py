@@ -1,3 +1,5 @@
+from copy import copy
+
 from wtforms import SelectField as _SelectField
 from wtforms.validators import ValidationError
 
@@ -25,7 +27,16 @@ class SelectField(_SelectField):
 
     Also supports lazy choices (callables that return an iterable)
     """
+
     widget = SelectWidget()
+
+    def __init__(self, *args, **kwargs):
+        choices = kwargs.pop("choices", None)
+        if callable(choices):
+            super().__init__(*args, **kwargs)
+            self.choices = copy(choices)
+        else:
+            super().__init__(*args, choices=choices, **kwargs)
 
     def iter_choices(self):
         """
@@ -33,7 +44,7 @@ class SelectField(_SelectField):
         internal list or tuple should be selected.
         """
         for value, label in self.concrete_choices:
-            yield (value, label, (self.coerce, self.data))
+            yield (value, label, (self.coerce, self.data), {})
 
     @property
     def concrete_choices(self):
@@ -57,7 +68,7 @@ class SelectField(_SelectField):
         Don't forget to validate also values from embedded lists.
         """
         values = self.choice_values
-        if (self.data is None and u'' in values) or self.data in values:
+        if (self.data is None and "" in values) or self.data in values:
             return True
 
-        raise ValidationError(self.gettext(u'Not a valid choice'))
+        raise ValidationError(self.gettext("Not a valid choice"))

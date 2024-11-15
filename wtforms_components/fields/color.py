@@ -11,9 +11,10 @@ class ColorField(StringField):
 
     Represents an ``<input type="color">``.
     """
+
     widget = ColorInput()
 
-    error_msg = u'Not a valid color.'
+    error_msg = "Not a valid color."
 
     def _value(self):
         if self.raw_data:
@@ -21,13 +22,13 @@ class ColorField(StringField):
         if self.data:
             return str(self.data)
         else:
-            return u''
+            return ""
 
     def process_formdata(self, valuelist):
         from colour import Color
 
         if valuelist:
-            if valuelist[0] == u'' or valuelist[0] == '':
+            if valuelist[0] == "" or valuelist[0] == "":
                 self.data = None
             else:
                 try:

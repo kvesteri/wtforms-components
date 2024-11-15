@@ -5,6 +5,48 @@ Here you can see the full list of changes between each WTForms-Components
 release.
 
 
+UNRELEASED
+^^^^^^^^^^
+
+- Drop whitelist argument from email validator (#75, pull request courtesy tvuotila)
+- Add support for Python 3.9, 3.10, 3.11 and 3.12.
+- Drop support for Python 3.8 or older.
+- Add support for WTForms 3.2. The minimum supported WTForms version is now 3.1.0.
+- Remove `email_validator` and `six` dependencies.
+- Remove `_compat` and `utils` modules.
+- Remove `try..except` from email validator import.
+
+
+0.10.5 (2021-01-17)
+^^^^^^^^^^^^^^^^^^^
+
+- Added WTForms 3.0 support (#71, pull request courtesy of jpic)
+
+
+0.10.4 (2019-04-01)
+^^^^^^^^^^^^^^^^^^^
+
+- Added JSONField (#65, pull request courtesy fedExpress)
+
+
+0.10.3 (2017-03-03)
+^^^^^^^^^^^^^^^^^^^
+
+- Made SelectWidget backwards compatible (#52, pull request courtesy tvuotila)
+
+
+0.10.2 (2016-12-05)
+^^^^^^^^^^^^^^^^^^^
+
+- Made read_only also add disabled attribute (#51, pull request courtesy quantus)
+
+
+0.10.1 (2016-11-22)
+^^^^^^^^^^^^^^^^^^^
+
+- Added seconds support for TimeField (#48, pull request courtesy tvuotila)
+
+
 0.10.0 (2016-01-28)
 ^^^^^^^^^^^^^^^^^^^
 

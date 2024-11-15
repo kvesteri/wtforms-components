@@ -1,7 +1,5 @@
-# -*- coding: utf-8 -*-
 import operator
 
-import six
 from wtforms import fields, widgets
 from wtforms.validators import ValidationError
 
@@ -29,24 +27,24 @@ class AjaxField(fields.Field):
         coerce=int,
         get_label=None,
         allow_blank=False,
-        blank_text='',
-        **kwargs
+        blank_text="",
+        **kwargs,
     ):
-        super(AjaxField, self).__init__(label, validators, **kwargs)
+        super().__init__(label, validators, **kwargs)
 
         if anyjson is None:
             raise ImproperlyConfigured(
-                'AjaxField requires anyjson extension to be installed.'
+                "AjaxField requires anyjson extension to be installed."
             )
 
         if data_url is None:
-            raise Exception('data_url must be given')
+            raise Exception("data_url must be given")
 
         self.get_pk = get_pk
 
         if get_label is None:
             self.get_label = lambda x: x
-        elif isinstance(get_label, six.string_types):
+        elif isinstance(get_label, str):
             self.get_label = operator.attrgetter(get_label)
         else:
             self.get_label = get_label
@@ -84,17 +82,15 @@ class AjaxField(fields.Field):
     def pre_validate(self, form):
         if self.data is None:
             if self._formdata or not self.allow_blank:
-                raise ValidationError('Not a valid choice')
+                raise ValidationError("Not a valid choice")
 
     def __call__(self, **kwargs):
-        kwargs.setdefault(
-            'data-allow-clear', anyjson.serialize(self.allow_blank)
-        )
-        kwargs.setdefault('data-placeholder', self.blank_text)
-        kwargs.setdefault('data-url', self.data_url)
+        kwargs.setdefault("data-allow-clear", anyjson.serialize(self.allow_blank))
+        kwargs.setdefault("data-placeholder", self.blank_text)
+        kwargs.setdefault("data-url", self.data_url)
         if self.data is not None:
-            kwargs.setdefault('data-initial-label', self.get_label(self.data))
-            kwargs.setdefault('value', self.get_pk(self.data))
+            kwargs.setdefault("data-initial-label", self.get_label(self.data))
+            kwargs.setdefault("value", self.get_pk(self.data))
         else:
-            kwargs.setdefault('value', '')
-        return super(AjaxField, self).__call__(**kwargs)
+            kwargs.setdefault("value", "")
+        return super().__call__(**kwargs)
