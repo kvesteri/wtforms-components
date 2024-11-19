@@ -67,7 +67,7 @@ Same applies to IntegerField:
 
 
 SelectField & SelectMultipleField
------------
+---------------------------------
 
 WTForms-Components provides enhanced versions of WTForms SelectFields. Both WTForms-Components
 SelectField and SelectMultipleField support the following enhancements:
@@ -211,7 +211,7 @@ In the following example we define a start_time and a start_date field, which do
 Email validator
 ---------------
 
-Validates an email address. This validator is based on `Django's email validator`_ and is stricter than the standard email validator included in WTForms.
+Validates an email address. This validator is based on Django's email validator and is stricter than the standard email validator included in WTForms.
 
 Example:
 ::
