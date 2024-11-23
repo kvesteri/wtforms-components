@@ -13,16 +13,22 @@ class SelectField(_SelectField):
     So, next choices would be supported as well::
 
         (
-            ('Fruits', (
-                ('apple', 'Apple'),
-                ('peach', 'Peach'),
-                ('pear', 'Pear')
-            )),
-            ('Vegetables', (
-                ('cucumber', 'Cucumber'),
-                ('potato', 'Potato'),
-                ('tomato', 'Tomato'),
-            ))
+            (
+                "Fruits",
+                (
+                    ("apple", "Apple"),
+                    ("peach", "Peach"),
+                    ("pear", "Pear"),
+                ),
+            ),
+            (
+                "Vegetables",
+                (
+                    ("cucumber", "Cucumber"),
+                    ("potato", "Potato"),
+                    ("tomato", "Tomato"),
+                ),
+            ),
         )
 
     Also supports lazy choices (callables that return an iterable)

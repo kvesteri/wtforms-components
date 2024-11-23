@@ -24,6 +24,7 @@ def min_max(field, validator_class):
                 validators=[Length(min=3, max=6), Length(min=4, max=7)]
             )
 
+
         form = MyForm()
 
         min_max(form.some_integer_field, Length)
