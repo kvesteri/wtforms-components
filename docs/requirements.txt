@@ -61,7 +61,7 @@ sphinxcontrib-serializinghtml==2.0.0
     # via sphinx
 tomli==2.1.0
     # via sphinx
-urllib3==2.2.3
+urllib3==2.5.0
     # via requests
 zipp==3.21.0
     # via importlib-metadata
