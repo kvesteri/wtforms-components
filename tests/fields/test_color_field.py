@@ -1,8 +1,11 @@
+import pytest
 from wtforms import Form
 from wtforms_test import FormTestCase
 
 from tests import MultiDict
 from wtforms_components import ColorField
+
+colour = pytest.importorskip("colour")
 
 
 class TestColorField(FormTestCase):
