@@ -8,6 +8,7 @@ Unreleased
 ^^^^^^^^^^
 
 - Drop support for Python 3.10 and older.
+- Add support for Python 3.13, 3.14 and 3.15.
 
 0.11.0 (2024-11-15)
 ^^^^^^^^^^^^^^^^^^^
