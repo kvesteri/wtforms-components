@@ -272,7 +272,7 @@ class SelectWidget(_Select):
         Render option as HTML tag, but not forget to wrap options into
         ``optgroup`` tag if ``label`` var is ``list`` or ``tuple``.
         """
-        if isinstance(label, (list, tuple)):
+        if isinstance(label, list | tuple):
             return cls.render_optgroup(value, label, mixed)
 
         try:
