@@ -62,7 +62,7 @@ class SelectField(_SelectField):
     def choice_values(self):
         values = []
         for value, label in self.concrete_choices:
-            if isinstance(label, (list, tuple)):
+            if isinstance(label, list | tuple):
                 for subvalue, sublabel in label:
                     values.append(subvalue)
             else:
