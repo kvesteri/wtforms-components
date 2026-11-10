@@ -27,6 +27,7 @@ Unreleased
 - Iterating over a ``SelectField`` with optgroups now yields one option per
   choice instead of one option per group.
 - Bump minimum MarkupSafe version to 2.0.
+- Remove unused ``timezone`` and ``ipaddress`` extras (#58).
 
 0.11.0 (2024-11-15)
 ^^^^^^^^^^^^^^^^^^^
