@@ -28,8 +28,7 @@ class TestSplitDateTimeField(SimpleFieldTestCase):
         form_class = self.init_form()
         form = form_class()
         assert str(form.test_field.date) == (
-            '<input id="test_field-date" name="test_field-date" type="date" '
-            'value="">'
+            '<input id="test_field-date" name="test_field-date" type="date" value="">'
         )
 
     def test_assigns_required_to_time(self):
@@ -46,8 +45,7 @@ class TestSplitDateTimeField(SimpleFieldTestCase):
         form_class = self.init_form()
         form = form_class()
         assert str(form.test_field.time) == (
-            '<input id="test_field-time" name="test_field-time" type="time" '
-            'value="">'
+            '<input id="test_field-time" name="test_field-time" type="time" value="">'
         )
 
     def test_processes_values(self):

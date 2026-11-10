@@ -23,7 +23,7 @@ class FieldTestCase(SimpleFieldTestCase):
     def test_assigns_required_from_validator(self):
         form_class = self.init_form(validators=[DataRequired()])
         form = form_class()
-        assert ('<input id="test_field"' ' name="test_field" required') in str(
+        assert ('<input id="test_field" name="test_field" required') in str(
             form.test_field
         )
 

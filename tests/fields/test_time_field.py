@@ -43,7 +43,7 @@ class TestTimeField(FieldTestCase):
         form_class = self.init_form()
         form = form_class(MultiDict(test_field="00:00"))
         assert str(form.test_field) == (
-            '<input id="test_field" name="test_field"' ' type="time" value="00:00">'
+            '<input id="test_field" name="test_field" type="time" value="00:00">'
         )
 
 

@@ -25,7 +25,7 @@ class SelectMultipleField(SelectField):
         except ValueError:
             raise ValueError(
                 self.gettext(
-                    "Invalid choice(s): one or more data inputs " "could not be coerced"
+                    "Invalid choice(s): one or more data inputs could not be coerced"
                 )
             )
 
@@ -35,8 +35,6 @@ class SelectMultipleField(SelectField):
             for value in self.data:
                 if value not in values:
                     raise ValidationError(
-                        self.gettext(
-                            "'%(value)s' is not a valid" " choice for this field"
-                        )
+                        self.gettext("'%(value)s' is not a valid choice for this field")
                         % dict(value=value)
                     )
