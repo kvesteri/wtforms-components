@@ -4,8 +4,8 @@ Changelog
 Here you can see the full list of changes between each WTForms-Components
 release.
 
-Unreleased
-^^^^^^^^^^
+0.12.0 (2026-11-10)
+^^^^^^^^^^^^^^^^^^^
 
 - Drop support for Python 3.10 and older.
 - Add support for Python 3.13, 3.14 and 3.15.
@@ -28,6 +28,8 @@ Unreleased
   choice instead of one option per group.
 - Bump minimum MarkupSafe version to 2.0.
 - Remove unused ``timezone`` and ``ipaddress`` extras (#58).
+- Remove the ``test`` extra. Test dependencies are now in the ``test``
+  dependency group (``pip install --group test .``).
 
 0.11.0 (2024-11-15)
 ^^^^^^^^^^^^^^^^^^^
