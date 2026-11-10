@@ -18,6 +18,8 @@ Unreleased
   boolean.
 - ``SelectWidget`` no longer puts newlines between options inside an
   ``optgroup``.
+- Fix ``__all__`` containing objects instead of names, which broke
+  ``from wtforms_components import *``.
 - ``SelectWidget`` no longer double-escapes ``Markup`` option labels, matching
   WTForms' own ``Select`` widget.
 - ``SelectWidget`` now renders per-choice ``render_kw`` attributes. Previously
