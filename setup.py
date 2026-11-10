@@ -29,8 +29,6 @@ extras_require = {
         "WTForms-Test>=0.1.1",
     ],
     "color": ["colour>=0.0.4"],
-    "ipaddress": [],
-    "timezone": ["python-dateutil"],
 }
 
 
