@@ -25,7 +25,7 @@ extras_require = {
     "test": [
         "pytest>=2.2.3",
         "flexmock>=0.9.7",
-        "ruff==0.7.3",
+        "ruff==0.17.4",
         "WTForms-Test>=0.1.1",
     ],
     "color": ["colour>=0.0.4"],
