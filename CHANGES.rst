@@ -24,6 +24,7 @@ Unreleased
   they raised ``TypeError`` on WTForms 3.1 and 3.2 and were ignored on 3.3.
 - Iterating over a ``SelectField`` with optgroups now yields one option per
   choice instead of one option per group.
+- Bump minimum MarkupSafe version to 2.0.
 
 0.11.0 (2024-11-15)
 ^^^^^^^^^^^^^^^^^^^

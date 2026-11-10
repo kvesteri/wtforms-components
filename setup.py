@@ -57,7 +57,7 @@ setup(
         "WTForms>=3.1.0",
         "validators>=0.21",
         "intervals>=0.6.0",
-        "MarkupSafe>=1.0.0",
+        "MarkupSafe>=2.0",
     ],
     extras_require=extras_require,
     classifiers=[
