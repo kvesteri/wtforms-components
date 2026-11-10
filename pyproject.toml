@@ -45,7 +45,7 @@ Issues = "https://github.com/kvesteri/wtforms-components/issues"
 
 [dependency-groups]
 test = [
-    "pytest>=2.2.3",
+    "pytest>=8.0",
     "ruff==0.17.4",
     "WTForms-Test>=0.1.1",
     "colour>=0.0.4",
