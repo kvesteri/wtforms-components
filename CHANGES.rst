@@ -9,6 +9,21 @@ Unreleased
 
 - Drop support for Python 3.10 and older.
 - Add support for Python 3.13, 3.14 and 3.15.
+- Add support for WTForms 3.3.
+- Fix WTForms 3.3 deprecation warnings in ``SelectField``, ``SelectMultipleField``
+  and ``SelectWidget``. ``SelectField.iter_choices()`` now yields flat choices and
+  the optgroup structure is available via ``has_groups()`` and ``iter_groups()``.
+  ``SelectWidget.render_optgroup()`` was removed, and ``SelectWidget.render_option()``
+  now takes ``(value, label, selected, **render_kw)`` where ``selected`` is a
+  boolean.
+- ``SelectWidget`` no longer puts newlines between options inside an
+  ``optgroup``.
+- ``SelectWidget`` no longer double-escapes ``Markup`` option labels, matching
+  WTForms' own ``Select`` widget.
+- ``SelectWidget`` now renders per-choice ``render_kw`` attributes. Previously
+  they raised ``TypeError`` on WTForms 3.1 and 3.2 and were ignored on 3.3.
+- Iterating over a ``SelectField`` with optgroups now yields one option per
+  choice instead of one option per group.
 
 0.11.0 (2024-11-15)
 ^^^^^^^^^^^^^^^^^^^

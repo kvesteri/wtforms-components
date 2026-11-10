@@ -32,5 +32,5 @@ jobs:
 
       - name: Run tests
         env:
-          TOXENV: py-wtforms31, py-wtforms32
+          TOXENV: py-wtforms31, py-wtforms32, py-wtforms33
         run: tox
