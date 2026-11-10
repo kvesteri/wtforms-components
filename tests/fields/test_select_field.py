@@ -47,6 +47,35 @@ class TestSelectField(FormTestCase):
         form.validate()
         assert len(form.errors) == 0
 
+    def test_renders_optgroups_mixed_with_ungrouped_options(self):
+        choices = (
+            ("none", "None"),
+            ("Fruits", (("apple", "Apple"), ("pear", "Pear"))),
+            ("cucumber", "Cucumber"),
+        )
+        form = self.init_form(choices=choices, default="pear")()
+        assert str(form.fruit) == (
+            '<select id="fruit" name="fruit">'
+            '<option value="none">None</option>'
+            '<optgroup label="Fruits">'
+            '<option value="apple">Apple</option>'
+            '<option selected value="pear">Pear</option>'
+            "</optgroup>"
+            '<option value="cucumber">Cucumber</option>'
+            "</select>"
+        )
+
+    def test_accepts_iterator_as_choices(self):
+        form_class = self.init_form(choices=zip(["apple", "pear"], ["Apple", "Pear"]))
+        form = form_class(MultiDict([("fruit", "pear")]))
+        assert '<option selected value="pear">Pear</option>' in str(form.fruit)
+        assert form.validate()
+
+    def test_validates_without_coercing_choices(self):
+        form_class = self.init_form(choices=[("", "---"), (1, "One")], coerce=int)
+        form = form_class(MultiDict([("fruit", "1")]))
+        assert form.validate()
+
     def test_understands_callables_as_choices(self):
         form_class = self.init_form(choices=lambda: [])
         form = form_class(MultiDict([("fruit", "invalid")]))

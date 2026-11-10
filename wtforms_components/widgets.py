@@ -251,46 +251,44 @@ class ReadOnlyWidgetProxy:
 
 class SelectWidget(_Select):
     """
-    Add support of choices with ``optgroup`` to the ``Select`` widget.
+    ``Select`` widget that renders ``optgroup``'s mixed with ungrouped options.
+
+    Uses the field's ``has_groups()`` and ``iter_groups()`` methods, where a
+    group label of ``None`` means the options are not wrapped in an
+    ``optgroup``.
     """
 
-    @classmethod
-    def render_optgroup(cls, value, label, mixed):
-        children = []
+    def __call__(self, field, **kwargs):
+        kwargs.setdefault("id", field.id)
+        if self.multiple:
+            kwargs["multiple"] = True
+        flags = getattr(field, "flags", {})
+        for k in dir(flags):
+            if k in self.validation_attrs and k not in kwargs:
+                kwargs[k] = getattr(flags, k)
 
-        for item_value, item_label in label:
-            item_html = cls.render_option(item_value, item_label, mixed)
-            children.append(item_html)
-
-        html = '<optgroup label="%s">%s</optgroup>'
-        data = (escape(str(value)), "\n".join(children))
-        return Markup(html % data)
-
-    @classmethod
-    def render_option(cls, value, label, mixed):
-        """
-        Render option as HTML tag, but not forget to wrap options into
-        ``optgroup`` tag if ``label`` var is ``list`` or ``tuple``.
-        """
-        if isinstance(label, list | tuple):
-            return cls.render_optgroup(value, label, mixed)
-
-        try:
-            coerce_func, data = mixed
-        except TypeError:
-            selected = mixed
+        if field.has_groups():
+            groups = field.iter_groups()
         else:
-            if isinstance(data, list) or isinstance(data, tuple):
-                selected = coerce_func(value) in data
-            else:
-                selected = coerce_func(value) == data
+            groups = [(None, field.iter_choices())]
 
-        options = {"value": value}
+        html = [f"<select {html_params(name=field.name, **kwargs)}>"]
+        for group, choices in groups:
+            if group is not None:
+                html.append(f"<optgroup {html_params(label=group)}>")
+            # WTForms 3.3 yields ``Choice`` named tuples, older versions tuples.
+            for value, label, selected, render_kw in choices:
+                html.append(
+                    self.render_option(value, label, selected, **(render_kw or {}))
+                )
+            if group is not None:
+                html.append("</optgroup>")
+        html.append("</select>")
+        return Markup("".join(html))
 
+    @classmethod
+    def render_option(cls, value, label, selected, **kwargs):
+        options = {"value": value, **kwargs}
         if selected:
             options["selected"] = True
-
-        html = "<option %s>%s</option>"
-        data = (html_params(**options), escape(str(label)))
-
-        return Markup(html % data)
+        return Markup(f"<option {html_params(**options)}>{escape(label)}</option>")

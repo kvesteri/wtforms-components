@@ -13,3 +13,6 @@ select = [
     "UP",  # pyupgrade
     "W",   # pycodestyle warnings
 ]
+
+[tool.pytest.ini_options]
+filterwarnings = ["error::DeprecationWarning:wtforms"]

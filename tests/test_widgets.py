@@ -10,14 +10,7 @@ class Dummy:
 
 
 class TestSelectWidgetWithNativeSelect(FormTestCase):
-    choices = (
-        ("apple", "Apple"),
-        ("peach", "Peach"),
-        ("pear", "Pear"),
-        ("cucumber", "Cucumber"),
-        ("potato", "Potato"),
-        ("tomato", "Tomato"),
-    )
+    choices = ["apple", "peach", "pear", "cucumber", "potato", "tomato"]
 
     def init_form(self, **kwargs):
         class TestForm(Form):
@@ -32,9 +25,20 @@ class TestSelectWidgetWithNativeSelect(FormTestCase):
         obj = Dummy()
         obj.fruit = "peach"
         form = form_class(obj=obj)
-        assert '<option selected value="peach">Peach</option>' in str(form.fruit)
+        assert '<option selected value="peach">peach</option>' in str(form.fruit)
 
     def test_default_value(self):
         form_class = self.init_form(choices=self.choices, default="pear")
         form = form_class()
-        assert '<option selected value="pear">Pear</option>' in str(form.fruit)
+        assert '<option selected value="pear">pear</option>' in str(form.fruit)
+
+    def test_render_option_override(self):
+        class CustomSelectWidget(SelectWidget):
+            @classmethod
+            def render_option(cls, value, label, selected, **kwargs):
+                return f"<option>{label}!</option>"
+
+        class TestForm(Form):
+            fruit = SelectField(widget=CustomSelectWidget(), choices=["apple"])
+
+        assert "<option>apple!</option>" in str(TestForm().fruit)
